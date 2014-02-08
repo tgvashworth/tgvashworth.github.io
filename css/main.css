@@ -1,5 +1,5 @@
 body {
-  background: #f1f1f1;
+  background: #fafafa;
   font: 15px/1.5 "Fira Sans", sans-serif;
 }
 
@@ -12,6 +12,21 @@ body {
 a { color: #4183c4; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+img {
+  max-width: 100%
+}
+
+img.me {
+  width: 70px;
+  border-radius: 35px;
+  margin-bottom: 1em
+}
+
+img.me-small {
+  height: 20px;
+  border-radius: 10px
+}
+
 .header {
   border-bottom: 1px solid black;
 }
@@ -19,9 +34,30 @@ a:hover { text-decoration: underline; }
 .header h1 {
   font-size: 1rem;
   margin: 0.5rem 0;
+  font-weight: normal;
 }
 
-.footer {}
+blockquote {
+  font-style: italic;
+  color: #555;
+  margin-right: 0;
+}
+
+.mini-about {
+  max-width: 14em;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2em 0 1em;
+}
+
+.mini-about p {
+  margin-top: 0
+}
+
+.footer {
+  border-top: 1px solid #eee;
+  margin: 1.5em 0;
+}
 
 .contact {
   float: left;
@@ -34,11 +70,33 @@ a:hover { text-decoration: underline; }
 /*
 /*****************************************************************************/
 
+.posts {
+  list-style: none;
+  padding-left: 0;
+}
+
+.posts li {
+  margin-bottom: 0.444em;
+}
+
+.post-title {
+  margin-bottom: 0;
+}
+
+.date {
+  font: 0.667em "Fira Mono", monospace;
+}
+
+.meta {
+  margin: 0;
+}
+
 /* standard */
 .post pre {
   border: 1px solid #ddd;
-  background-color: #eef;
-  padding: 0 .4em;
+  background-color: #f1f1f1;
+  padding: .4em;
+  overflow-x: scroll;
 }
 
 .post ul, .post ol {
@@ -47,12 +105,14 @@ a:hover { text-decoration: underline; }
 
 .post code {
   border: 1px solid #ddd;
-  background-color: #eef;
+  background-color: #f1f1f1;
   padding: 0 .2em;
 }
 
 .post pre code {
   border: none;
+  font-family: "Fira Mono", monospace;
+  line-height: 1.1;
 }
 
 /* terminal */

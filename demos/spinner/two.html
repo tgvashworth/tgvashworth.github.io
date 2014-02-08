@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<meta charset=utf-8 />
+<title>Demo Two: HTML &amp; CSS Spinner</title>
+<style>
+  
+  .spinner {
+    -webkit-mask-box-image: -webkit-radial-gradient(
+          center,ellipse cover, rgba(0,0,0,1) 66%, rgba(0,0,0,0) 68%);
+    background: red;
+    width: 80px;
+    height: 80px;
+    position: relative;
+  }
+  
+  .spinner-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    border-width: 40px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-top-color: rgba(0,0,0,1);
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    -webkit-transform: rotate(-45deg);
+    -webkit-animation: inner 10s linear infinite;
+  }
+  
+  .spinner-mask {
+    position: absolute;
+    top: 1px;
+    left: 0px;
+    background: transparent;
+    border-width: 40px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-top-color: red;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    -webkit-transform: rotate(-45deg);
+    -webkit-animation: mask 10s linear infinite;
+  }
+  .spinner-mask-two {
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: -1px;
+    background: transparent;
+    border-width: 40px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-top-color: black;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    -webkit-transform: rotate(45deg);
+    -webkit-animation: mask-two 10s linear infinite;
+  }
+  
+  @-webkit-keyframes inner {
+    0% {
+      -webkit-transform: rotate(-45deg);
+    }
+    25% {border-left-color:transparent;}
+    26% {
+      border-left-color:  rgba(0,0,0,1);
+    }
+    50% {border-bottom-color:transparent;}
+    51% {
+      border-bottom-color:  rgba(0,0,0,1);
+    }
+    75% {border-right-color:transparent;}
+    76% {
+      border-right-color:  rgba(0,0,0,1);
+    }
+    100% {
+      -webkit-transform: rotate(315deg);
+      border-left-color:  rgba(0,0,0,1);
+      border-bottom-color:  rgba(0,0,0,1);
+      border-right-color:  rgba(0,0,0,1);
+    }
+  }
+  
+   @-webkit-keyframes mask {
+    0% {
+      -webkit-transform: rotate(-45deg);
+    }
+    75% {
+      -webkit-transform: rotate(-45deg);
+    }
+    100% {
+      -webkit-transform: rotate(45deg);
+    }
+  }
+  
+  @-webkit-keyframes mask-two {
+    0% {
+      opacity: 0;
+    }
+    75% {
+      opacity: 0;
+    }
+    76% {
+      opacity: 1;
+    }
+  }
+  
+  
+</style>
+
+<div class=spinner>
+  <div class=spinner-inner></div>
+  <div class=spinner-mask></div>
+  <div class=spinner-mask-two></div>
+</div>
