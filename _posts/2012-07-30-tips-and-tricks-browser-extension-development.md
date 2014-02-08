@@ -19,11 +19,13 @@ It's meant a few hacks to allow the shared code to work the same in each browser
 Extensions have a configuration file that dictates anything from the name and descripton to which content scripts are injected where and when. So it's pretty useful to be able to grab information about your extension to use in the background page. The APIs for this are not obvious or non-existant, so here's a few snippets to help you get the information.
 
 In Chrome you can get the manifest.json as an object using the chrome.app API, and make it available as `chrome.manifest`.
+
 {% highlight javascript %}
 chrome.manifest = chrome.app.getDetails();
 {% endhighlight %}
 
 In Safari the info is store as a plist file. Urgh. Use a blocking XMLHttpRequest, and a JS plist parser, and expose it as `safari.info`.
+
 {% highlight javascript %}
 var req = new XMLHttpRequest();
 req.open(
@@ -36,6 +38,7 @@ safari.info =
 {% endhighlight %}
 
 Firefox is a trickier beast. You can get some of the data from the global self object...
+
 {% highlight javascript %}
 self.version; // "1.7.3"
 self.name; // "MyGreatExtension"
@@ -133,7 +136,3 @@ connect();
 {% endhighlight %}
 
 That should keep your content scripts connected up and working even if the extension is uninstalled or upgraded.
-
-### Summary
-
-Hopefully some of this might help you out if you're putting together a content script heavy browser extension. I'd love to hear from you if you have any thoughts, ideas or questions – just [email me](mailto:tom@phuu.net)!
