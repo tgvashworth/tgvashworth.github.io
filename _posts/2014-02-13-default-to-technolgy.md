@@ -3,7 +3,7 @@ layout: post
 title: Default to technology
 ---
 
-I'm not the first to point it out, but the adage that "if you build it, they will come" is simply false, but it seems this often forgotten, even by [very competent, experienced teams](http://stet.editorially.com/articles/goodbye/).
+I'm not the first to point it out that "if you build it, they will come" is simply false, but it seems this is forgotten even by [very competent, experienced teams](http://stet.editorially.com/articles/goodbye/).
 
 While we are used to seeing hyperbolic reports of explosive growth in products and companies, particularly in the technology space, this kind of development is *not the rule*. They are clearly exceptions.
 
