@@ -1,0 +1,3 @@
+[submodule "fonts/fira"]
+	path = fonts/fira
+	url = git@github.com:mozilla/Fira.git
