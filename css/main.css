@@ -113,6 +113,7 @@ blockquote {
   border: none;
   font-family: "Fira Mono", monospace;
   line-height: 1.1;
+  padding: 0;
 }
 
 /* terminal */
