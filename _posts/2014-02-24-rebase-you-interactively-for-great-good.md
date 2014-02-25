@@ -353,3 +353,4 @@ Woopee!
 
 For more on rebasing – it's really, really useful – checkout the [git-scm docs](http://git-scm.com/docs/git-rebase).
 
+This technique is particularly good when used repeatedly to iterate over a set of commits, improving and cleaning them up further as you go. In addition to editing, with rebase you can reorder and meld commits together to produce a clean, clear and readable git log that *will* help you and your team in the future.
