@@ -100,7 +100,8 @@ blockquote {
 }
 
 .post ul, .post ol {
-  margin-left: 1.35em;
+  margin-left: 0;
+  padding-left: 2em;
 }
 
 .post code {
