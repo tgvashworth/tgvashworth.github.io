@@ -13,7 +13,7 @@ Why are lots of arguments bad?
 
 It's just a heuristic, but I'd say any more than three is too many.
 
-```
+```javascript
 function doAThing(id, someUrl, isAboutSharks, mightInvolvePonies, callback) {
   // ...
 };
@@ -21,7 +21,7 @@ function doAThing(id, someUrl, isAboutSharks, mightInvolvePonies, callback) {
 
 That's not great, becuase the call might look like this:
 
-```
+```javascript
 doAThing(shark.id, "/shark/:id/sightings-with-ponies.json", true, shark.getPonyInvolvement(), function (err, result) { ... });
 ```
 
@@ -29,7 +29,7 @@ Remove the middle `true` and all hell breaks loose.
 
 Switching to an arguments object is easy:
 
-```
+```javascript
 function doAThing(id, opts, callback) {
   // Provide some defaults for things not passed
   if (typeof opts.isAboutSharks === "undefined") {
@@ -47,7 +47,7 @@ function doAThing(id, opts, callback) {
 
 Now the call could look like:
 
-```
+```javascript
 doAThing(shark.id, {
   mightInvolvePonies: shark.getPonyInvolvement()
 }, function (err, result) { ... });
@@ -57,7 +57,7 @@ Clean, clear and easy to read. Yum.
 
 This API would be even better with Promises, as it would avoid the last argument:
 
-```
+```javascript
 doAThing(shark.id, {
   mightInvolvePonies: shark.getPonyInvolvement()
 }).then(function () { ... });
