@@ -4,7 +4,7 @@ layout: post
 title: Avoid lots of arguments
 ---
 
-If you're writing a function that takes lots of arguments, it might be a sign that you need to refactor. One way is to use an arguments object.
+If you're writing a function that takes lots of arguments, it might be a sign that you need to refactor. One way is to use an options object.
 
 Why are lots of arguments bad?
 
@@ -14,7 +14,7 @@ Why are lots of arguments bad?
 It's just a heuristic, but I'd say any more than three is too many.
 
 ```
-var doAThing = function (id, someUrl, isAboutSharks, mightInvolvePonies, callback) {
+function doAThing(id, someUrl, isAboutSharks, mightInvolvePonies, callback) {
   // ...
 };
 ```
@@ -30,19 +30,19 @@ Remove the middle `true` and all hell breaks loose.
 Switching to an arguments object is easy:
 
 ```
-var doAThing = function (id, args, callback) {
+function doAThing(id, opts, callback) {
   // Provide some defaults for things not passed
-  if (typeof args.isAboutSharks === "undefined") {
-    args.isAboutSharks = true;
+  if (typeof opts.isAboutSharks === "undefined") {
+    opts.isAboutSharks = true;
   }
-  // (or use an library's defaults method)
-  var options = _.defaults(args, {
+  // (or use a library's defaults method)
+  var opts = _.defaults(opts, {
     url: '/sharks.json',
     isAboutSharks: true,
     mightInvolvePonies: false
   };
-  // use args.isAboutSharks or args.mightInvolvePonies
-};
+  // use opts.isAboutSharks or opts.mightInvolvePonies
+});
 ```
 
 Now the call could look like:
@@ -54,3 +54,13 @@ doAThing(shark.id, {
 ```
 
 Clean, clear and easy to read. Yum.
+
+This API would be even better with Promises, as it would avoid the last argument:
+
+```
+doAThing(shark.id, {
+  mightInvolvePonies: shark.getPonyInvolvement()
+}).then(function () { ... });
+```
+
+Very nice.
