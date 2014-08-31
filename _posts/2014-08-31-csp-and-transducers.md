@@ -254,7 +254,7 @@ How does composability apply to the algorithmic transformations we've already de
 We can already do the former:
 
 ```js
-filter(greaterThanTwo, map(inc, [1,2,3,4])) // => [2,3]
+filter(greaterThanTwo, map(inc, [1,2,3,4])) // => [3,4,5]
 ```
 
 We can even use `compose`:
@@ -265,13 +265,13 @@ var incrementAndFilter = compose(
     map.bind(null, inc)
 );
 
-incrementAndFilter([1,2,3,4]) // => [2,3]
+incrementAndFilter([1,2,3,4]) // => [3,4,5]
 ```
 
 However, this has a number of issues:
 
-- It cannot be done lazily.
 - It cannot be parallelised.
+- It cannot be done lazily.
 - The operations are tied very closely to input and output data structure.
 
 The converse is true for the latter way of combining the transformations, and so is the much more desirable end result.
