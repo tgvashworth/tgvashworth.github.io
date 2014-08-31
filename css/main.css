@@ -40,7 +40,7 @@ img.me-small {
 blockquote {
   font-style: italic;
   color: #555;
-  margin-right: 0;
+  margin: 1em 2em;
 }
 
 .mini-about {
@@ -127,4 +127,12 @@ blockquote {
 
 .post pre.terminal code {
   background-color: #333;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  width: 100%;
+  max-width: 10em;
+  margin: 2em auto;
 }
