@@ -64,7 +64,7 @@ core.async's channels offer an alternative that is ideal for flow control, reuse
 
 The first step was to implement the core.async primitive — channels — and their fundamental operations: `put` and `take`.
 
-Channels are pretty simple: they support producers and consumers that `put` values to, and `take` values from, from the channel. The default behaviour is "one-in, one-out" — a `take` from the channel will give you only the least-recently `put` value, and you have to explicitly `take` again to get the next value. They're like queues.
+Channels are pretty simple: they support producers and consumers that `put` values to, and `take` values from, the channel. The default behaviour is "one-in, one-out" — a `take` from the channel will give you only the least-recently `put` value, and you have to explicitly `take` again to get the next value. They're like queues.
 
 It's immediately obvious that this decouples the producer and consumer – they each only have to know about the channel to communicate, and it's many-to-many: multiple producers can `put` values for multiple consumers to `take`.
 
@@ -176,7 +176,7 @@ function inc(x) {
 
 Using this with any collection requires another higher-order function, `map`, that combines the transform and the collection.
 
-This is where things start to get interesting: this function contains the *essence* of what it means to `map` — we *reduce* one collection to another by *transforming* the values and *cons-ing* the results together.
+This is where things start to get interesting: this function contains the *essence* of what it means to `map` — we *reduce* one collection to another by *transforming* the values and *concatenating* the results together.
 
 ```js
 function map(transform, collection) {
@@ -278,15 +278,15 @@ The converse is true for the latter way of combining the transformations, and so
 
 > For a discussion of why this is the case, look into the [fork-join model][fork-join].
 
-Frankly, I found this extremely difficult; I just couldn't understand *how* they could be composed generically?
+Frankly, I found this extremely difficult; I just couldn't understand *how* they could be composed generically.
 
-We need to take another step up back. Time to talk about reducing functions.
+Time to dig deeper, and talk about reducing functions.
 
 ### Reducing functions
 
 A reducing function is any function that can be passed to `reduce`. They have the form: `(something, input) -> something`. They're the inner-most function in the `map` and `filter` examples.
 
-These are the things we're need to be composing, but right now they are hidden away in `map` and `filter`.
+These are the things we need to be composing, but right now they are hidden away in `map` and `filter`.
 
 ```js
 function map(transform, collection) {
@@ -314,7 +314,7 @@ function filter(predicate, collection) {
 }
 ```
 
-To get at the reducing functions, we need to `map` and `filter` more generic by extracting the pieces they have in common:
+To get at the reducing functions, we need to make `map` and `filter` more generic by extracting the pieces they have in common:
 
 - Use of collection.reduce
 - The 'seed' value is an empty array
@@ -366,7 +366,7 @@ Yes, we could.
 
 ---
 
-Next, we'll make a very explicit example by rewriting `filterer` to use `mapper` to combine the `result` with the `input`, and explore how the data flows around.
+To build up to composing our reducing functions we'll start with a very explicit example, rewriting `filterer` to use `mapper` to combine the `result` with the `input`, and explore how the data flows around.
 
 Before we do that, we need a new function: `identity`. It simply returns whatever it is given:
 
@@ -404,7 +404,7 @@ function filterer(predicate) {
 [1,2,3,4].reduce(filterer(lessThanThree), []) // => [1,2]
 ```
 
-To show how this works, let's step debug in our heads:
+To see how this works, let's step through it:
 
 1. `filterer(lessThanThree)` produces a reducing function which is passed to `.reduce`.
 2. The reducing function is passed `result` — currently `[]` — and the first `input` — `1`.
@@ -428,7 +428,7 @@ In fact, if we altered `filterer` to use `mapper(inc)`, we'd get:
 
 This is starting to feel a lot like composable algorithmic transformation, but we don't want to be manually writing composed functions – we want to use `compose`!
 
-To do so, we need the reducing functions to rely on another reducing function to combine `result` and `input`. Since we need functions that take only one argument we can pull out the inner reducing function (the combiner), to make reducing functions that express the essence of their job without being tied to any particular way of combining their arguments.
+If we pull out the inner reducing function (the combiner), we make reducing functions that express the essence of their job without being tied to any particular way of combining their arguments.
 
 We'll change the names again to express the nature of what's going on here:
 
@@ -599,7 +599,7 @@ Running this code, you should see lots of events in your console – but only th
 
 ### Stateful transducers
 
-Finally, we'll take a look at a stateful transducers, building a `gateFilter` to detect "dragging" using `mousedown` and `mouseup` event, and a `keyFilter` that matches against a property of the channel data.
+Finally, let's take a look at a stateful transducer, building a `gateFilter` to detect "dragging" using `mousedown` and `mouseup` event, and a `keyFilter` that matches against a property of the channel data.
 
 ```js
 function gateFilter(opener, closer) {
@@ -653,7 +653,7 @@ Whew. Pretty cool, eh?
 
 ### And finally...
 
-I think there's a great deal of expressive power here, and I'm intrigued by the possibilities and implications.
+I think there's a great deal of expressive power here, particularly in making it easy to reason about data flow in large application.
 
 My real goal is to explore [the Actor model][actor-model] as it relates to front-end engineering, particularly in preventing an explosion of complexity with increasing scale. It's the model [Flight][flight] uses, but I'm not wholly convinced events — while perfect for one-shot notifications — are the right primitive for coordinating behaviour and flow-control.
 
