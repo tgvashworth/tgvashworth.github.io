@@ -27,7 +27,38 @@ The most recent development in this epic saga (spanning almost [40 years][csp-pa
 
 However I've never felt truly comfortable with what's going on under the hood, and since the best way to learn anything is to *do it yourself*, I've been experimenting!
 
-Oh, and just quickly — I'm not going to spend much time on *why* you might want this stuff. Many of the links above should provide justification!
+Oh, and just quickly — I'm not going to spend very much time on *why* you might want this stuff. Many of the links above will help.
+
+### What's the problem?
+
+There's a whole stack of ideas that combine to make channels and transducers valuable, but I'll pick just one: *events are a bad primitive for data flow*. They require distribution of mutable state around your code, and it's not idiomatic or pleasant to flow data through events:
+
+```js
+pubsub.on('users:response', function (users) {
+    users
+        .filter(function (user) {
+            return !user.muted;
+        })
+        .forEach(function (user) {
+            pubsub.emit('posts:request', {
+                user: user.id
+            });
+        })
+    })
+});
+
+pubsub.on('posts:response', function (data) {
+    ...
+});
+
+pubsub.emit('users:request');
+```
+
+Events are fine for one-shot notifications, but break down when you want to coordinate data from a number of sources. Event handlers tend to not be very reusable or composable.
+
+core.async's channels offer an alternative that is ideal for flow control, reuse and composability.
+
+> I'll leave it to David Nolen to [show you why][core.async-nolen].
 
 ### Channels in JavaScript
 
@@ -37,41 +68,9 @@ Channels are pretty simple: they support producers and consumers that `put` valu
 
 It's immediately obvious that this decouples the producer and consumer – they each only have to know about the channel to communicate, and it's many-to-many: multiple producers can `put` values for multiple consumers to `take`.
 
-To support this behaviour we need two pieces of internal state: some way to track the values currently in the channel — a buffer — and some way to keep track of consumers waiting for a value. Primitive channels can be implemented thus:
+I'm not going to detail [the exact implementation][repo-channel.js] here, but making a new channel is as simple as asking for one: `var c = chan()`.
 
-```js
-function chan() {
-    return {
-        buffer: [],
-        consumers: []
-    };
-}
-```
-
-Making a new channel is as simple as asking for one: `var c = chan()`.
-
-Now we must define the basic operations `put` and `take`, plus `run` that simulates values moving through the channel. To group the functionality, I've made them properties of the `chan` function:
-
-```js
-chan.put = function put(c, v) {
-    c.buffer.push(v);
-    return chan.run(c);
-};
-
-chan.take = function take(c, cb) {
-    c.consumers.push(cb);
-    return chan.run(c);
-};
-
-chan.run = function run(c) {
-    if (c.buffer.length && c.consumers.length) {
-        c.consumers.shift()(c.buffer.shift());
-    }
-    return c;
-};
-```
-
-And that's more-or-less the most simple channel implementation – and already there's some power here. You can try it out in this JS Bin:
+You can try channels out in this JS Bin:
 
 <a class="jsbin-embed" href="http://jsbin.com/bajenu/3/embed?js,console">JS Bin</a>
 
@@ -118,7 +117,7 @@ I hope you're excited.
 
 ### From the bottom to the top...
 
-First, we have to realise that many array (or other collection) operations like `map`, `filter` and `reverse` are in fact special cases of `reduce`.
+First, we have to realise that many array (or other collection) operations like `map`, `filter` and `reverse` can be defined in terms of a `reduce`.
 
 To start with, here's an example that maps over an array to increment all its values:
 
@@ -130,23 +129,23 @@ To start with, here's an example that maps over an array to increment all its va
 
 Pretty simple. Note that two things are implicit here:
 
-- The return value is built up from a new, empty array
+- The return value is built up from a new, empty array.
 - Each value returned is added to the end of the new array as you would do manually using JavaScript's `concat`.
 
 With this in mind, we can convert the example to use `.reduce`:
 
 ```js
 [1,2,3,4].reduce(function (result, input) {
-    return cons(result, input + 1);
+    return concat(result, input + 1);
 }, []) // => [2,3,4,5]
 ```
 
 ---
 
-To get around JavaScript's unfortunate Array `concat` behaviour, we're using a function called `cons` that adds a single value to an array:
+To get around JavaScript's unfortunate Array `concat` behaviour, I've redefined it to a function called `concat` that adds a single value to an array:
 
 ```js
-function cons(a, b) {
+function concat(a, b) {
     return a.concat([b]);
 }
 ```
@@ -160,7 +159,7 @@ Our increment-map-using-reduce example isn't very generic, but we can make it mo
 ```js
 function mapWithIncr(collection) {
     return collection.reduce(function (result, input) {
-        return cons(result, input + 1);
+        return concat(result, input + 1);
     }, []);
 }
 
@@ -182,7 +181,7 @@ This is where things start to get interesting: this function contains the *essen
 ```js
 function map(transform, collection) {
     return collection.reduce(function (result, input) {
-        return cons(result, transform(input));
+        return concat(result, transform(input));
     }, []);
 }
 ```
@@ -215,7 +214,7 @@ We're going to quickly jump from a concrete example, through the `reduce` versio
 [1,2,3,4].reduce(function (result, input) {
     return (
         input > 2 ?
-            cons(result, input) :
+            concat(result, input) :
             result
     );
 }, []) // => [3,4]
@@ -230,7 +229,7 @@ function filter(predicate, collection) {
     return collection.reduce(function (result, input) {
         return (
             predicate(input) ?
-                cons(result, input) :
+                concat(result, input) :
                 result
         );
     }, [])
@@ -247,26 +246,7 @@ filter(greaterThanTwo, [1,2,3,4]) // => [3,4]
 
 Now we can construct a couple of different algorithmic transformations, we're missing "composable" bit from that original definition. We should fix that.
 
----
-
-First, an aside about composition.
-
-Composition means combining two or more operations into one. For example, doubling `x` and then finding the square root of the result is, in terms of the functions `double` and `sqrt`, `sqrt(double(x))`. Composing these functions means combining them into a single function so that their composite can be easily reused:
-
-```js
-var doubleAndRoot = compose(sqrt, double);
-doubleAndRoot(8) // => 4
-```
-
-Composite functions act like a pipeline through which values flow, undergoing transformation at every step.
-
-An important property of the constituent functions is that they take only one argument – composing functions that expect more than one isn't going to work (although you can [partially apply][partial-application]...).
-
----
-
-How does composability apply to the algorithmic transformations we've already defined — `map` and `filter`?
-
-There are two ways to combine these transformations:
+How does composability apply to the algorithmic transformations we've already defined — `map` and `filter`? There are two ways to combine these transformations:
 
 - Perform the first transformation on the whole collection before moving on to the second.
 - Perform all transformations on the first element of the collection before moving on to the second.
@@ -313,7 +293,7 @@ function map(transform, collection) {
     return collection.reduce(
         // Reducing function!
         function (result, input) {
-            return cons(result, transform(input));
+            return concat(result, transform(input));
         },
         []
     );
@@ -325,7 +305,7 @@ function filter(predicate, collection) {
         function (result, input) {
             return (
                 predicate(input) ?
-                    cons(result, input) :
+                    concat(result, input) :
                     result
             );
         },
@@ -338,7 +318,7 @@ To get at the reducing functions, we need to `map` and `filter` more generic by 
 
 - Use of collection.reduce
 - The 'seed' value is an empty array
-- The `cons` operation performed on `result` and the `input` (`transform`-ed or not)
+- The `concat` operation performed on `result` and the `input` (`transform`-ed or not)
 
 ---
 
@@ -347,7 +327,7 @@ First, let's pull out the use of `collection.reduce` and the seed value. Instead
 ```js
 function mapper(transform) {
     return function (result, input) {
-        return cons(result, transform(input));
+        return concat(result, transform(input));
     };
 }
 
@@ -355,7 +335,7 @@ function filterer(predicate) {
     return function (result, input) {
         return (
             predicate(input) ?
-                cons(result, input) :
+                concat(result, input) :
                 result
         );
     };
@@ -365,12 +345,12 @@ function filterer(predicate) {
 [1,2,3,4].reduce(filterer(greaterThanTwo), []) // => [3,4]
 ```
 
-Nice! We're getting closer but we still cannot compose two or more reducing functions. The last piece of shared functionality is the key: the `cons` operation performed on `result` and the `input`.
+Nice! We're getting closer but we still cannot compose two or more reducing functions. The last piece of shared functionality is the key: the `concat` operation performed on `result` and the `input`.
 
-Remember we said that reducing functions have the form `(something, input) -> something`? Well, cons just one such function:
+Remember we said that reducing functions have the form `(something, input) -> something`? Well, concat just one such function:
 
 ```js
-function cons(a, b) {
+function concat(a, b) {
     return a.concat([b]);
 }
 ```
@@ -380,7 +360,7 @@ That means there's actually two reducing functions:
 - One that defines the job (mapping, filtering, reversing...)
 - Another that, within the job, combines the existing `result` with the `input`
 
-So far we have only used `cons` for the latter, but who says we have to? Could we use *another, completely different reducing function* – like, say, one produced from `mapper`?
+So far we have only used `concat` for the latter, but who says we have to? Could we use *another, completely different reducing function* – like, say, one produced from `mapper`?
 
 Yes, we could.
 
@@ -407,7 +387,7 @@ function lessThanThree(x) {
 
 function mapper(transform) {
     return function (result, input) {
-        return cons(result, transform(input));
+        return concat(result, transform(input));
     };
 }
 
@@ -431,12 +411,12 @@ To show how this works, let's step debug in our heads:
 3. The `predicate` is called and returns `true`, so the first expression in the ternary is evaluated.
 4. `mapper(identity)` returns a reducing function, then called with `[]` and `1`.
     1. The reducing function's `transform` function — `identity` — is called, returning the same input it was given.
-    2. The input is `cons`-ed onto the `result` and returned.
+    2. The input is `concat`-ed onto the `result` and returned.
 5. The new result — now `[1]` — is returned, and so the `reduce` cycle continues.
 
 > I'd recommend running this code and looking for yourself!
 
-What has this gained us? Well, now we can see that a reducing function can make use of another reducing function – it doesn't have to be cons!
+What has this gained us? Well, now we can see that a reducing function can make use of another reducing function – it doesn't have to be `concat`!
 
 In fact, if we altered `filterer` to use `mapper(inc)`, we'd get:
 
@@ -488,13 +468,13 @@ var filterLessThanThreeAndIncrement = compose(
     mapping(inc)
 );
 
-[1,2,3,4].reduce(filterLessThanThreeAndIncrement(cons), []) // => [2,3]
+[1,2,3,4].reduce(filterLessThanThreeAndIncrement(concat), []) // => [2,3]
 ```
 
 Wow. Notice:
 
 - We only specify the seed data structure once, when we use the transducer.
-- We only tell the transducers how to combine their `input` with the `result` once (in this case, with `cons`), by passing it to the `filterLessThanThreeAndIncrement` transducer.
+- We only tell the transducers how to combine their `input` with the `result` once (in this case, with `concat`), by passing it to the `filterLessThanThreeAndIncrement` transducer.
 
 To prove that this works, let's turn it into an object with the resulting values as keys *without altering the reducing functions*.
 
@@ -553,7 +533,7 @@ posts.reduce(extractMentions(graph), {}) /* =>
 
 ### Applying transducers to channels
 
-Now have all the parts of a "composable way to build algorithmic transformations" we can start applying them to any data pipeline – so let's try channels. I'm not going to show you the [channel-level implementation][repo-channel.js], just some usage examples.
+Now we have all the parts of a "composable way to build algorithmic transformations" we can start applying them to any data pipeline – so let's try channels. Again, I'm not going to show you the [channel-level implementation][repo-channel.js], just some usage examples.
 
 We're going to listen for DOM events and put them into a channel that filters only those that occur on even x & y positions and maps them into a triple of `[type, x, y]`.
 
@@ -635,7 +615,7 @@ function gateFilter(opener, closer) {
         }
         return open;
     };
-};
+}
 
 function keyFilter(key, value) {
     return function (e) {
