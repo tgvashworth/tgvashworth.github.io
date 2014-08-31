@@ -426,11 +426,9 @@ In fact, if we altered `filterer` to use `mapper(inc)`, we'd get:
 
 ---
 
-This is starting to feel a lot like a composite algorithmic transform, but we don't want to be manually writing composed functions – we want to use `compose`!
+This is starting to feel a lot like composable algorithmic transformation, but we don't want to be manually writing composed functions – we want to use `compose`!
 
-To do so, we need the reducing functions to use another reducing function to combine `result` and `input`.
-
-In order to compose we need functions that take only one argument, so we can pull that inner reducing function (the combiner) out. In this way, we make reducing functions that express the essence of their job without being tied to any particular way of combining their arguments.
+To do so, we need the reducing functions to rely on another reducing function to combine `result` and `input`. Since we need functions that take only one argument we can pull out the inner reducing function (the combiner), to make reducing functions that express the essence of their job without being tied to any particular way of combining their arguments.
 
 We'll change the names again to express the nature of what's going on here:
 
