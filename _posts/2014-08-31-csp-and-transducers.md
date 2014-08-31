@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "CSP and transducers"
+title: "CSP and transducers in JavaScript"
 ---
 
 Learning [Clojure][clj] has introduced me to some really fascinating ideas. I really believe in the importance of [trying new things][try-something-new], so I've been playing with two of them — an old idea and a new one: the [Clojure/core.async interpretation][core.async-channels] of C. Hoare's [Communicating Sequential Processes][csp] (CSP), and Rich Hickey's [transducers][transducers], coming soon to a Clojure near you.
