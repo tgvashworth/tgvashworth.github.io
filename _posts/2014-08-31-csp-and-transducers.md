@@ -661,6 +661,8 @@ My real goal is to explore [the Actor model][actor-model] as it relates to front
 
 The result of this work is [on Github][repo] so please do check that out, and [email][email] or [Tweet][twitter] me with feedback.
 
+Finally finally, a massive thank-you to [Stuart][sil] &amp; [Passy][passy] who gave me top-notch feedback on this article!
+
 <!-- JS Bin -->
 
 <script src="http://static.jsbin.com/js/embed.js"></script>
@@ -706,6 +708,11 @@ The result of this work is [on Github][repo] so please do check that out, and [e
 [try-something-new]: /2012/10/01/try-something-new.html "Try Something New"
 [email]: mailto:tgvashworth@gmail.com "Email me!"
 [twitter]: https://twitter.com/phuunet "@phuunet"
+
+<!-- People -->
+
+[passy]: https://twitter.com/passy "Pascal Hartig"
+[sil]: https://twitter.com/sil "Stuart Langridge"
 
 <!-- Images -->
 
