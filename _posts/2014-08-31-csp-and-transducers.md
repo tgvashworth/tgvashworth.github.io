@@ -7,7 +7,7 @@ Learning [Clojure][clj] has introduced me to some really fascinating ideas. I re
 
 Hopefully, this post will serve two purposes: to solidify these ideas in my mind by explaining them, and — by proxy — help someone else to understand. To weed out mistakes and weaknesses in my own thinking I'm pretty explicit each small conceptual step, particularly when it comes to transducers. It's a long one, but hopefully useful!
 
-**tl;dr** — [There's code on GitHub](repo).
+**tl;dr** — [There's code on GitHub][repo].
 
 First, a quick introduction to the mass of prior work here...
 
@@ -268,6 +268,16 @@ var incrementAndFilter = compose(
 incrementAndFilter([1,2,3,4]) // => [3,4,5]
 ```
 
+---
+
+`compose` is a function that combines functions:
+
+```js
+compose(f, g)(10) === f(g(10));
+```
+
+---
+
 However, this has a number of issues:
 
 - It cannot be parallelised.
@@ -347,7 +357,7 @@ function filterer(predicate) {
 
 Nice! We're getting closer but we still cannot compose two or more reducing functions. The last piece of shared functionality is the key: the `concat` operation performed on `result` and the `input`.
 
-Remember we said that reducing functions have the form `(something, input) -> something`? Well, concat just one such function:
+Remember we said that reducing functions have the form `(something, input) -> something`? Well, concat is just one such function:
 
 ```js
 function concat(a, b) {
