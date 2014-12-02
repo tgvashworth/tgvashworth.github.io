@@ -19,4 +19,6 @@ This pattern also uniquely allows reuse of a template without reuse of associate
 
 My position is that logic dedicated solely to presentation should be physically, line-of-code close to its use in a template because they are in fact the *same* concern. Changes in logic are immediately linked to changes in presentation due to proximity and so the implications of a change are intuitively clear.
 
-React’s way of doing things gives you this benefit in abundance.
+In the literature, this property is called [cohesion](http://en.wikipedia.org/wiki/Cohesion_%28computer_science%29) — the separate-template approach has *low* cohesion; the alternative has *high* cohesion, and is more desirable for it.
+
+React’s way of doing things has high cohesion and a good measure of intuitive maintainability. I like it.
