@@ -710,7 +710,7 @@ Finally finally, a massive thank-you to [Stuart][sil] &amp; [Passy][passy] who g
 <!-- Me -->
 
 [repo]: https://github.com/phuu/csp "phuu/csp"
-[repo-channel.js]: https://github.com/phuu/csp/blob/master/channel.js "phuu/csp/channel.js"
+[repo-channel.js]: https://github.com/phuu/csp/blob/master/lib/channel.js "phuu/csp/lib/channel.js"
 [om-do]: https://github.com/phuu/om-do "phuu/om-do"
 [try-something-new]: /2012/10/01/try-something-new.html "Try Something New"
 [email]: mailto:tgvashworth@gmail.com "Email me!"
