@@ -23,7 +23,7 @@ Just over a year ago an implementation of CSP called [core.async][core.async] wa
 
 The most recent development in this epic saga (spanning almost [40 years][csp-paper] of computing history!) are [transducers][transducers], a "powerful and composable way to build algorithmic transformations". Again dry but very powerful in use — and very hard for me to understand!
 
-[Talks](core.async-nolen-talk) about [how these concepts tie together][core.async-webinar] fascinated me, and I've been [toying with the ideas][om-do] using [ClojureScript][cljs] and [David Nolen][david-nolen]'s excellent [Om][om] framework. In addition, these ideas tie closely with Twitter's [Flight framework][flight] on which I work.
+Talks about [how these concepts tie together][core.async-nolen] fascinated me, and I've been [toying with the ideas][om-do] using [ClojureScript][cljs] and [David Nolen][david-nolen]'s excellent [Om][om] framework. In addition, these ideas tie closely with Twitter's [Flight framework][flight] on which I work.
 
 However I've never felt truly comfortable with what's going on under the hood, and since the best way to learn anything is to *do it yourself*, I've been experimenting!
 
@@ -701,7 +701,6 @@ Finally finally, a massive thank-you to [Stuart][sil] &amp; [Passy][passy] who g
 [simple]: http://www.youtube.com/watch?v=rI8tNMsozo0 "Simplicity Matters — Rich Hickey"
 [language-of-the-system]: http://www.youtube.com/watch?v=ROor6_NGIWU "The Language of the System — Rich Hickey"
 [core.async-nolen]: http://www.youtube.com/watch?v=AhxcGGeh5ho "core.async — David Nolen"
-[core.async-webinar]: http://www.youtube.com/watch?v=AhxcGGeh5ho "core.async — David Nolen"
 
 <!-- JS -->
 
