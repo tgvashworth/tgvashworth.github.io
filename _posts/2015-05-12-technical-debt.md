@@ -81,3 +81,5 @@ Most importantly, stop and think. Often. Be aware of your own biases (mine are t
 Paying back technical debt is about understanding the trade-offs, constraints and complexity and redressing the balance with a new approach. It's tough and time consuming, but little and often can really help keep a project moving.
 
 Ship it!
+
+> Thanks to [Passy](https://twitter.com/passy) for proof-reading this.
