@@ -78,4 +78,6 @@ I am absolutely guilty of failing to adhere to this. It's seriously unprofession
 
 Most importantly, stop and think. Often. Be aware of your own biases (mine are to code and to rewrites), and consciously fight them.
 
-Paying back technical debt is about understanding the trade-offs, constraints and complexity and redressing the balance with a new approach. It's tough and time consuming. Little and often... Ship it!
+Paying back technical debt is about understanding the trade-offs, constraints and complexity and redressing the balance with a new approach. It's tough and time consuming, but little and often can really help keep a project moving.
+
+Ship it!
