@@ -60,9 +60,9 @@ Balance the trade-offs. Ask yourself, where will you make compromises if you rew
 
 ---
 
-We began our project as a refactor, shipping incremental changes directly into production, before deciding that we were making things more difficult for ourselves. We agreed to allow a period of breakage and approaching the problem as a rewrite, working off-master and going back to first principles.
+We began our project as a refactor, shipping incremental changes directly into production, before deciding that we were making things more difficult for ourselves.
 
-This proved very important later on, as the rigour we were then able to apply gave us confidence later in the project.
+We agreed to allow a period of breakage and approached the problem as a rewrite, working off-master and going back to first principles. The rigour we were then able to apply gave us confidence later in the project.
 
 I'm still undecided on the right approach in terms of time-taken but if the ends justify the means, we made the right call.
 
