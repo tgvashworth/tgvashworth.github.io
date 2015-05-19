@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <g transform="translate(0 32) scale(4)">
+
+    <rect transform="translate(32 32)" x="0" y="0" height="64" width="16" fill="#aab8c2"/>
+    
+    
+    <rect transform="translate(32 96)" x="0" y="0" height="0" width="16" fill="#77b255">
+      <animate attributeName="height" from="0" to="32" dur="0.5s" fill="freeze"
+               id="infinte-scroll-anim" begin="infinite-viewport-anim.begin + 2s" />
+    </rect>
+    
+    <rect transform="translate(24 32)" x="0" y="0.5" height="16" width="32" fill="transparent" stroke="rgba(255,255,255,.5)">
+      <animate attributeName="y" values="0; 40; 72;" dur="5s" begin="2s" fill="freeze"
+               keytimes="0;0.5;1" keySplines="0.38 0.5 0.63 1;0.38 0.5 0.63 1" calcMode="spline"
+               id="infinite-viewport-anim" />
+    </rect>
+  </g>
+  
+  <g transform="translate(160 32) scale(4)">
+
+    <rect transform="translate(32 32)" x="0" y="0" height="64" width="16" fill="#aab8c2"/>
+    
+    <rect transform="translate(32 0)" x="0" y="0" height="0" width="16" fill="#77b255">
+      <animate attributeName="height" from="0" to="32" dur="0.5s" fill="freeze"
+               id="upward-scroll-anim" begin="upward-viewport-anim.begin + 2s" />
+    </rect>
+    
+    <rect transform="translate(24 32)" x="0" y="40" height="16" width="32" fill="transparent" stroke="rgba(255,255,255,.5)">
+      <animate attributeName="y" values="40; 8; -24;" dur="5s" begin="infinite-viewport-anim.end + 1s" fill="freeze"
+               keytimes="0;0.5;1" keySplines="0.38 0.5 0.63 1;0.38 0.5 0.63 1" calcMode="spline"
+               id="upward-viewport-anim" />
+    </rect>
+  </g>
+  
+  <g transform="translate(320 32) scale(4)">
+
+    <rect transform="translate(32 32)" x="0" y="0" height="64" width="16" fill="#aab8c2"/>
+    
+    <rect transform="translate(32 0)" x="0" y="0" height="0" width="16" fill="#77b255">
+      <animate attributeName="height" from="0" to="28" dur="0.5s" fill="freeze"
+               id="upward-gap-scroll-anim" begin="upward-gap-viewport-anim.begin + 2s" />
+    </rect>
+    
+    <rect transform="translate(32 28)" x="0" y="0" height="0" width="16" fill="#ffcc4d">
+      <animate attributeName="height" from="0" to="4" dur="0.1s" fill="freeze"
+               id="upward-gap-gap-anim" begin="upward-gap-scroll-anim.end + 0s" />
+    </rect>
+    
+    <rect transform="translate(24 32)" x="0" y="40" height="16" width="32" fill="transparent" stroke="rgba(255,255,255,.5)">
+      <animate attributeName="y" values="40; 8; -24;" dur="5s" begin="upward-viewport-anim.end + 1s" fill="freeze"
+               keytimes="0;0.5;1" keySplines="0.38 0.5 0.63 1;0.38 0.5 0.63 1" calcMode="spline"
+               id="upward-gap-viewport-anim" />
+    </rect>
+  </g>
+</svg>
