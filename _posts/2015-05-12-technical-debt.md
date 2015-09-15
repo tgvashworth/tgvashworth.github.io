@@ -12,19 +12,21 @@ Having reached the end and successfully released without a hitch, apart from the
 
 Technical debt is the sum of all the constraints, the trade-offs and compromises made, in every piece of work by every engineer since the beginning of a project. It means done but hacky; shipped but imperfect; working but cumbersome.
 
-However, that does *not* mean things you don't like, don't understand or believe to be too complex can automatically be considered technical debt. Before you can consider those areas technical debt, you'll need to be a bit more objective!
+However, i does *not* mean things you don't like, don't understand or believe to be too complex. They are not necessarily technical debt; you'll need to be a bit more objective!
 
-Paying off technical debt means understanding the trade-offs that were made, restating the goals, changing the constraints and taking a different fork in the road.
+Paying off technical debt means understanding the trade-offs that shaped how things are. Before taking a different fork in the road, restate the goals and constraints.
 
-You should pay off debt when living with it outweighs the cost of fixing it, or when it may jeopardise the success of future work. Cost can be measured in complexity, bug frequency, or the speed at which engineers are able to work.
+You should pay off debt when living with it outweighs the cost of fixing it, or when it may jeopardise the success of future work. While 'cost' is hard to measure, you can try complexity, bug frequency, or the speed at which engineers are able to work.
 
 ### How do you decide what to pay off, and what to live with?
 
 While I've been trying to learn the habits of the more senior engineers around me by observing and copying, I think that to make decisions like this you have to try, fail, and try again.
 
-Methodically explore the problem space. Ask yourself, what are the goals of the work? More importantly, what *isn't* a goal? What should be taken off the table?
+Methodically explore the problem space. State the goals of the work. More importantly, state what *isn't* a goal. What should be taken off the table?
 
-Draw, map and visualise until you thoroughly understand the situation before you touch the keyboard. Your goal is to know landscape of the problem by its landmarks: components, modules, functions, and their interactions. You can only be confident of making the right choices if you have a complete understanding.
+Draw, map and visualise until you thoroughly understand the situation before you touch the keyboard.
+
+If you're technical, the goal is to know landscape of the problem by its landmarks: components, modules, functions, and their interactions. Confidence to make the right choice comes when you have a complete understanding.
 
 Do this first, because writing code is costly in the extreme; thinking, sketching and exploring are cheap.
 
@@ -36,13 +38,15 @@ During this process we were constantly talking, sharing and spreading knowledge.
 
 ### Saying no
 
-If you find an area you don't want to modify, try to reduce its surface area by improving the interface. Build a wall around the functionality to isolate yourself from it.
+If you find an area you don't want to modify, try to reduce its surface area by improving the interface. Build a wall around it to isolate the damage.
 
 Take a Hansel & Gretel approach, leaving breadcrumbs as you go, to find your way back in future.
 
 If you decide to defer improving something, remember that debt spreads when left without containment, because it tends to be the easy option, and is the learned go-to. Quarantine and come back in the future. Document that you did so, and discuss it with others.
 
-Consider that doing nothing is an option always available, and it may be the best choice. Your natural inclination may be to code, so come up with reasons why you shouldn't, and justify every change.
+Consider that doing nothing is an option always available, and it may be the best choice.
+
+Your natural inclination may be to code, so come up with reasons why you shouldn't, and justify every change.
 
 ---
 
