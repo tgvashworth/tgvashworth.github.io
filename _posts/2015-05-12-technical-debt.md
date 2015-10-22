@@ -12,7 +12,7 @@ Having reached the end and successfully released without a hitch, apart from the
 
 Technical debt is the sum of all the constraints, the trade-offs and compromises made, in every piece of work by every engineer since the beginning of a project. It means done but hacky; shipped but imperfect; working but cumbersome.
 
-However, i does *not* mean things you don't like, don't understand or believe to be too complex. They are not necessarily technical debt; you'll need to be a bit more objective!
+However, it does *not* mean things you don't like, don't understand or believe to be too complex. They are not necessarily technical debt; you'll need to be a bit more objective!
 
 Paying off technical debt means understanding the trade-offs that shaped how things are. Before taking a different fork in the road, restate the goals and constraints.
 
