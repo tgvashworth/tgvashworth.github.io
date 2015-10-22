@@ -10,7 +10,7 @@ Having reached the end and successfully released without a hitch, apart from the
 
 ### Identifying debt
 
-Technical debt is the sum of all the constraints, the trade-offs and compromises made, in every piece of work by every engineer since the beginning of a project. It means done but hacky; shipped but imperfect; working but cumbersome.
+Your technical debt is the sum of the trade-offs and compromises still present in your code. It means done but hacky; shipped but imperfect; working but cumbersome. It can appear organically over time or very suddenly. It slows your team down and detracts from the value you can provide.
 
 However, it does *not* mean things you don't like, don't understand or believe to be too complex. They are not necessarily technical debt; you'll need to be a bit more objective!
 
