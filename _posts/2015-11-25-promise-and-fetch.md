@@ -8,7 +8,7 @@ Working on [fetch-engine][fetch-engine] has had me wondering about how we intera
 
 I'd like the library to make *network request timeouts* simple. They're a good practice for distributed systems, and we should all be using them without thinking about it.
 
-To build timeout support, there needs to be a way cancel the in-flight request, free up [HTTP resources][max-connections] in the browser, and notify the code performing the request than a timeout has occurred. To see how fetch-engine could do this, I looked into how we could make network requests.
+To build timeout support, there needs to be a way cancel the in-flight request, free up [HTTP resources][max-connections] in the browser, and notify the code performing the request that a timeout has occurred. To see how fetch-engine could do this, I looked into how we could make network requests.
 
 [fetch][fetch-spec] is becoming a standard and making its way into browsers, so my intuition was to base fetch-engine on it, hence the name.
 
