@@ -58,13 +58,18 @@ Let's look back at the key bits of a Promise. They:
 - transition *only* from pending to fulfilled *or* rejected
 - expose a single method, `then`, that returns a new Promise
 
-Now compare that to [the fetch spec][fetch-spec]. It's far, far too big for me to even address.
+Now compare that to [the fetch spec][fetch-spec]. A fetch:
 
-To my eyes, a Promise cannot convey a fetch; the latter is far more complicated than a single value in one of three states.
+- is not just a single value (a fetch response contains streams, for example)
+- has more than three states (cancelled, anyone?)
+- is already in in three parts: Request, fetch, and Response
+- can be retried, paused, or partially complete (and still usable)
 
-With that in mind, here's my opinion: *cancellation should not be addressed within the Promise spec*. It's a simple, useful tool and it should stay that way.
+A Promise cannot be used as an interface for the intricacies of a fetch. It's far more complicated than that.
 
-Instead, let's look harder at fetch and find new primitives that have desirable properties and the required features.
+So, here's my opinion: *cancellation does not fit within the Promise spec*. It's a simple, useful tool and it should stay that way.
+
+Instead, let's look hard at fetch, find new primitives that have desirable properties and the required features, and build the Fetch API around them.
 
 Of course, Promises may be reused in places. That's fine, *that's what abstractions are for*.
 
@@ -74,7 +79,7 @@ I'm not going to design a solution here. Instead, I would like to see some thing
 
 - let's admit that, although Promise is great, it's not right for every problem
 - let's look *outside of JavaScript* to find the good ways others have solved this problem
-- stop [fighting][fetch-spec] over this. It's just JavaScript; chill out.
+- stop fighting over this. It's just JavaScript; chill out.
 
 &hearts;
 
