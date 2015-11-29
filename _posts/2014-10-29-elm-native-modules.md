@@ -5,11 +5,13 @@ title: "Elm: building Native modules"
 
 I couldn't find any documentation on how to write modules written in pure JavaScript for [Elm][elm] so I took a stab at it myself, using [elm-d3][elm-d3] and the [Elm compiler][elm-compiler] as a reference. Here's a quick write-up.
 
-It's important to note that doing this is *not encouraged* by Evan (the Elm creator). It's a hack and subject to compiler implementation changes. Use at your own risk.
+It's important to note that doing this is *not encouraged* by Evan (the Elm creator). It's a hack and subject to compiler implementation changes. **Use at your own risk.**
 
 ## The problem
 
-Elm is great but there are a number of useful functions that aren't implemented as standard or and aren't worth the effort to write in Elm itself. Elm has a JavaScript interoperability pattern called [ports][ports] but they're async and have a couple of other unfortunate constraints, so aren't ideal for some use-cases.
+Elm is great, but there are functions that aren't implemented as standard and aren't worth the effort to write in Elm itself, and are better built in JavaScript.
+
+While Elm has a JavaScript interoperability pattern called [ports][ports] but they're async and have a couple of other unfortunate constraints, so aren't ideal for some use-cases.
 
 Sometimes you just gotta call a function.
 
@@ -28,9 +30,9 @@ import Native.Logger
 
 At compile time the compiler goes out to find the modules you import (`SomeModule` maps to a file of the same name with a `.elm` extension) *unless* the module name has the prefix `Native.`.
 
-If the name contains `Native.`, the Elm compiler will happily go on if the file doesn't exist. If the `.elm` files aren't there, it will blow up — this is good.
+If the `.elm` files aren't there, it will blow up — this is good. If the name contains `Native.`, the Elm compiler will continue even if the file doesn't exist.
 
-Assuming the files are present it compiles the importing code (roughly) like:
+Assuming the files are present it compiles the importing code to something like:
 
 ```haskell
 var $Some$Module = Elm.SomeModule.make(_elm),
@@ -39,7 +41,7 @@ var $Some$Module = Elm.SomeModule.make(_elm),
     $Native$Logger = Elm.Native.Logger.make(_elm);
 ```
 
-You can see that it assumes the module will be there at runtime, and that it calls a `make` method to initialise the module. So we just need to add something to the `Elm.Native` namespace before the main apps loads (but after the runtime).
+You can see that Elm assumes modules are there at runtime, and that it calls a `make` method to initialise the module. To build a native module, we just need to add something to the `Elm.Native` namespace before the main app loads (but after the runtime loads).
 
 So, here's an example native module called `Logger`:
 
@@ -57,8 +59,6 @@ Elm.Native.Logger.make = function(elm) {
     };
 };
 ```
-
-This pattern is copied more-or-less from compiled Elm code.
 
 You can include this in the page in any way you like, so long as it comes after the Elm runtime:
 
@@ -80,9 +80,9 @@ window.onload = function () {
 </script>
 ```
 
-In production, these files should be concatenated and minified.
+As usual, in production, concatenate and minify those files!
 
-Finally, here's a little snippet for generating these modules more easily:
+To finish up, here's a little snippet for generating these modules:
 
 ```js
 function ElmNativeModule(name, values) {
@@ -107,7 +107,7 @@ ElmNativeModule('Logger', {
 });
 ```
 
-Remember, this is *not recommended*. Try to use ports first, and be prepared for this to break when the compiler implementation changes.
+Remember, this is *not recommended*. Try to use ports first, and prepare for this to break when the compiler implementation changes.
 
 [elm]: http://elm-lang.org/ "Elm"
 [elm-d3]: https://github.com/seliopou/elm-d3 "seliopou/elm-d3"
