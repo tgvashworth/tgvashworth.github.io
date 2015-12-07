@@ -9,9 +9,9 @@ It's important to note that doing this is *not encouraged* by Evan (the Elm crea
 
 ## The problem
 
-Elm is great, but there are functions that aren't implemented as standard and aren't worth the effort to write in Elm itself, and are better built in JavaScript.
+Elm is great but there are functions that aren't implemented as standard, aren't worth the effort to write in Elm itself, and are better built in JavaScript.
 
-While Elm has a JavaScript interoperability pattern called [ports][ports] but they're async and have a couple of other unfortunate constraints, so aren't ideal for some use-cases.
+While Elm has a JavaScript interoperability pattern called [ports][ports], they're async-only and have a couple of other unfortunate constraints so aren't ideal for some use-cases.
 
 Sometimes you just gotta call a function.
 
