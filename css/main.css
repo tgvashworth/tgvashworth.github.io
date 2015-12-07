@@ -1,16 +1,22 @@
+html {
+  font: 18px/1.5 "Fira Sans", sans-serif;
+}
+
 body {
   background: #fafafa;
-  font: 15px/1.5 "Fira Sans", sans-serif;
+  margin: 0;
 }
 
 .container {
-  margin: 2rem auto;
+  margin: 1.5rem auto;
   width: auto;
   max-width: 40rem;
+  padding: 0 1rem;
 }
 
 a { color: #4183c4; text-decoration: none; }
 a:hover { text-decoration: underline; }
+a.alt { color: #E58800; }
 
 img {
   max-width: 100%
@@ -57,11 +63,17 @@ blockquote {
 .footer {
   border-top: 1px solid #eee;
   margin: 1.5em 0;
+  overflow: hidden;
 }
 
 .contact {
   float: left;
   width: 50%;
+  padding-top: 1.5rem;
+}
+
+.contact p {
+  margin: 0;
 }
 
 /*****************************************************************************/
@@ -85,6 +97,7 @@ blockquote {
 
 .date {
   font: 0.667em "Fira Mono", monospace;
+  padding-right: 1em;
 }
 
 .meta {
