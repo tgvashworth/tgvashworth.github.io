@@ -4,7 +4,11 @@ date: 2015-12-7
 layout: post
 ---
 
-The workings of large, distributed systems fascinate me. At the same time, working at Twitter has taught me hard lessons about the variety of exciting failure scenarios of a scaled system; those "holy shit, everything's on fire" moments. So I've been reading up. Here's some stuff I've read, some I haven't. Enjoy.
+The workings of large distributed systems fascinate me. At the same time, working at Twitter has taught me hard lessons about the variety of exciting failure scenarios of a scaled system. "holy shit, everything's on fire" moments are my personal favourites.
+
+So, I've been reading up.
+
+Here's some stuff I've read and some I haven't. Enjoy.
 
 - [What We Talk About When We Talk About Distributed Systems](http://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html) — Fantastic article (and talk) with grounding in all the terminology.
 - [Aphyr on Distributed Systems](https://aphyr.com/tags/Distributed-Systems) — Great blog. Kyle works on [Jepsen](https://github.com/aphyr/jepsen), and I learn something from every one of his posts.
