@@ -9,11 +9,11 @@ This a quick response to Ben’s tweet from this week:
 
 His issue is the mix of logic and template. We’ve all heard it: your templates should exist in their own files, referenced by some kind of view. The logic is defined somewhere else.
 
-Separating the two is meant to encourage more simple templates, grouped the logic,maintainability and perhaps even reuse.
+Separating the two is meant to lead to more simple templates, a single place to find logic, maintainabile code and perhaps even code reuse.
 
 Ben’s view is that embedding the template in the React component loses those desirable properties. I hope I’m not putting word in his mouth.
 
-Needless to say, I disagree.
+You've probably guessed that I disagree.
 
 View logic is tied to a component (or application’s) state — good examples are toggling attributes, selectively including parts of the template, and reusing other templates or whole components. When the connection between the presentation and related logic isn’t intuitive or obvious, split-brain maintainability problems occur because the presentation changes incurred by a logical change are not clear. This leads to bugs.
 
