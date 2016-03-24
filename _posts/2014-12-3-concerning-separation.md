@@ -7,6 +7,8 @@ This a quick response to Ben’s tweet from this week:
 <blockquote class="twitter-tweet" lang="en"><p>This does not seem ok:&#10;&#10;<a href="http://t.co/DGK6CteRPK">http://t.co/DGK6CteRPK</a>&#10;&#10;Emperor&#39;s New Clothes Effect™ in full force again.</p>&mdash; Ben Howdle (@benhowdle) <a href="https://twitter.com/benhowdle/status/539454010387070977">December 1, 2014</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+**Edit**: Ben seems to have deleted the tweet since this was published — I'm not sure why.
+
 His issue is the mix of logic and template. We’ve all heard it: your templates should exist in their own files, referenced by some kind of view. The logic is defined somewhere else.
 
 Separating the two is meant to lead to more simple templates, a single place to find logic, maintainabile code and perhaps even code reuse.
