@@ -12,6 +12,7 @@ Here's some stuff I've read and some I haven't. Enjoy.
 
 - [What We Talk About When We Talk About Distributed Systems](http://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html) — Fantastic article (and talk) with grounding in all the terminology.
 - [Aphyr on Distributed Systems](https://aphyr.com/tags/Distributed-Systems) — Great blog. Kyle works on [Jepsen](https://github.com/aphyr/jepsen), and I learn something from every one of his posts.
+- [Dist-sys Class Notes](https://github.com/aphyr/distsys-class) – More Aphyr, this time with notes from his distributed systems class. Great stuff, learned a tonne.
 - [Notes on Distributed Systems for Young Bloods](http://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/) — Jeff Hodges on how to think about distributed systems.
 - [Time, Clocks, and the Ordering of Events in a Distributed System](http://research.microsoft.com/en-us/um/people/lamport/pubs/time-clocks.pdf) — One of *the* dist-sys papers. Have dipped in and out, need to read it properly.
 - [Readings in Database Systems](http://www.redbook.io) — aka. the "Red Book". Need to read, though it's more about data that dist-sys.
