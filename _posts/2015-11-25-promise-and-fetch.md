@@ -42,7 +42,7 @@ When designing a new behaviour promise, these desirable properties should be mai
 - maintaining interface immutability such that cancellation does not allow the *user* of the Promise to interfere with its resolution
 - Promise should remain as simple to describe and understand as possible
 
-A few in the [the whatwg discussion][fetch-cancel-discussion] felt the need to design a cancellation API. Pick your way through to find them. Unfortunately, the designs suffer variously from a couple of issues:
+A few in the [the whatwg discussion][fetch-cancel-discussion] felt the need to design a cancellation API. Pick your way through to find them. Unfortunately, the designs suffer variously from a couple of issues. They either:
 
 - fail to maintain the desirable properties of Promises
 - ask for changes to existing, tangentially related specs
@@ -63,15 +63,15 @@ Now compare that to [the fetch spec][fetch-spec]. A fetch:
 - is not just a single value (a fetch response contains streams, for example)
 - has more than three states (cancelled, anyone?)
 - is already in in three parts: Request, fetch, and Response
-- can be retried, paused, or partially complete (and still usable)
+- can be retried, paused, or partially complete (and still be usable)
 
-A Promise cannot be used as an interface for the intricacies of a fetch. It's far more complicated than that.
+It seems to me that a Promise cannot be used as an interface for the intricacies of a fetch. It's just more complicated than that.
 
 So, here's my opinion: *cancellation does not fit within the Promise spec*. It's a simple, useful tool and it should stay that way.
 
 Instead, let's look hard at fetch, find new primitives that have desirable properties and the required features, and build the Fetch API around them.
 
-Of course, Promises may be reused in places. That's fine, *that's what abstractions are for*.
+Of course, Promises may be reused in places. That's fine. *That's what abstractions are for*.
 
 ## What's next?
 
