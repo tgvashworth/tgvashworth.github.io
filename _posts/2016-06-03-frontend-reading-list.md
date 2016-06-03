@@ -15,7 +15,7 @@ title: "Frontend Reading List"
 - [The Elm Architecture](http://guide.elm-lang.org/architecture/index.html) — *Article* — Elm Documentation
 - [Impossible Programs](https://www.youtube.com/watch?v=hN63FOa_Gp4) — *Video* — Tom Stuart
 
-### Frontend
+### HTML & CSS
 
 - [About HTML semantics and front-end architecture](http://nicolasgallagher.com/about-html-semantics-front-end-architecture/) — *Article* — Nicolas Gallagher
 - [Code Smells in CSS](http://csswizardry.com/2012/11/code-smells-in-css/) — *Article* — Harry Roberts
