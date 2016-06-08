@@ -3,7 +3,8 @@ html {
 }
 
 body {
-  background: #fafafa;
+  background: #FCFDFF;
+  color: #001514;
   margin: 0;
 }
 
@@ -16,7 +17,8 @@ body {
 
 a { color: #4183c4; text-decoration: none; }
 a:hover { text-decoration: underline; }
-a.alt { color: #E58800; }
+a.alt, a.alt:visited { color: #C17400; }
+a:visited { color: #2B5884; }
 
 img {
   max-width: 100%
@@ -106,8 +108,8 @@ blockquote {
 
 /* standard */
 .post pre {
-  border: 1px solid #ddd;
-  background-color: #f1f1f1;
+  border: 1px solid #D6D7D8;
+  background-color: #F7F8F9;
   padding: .4em;
   overflow-x: scroll;
 }
@@ -118,8 +120,8 @@ blockquote {
 }
 
 .post code {
-  border: 1px solid #ddd;
-  background-color: #f1f1f1;
+  border: 1px solid #D6D7D8;
+  background-color: #F7F8F9;
   padding: 0 .2em;
 }
 
@@ -144,7 +146,7 @@ blockquote {
 
 hr {
   border: none;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #D6D7D8;
   width: 100%;
   max-width: 10em;
   margin: 2em auto;
