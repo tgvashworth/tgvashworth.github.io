@@ -16,6 +16,7 @@ title: "Frontend Reading List"
 - [The Elm Architecture](http://guide.elm-lang.org/architecture/index.html) — *Article* — Elm Documentation
 - [Let’s be mainstream!](http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design) — *Video and article* — Evan Czaplicki
 - [Impossible Programs](https://www.youtube.com/watch?v=hN63FOa_Gp4) — *Video* — Tom Stuart
+- [K Things I Know About Building Resilient Reactive Systems](https://www.youtube.com/watch?v=rQIE22e0cW8) – *Video* – Joe Armstrong
 
 ### HTML & CSS
 
