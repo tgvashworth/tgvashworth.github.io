@@ -20,6 +20,7 @@ a {
   text-decoration: none;
   position: relative;
 }
+a:focus { outline: none; /* replaced by pseudo-element */ }
 a:before { background-color: #4183c4; }
 a:visited { color: #2B5884; }
 a:visited:before { background-color: #2B5884; }
@@ -47,6 +48,7 @@ a:before {
 }
 
 a:hover:before,
+a:focus:before,
 a:active:before {
   visibility: visible;
   -webkit-transform: scaleX(1);
@@ -55,6 +57,10 @@ a:active:before {
 
 a:active:before {
   opacity: 0.2;
+}
+
+a:focus:before {
+  background-color: #001514;
 }
 
 img {
