@@ -23,4 +23,4 @@ Here's some stuff I've read and some I haven't. Enjoy.
 
 There's way more that I've forgotten about, so I'll come back and update this when I remember.
 
-There's a good amount of writing on this topic, and it's becoming more and more accessible (less academic, more practical), but I haven't seen much written from the client-side perspective so I might try to contribute in some small way in that space. Poke me [on Twitter](https://twitter.com/phuunet) if you want that article.
+There's a good amount of writing on this topic, and it's becoming more and more accessible (less academic, more practical), but I haven't seen much written from the client-side perspective so I might try to contribute in some small way in that space. Poke me [on Twitter](https://twitter.com/tgvashworth) if you want that article.

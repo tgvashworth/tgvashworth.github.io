@@ -714,7 +714,7 @@ Finally finally, a massive thank-you to [Stuart][sil] &amp; [Passy][passy] who g
 [om-do]: https://github.com/phuu/om-do "phuu/om-do"
 [try-something-new]: /2012/10/01/try-something-new.html "Try Something New"
 [email]: mailto:tgvashworth@gmail.com "Email me!"
-[twitter]: https://twitter.com/phuunet "@phuunet"
+[twitter]: https://twitter.com/tgvashworth "@tgvashworth"
 
 <!-- People -->
 

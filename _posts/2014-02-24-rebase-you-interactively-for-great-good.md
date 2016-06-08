@@ -3,7 +3,7 @@ layout: post
 title: Rebase you interactively for great good
 ---
 
-I [tweeted today](https://twitter.com/phuunet/status/437997631315656704) about using interactive rebase to clean up a set of commits, so here's a wee bit on how to do it. The repo for this is [on GitHub](https://github.com/phuu/example-interactive-rebase).
+I [tweeted today](https://twitter.com/tgvashworth/status/437997631315656704) about using interactive rebase to clean up a set of commits, so here's a wee bit on how to do it. The repo for this is [on GitHub](https://github.com/phuu/example-interactive-rebase).
 
 Before we get stuck in, remember one thing: if others are working on the code, and you've already pushed, *don't do this*. Your friends will desert you and everyone you ever loved will pour scorn and derision upon you for evermore. Or something.
 

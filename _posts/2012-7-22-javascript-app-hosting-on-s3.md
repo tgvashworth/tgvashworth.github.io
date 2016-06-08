@@ -45,7 +45,7 @@ if( segments[0] === 'somepage' ) {
 
 #### Testing
 
-That linked you copied? Try going to it in your browser. You should see your crazy-cool site. If not, read back over the above and mess around. If it still doesn't work, [tweet me](http://twitter.com/phuunet).
+That linked you copied? Try going to it in your browser. You should see your crazy-cool site. If not, read back over the above and mess around. If it still doesn't work, [tweet me](http://twitter.com/tgvashworth).
 
 #### Domain & DNS
 
