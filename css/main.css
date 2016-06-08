@@ -42,8 +42,8 @@ a:before {
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
   transform-origin: left;
-  -webkit-transition: all 100ms ease-in-out 0s;
-  transition: all 100ms ease-in-out 0s;
+  -webkit-transition: all 200ms ease-in-out 0s;
+  transition: all 200ms ease-in-out 0s;
   opacity: 0.1;
 }
 
