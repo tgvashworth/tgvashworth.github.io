@@ -141,7 +141,7 @@ blockquote {
 }
 
 .date {
-  font: 0.667em "Fira Mono", monospace;
+  font: 0.667em monospace;
   padding-right: 1em;
 }
 
@@ -163,7 +163,7 @@ blockquote {
 }
 
 .post code {
-  font-family: "Fira Mono", monospace;
+  font-family: monospace;
   font-size: 0.9em;
   border: 1px solid #D6D7D8;
   background-color: #F7F8F9;
