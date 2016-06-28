@@ -32,7 +32,7 @@ In summary, the [twitter-search-query-parser][tsqp] is:
 - AST node [types][types] that define *reduction*, *stringification* and *simplification* for the rules of the grammar
 - methods for parsing, stringifying and simplifying a search query
 
-Typical usage of the library to generte a UI would look like this:
+Typical usage of the library to generate a UI would look like this:
 
 1. Load search query from storage
 2. Pass to parser for parsing into the interchange format
@@ -62,24 +62,24 @@ grammar Lists
 
 Each line is a rule. For example, `value <- list / number` describes that a value node is either a list or a number. The line belows describe a `list`, using the `value` rule recursively.
 
-Two terms next two each other concatenate: the rule `"a" "b"` matches the string `ab`, not `a b`.
+Two terms next to each other concatenate: the rule `"a" "b"` matches the string `ab`, not `a b`.
 
 ---
 
 The other important component relating to the grammar is a parser that implements it.
 
-I used [James][jcoglan]'s *parser-generator* library [Canopy][canopy]. Passing a grammer file to [Canopy][canopy] generates code for a parser a dependency-free parser to which you can pass strings and recieve a parsed tree, or a syntax error. This is what the library uses internally to parse the query into an AST.
+I used [James][jcoglan]'s *parser-generator* library [Canopy][canopy]. Passing a grammar file to [Canopy][canopy] generates code for a parser a dependency-free parser to which you can pass strings and receive a parsed tree, or a syntax error. This is what the library uses internally to parse the query into an AST.
 
 Canopy supports multiple output languages (JavaScript, Java, Python and Ruby) which makes the grammar of this library potentially even more useful in the future!
 
-I've barely toughed on parser generation here, but there's more documentation on the [Canopy][canopy] site.
+I've barely touched on parser generation here, but there's more documentation on the [Canopy][canopy] site.
 
 ---
 
 I learnt a whole load about PEGs. They're simple, but combine in complex ways to create complicated grammars. I made a few mistakes as I went along, so here's a couple of tips:
 
 - Be specific first and generalise later. It's better to have a specific rule (like `filter <- "filter:" [\S]+`) first, as generalisation can cause some matched-the-wrong-thing errors. You can see me generalising in [this](https://github.com/tweetdeck/twitter-search-query-parser/commit/42d35a118324339bae590d234297752ac451f10e) commit.
-- If you're using [types][types], a rule of thumb is: annotate rules that doesn't contain a forward-slash (`/`, aka "or"). This is becuase rules that only contain [cross-references](http://canopy.jcoglan.com/references.html) and slashes are not in the parse tree and so require [extra work](https://github.com/tweetdeck/twitter-search-query-parser/blob/a30904a3023c1edd95ee416d3695c3de70b01813/grammar/query.peg#L22).
+- If you're using [types][types], a rule of thumb is: annotate rules that doesn't contain a forward-slash (`/`, aka "or"). This is because rules that only contain [cross-references](http://canopy.jcoglan.com/references.html) and slashes are not in the parse tree and so require [extra work](https://github.com/tweetdeck/twitter-search-query-parser/blob/a30904a3023c1edd95ee416d3695c3de70b01813/grammar/query.peg#L22).
 
 ### Interchange format
 
@@ -156,7 +156,7 @@ One of my goals with this project was to make the stringification as close to th
 
 The general stringification strategy is similar to reduction: a depth-first walk of the tree, stringifying each node according to its type.
 
-The technique isn't quite the same as reduction becuase the a particular type's stringify *implementation* is chosen according to its type annotation and called *statically*, whereas the reduce *method* is called on an *instance* of a parse tree node.
+The technique isn't quite the same as reduction because the a particular type's stringify *implementation* is chosen according to its type annotation and called *statically*, whereas the reduce *method* is called on an *instance* of a parse tree node.
 
 Despite their differences, both are in the [types file][tsqptypes]. Hopefully that will make implementing new types simple, or at least *more obvious*.
 
@@ -227,13 +227,13 @@ simplify(parse('@jack OR @twitter -(@support OR @twitterdev)'), {
 })
 ```
 
-> It's possible that "disallowing" certain nodes is not the correct approach: if a new type were added to the library, the developer would immediately have to disallow it. It seems the better approach would be to explicitly *allow* supported node types. Another possibe area of improvement.
+> It's possible that "disallowing" certain nodes is not the correct approach: if a new type were added to the library, the developer would immediately have to disallow it. It seems the better approach would be to explicitly *allow* supported node types. Another avenue for improvement.
 
 ### Testing strategy
 
 I also want to make a quick note about the way this library is tested as the technique it might be useful for others.
 
-As the goal was to have reversible parsing (`query -> parse -> (simplifly ->) stringify -> query`), I tested it by checking that each test case against itself as well as the expected values:
+As the goal was to have reversible parsing (`query -> parse -> (simplify ->) stringify -> query`), I tested it by checking that each test case against itself as well as the expected values:
 
 ```js
 testCases.forEach(([name, rawQuery, expected]) => {
@@ -270,7 +270,7 @@ I'm also looking into QuickCheck-style property-based testing. This kind of test
 
 ### Summing up
 
-This was a realy fun library to work on. It was a great learning experience, though I'm still no expert, and who knows? Maybe other people will find this post, Canopy or the library useful!
+This was a fun project to work on. It was a great learning experience, though I'm still no expert, and who knows? Maybe other people will find this post, Canopy or the library useful!
 
 [twsearch]: https://dev.twitter.com/rest/public/search
 [tsqp]: https://github.com/tweetdeck/twitter-search-query-parser
