@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/phuu/phuu.github.io#readme",
   "devDependencies": {
-    "jkl": "0.0.2"
+    "jkl": "0.0.2",
+    "write-good": "^0.9.1"
   }
 }
