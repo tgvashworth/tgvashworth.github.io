@@ -9,7 +9,7 @@ title: "Building a search query parser"
 
 While building an interface for [Twitter search queries][twsearch] the TweetDeck team found we needed to be able to convert from a search query string into a data structure to generate the UI, and back to a string for sending queries to the API.
 
-I built that thing!
+So, I built a thing...
 
 ### The problem
 
