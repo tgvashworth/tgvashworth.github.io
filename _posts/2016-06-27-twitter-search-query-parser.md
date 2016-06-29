@@ -68,7 +68,7 @@ Two terms next to each other concatenate: the rule `"a" "b"` matches the string 
 
 The other important component relating to the grammar is a parser that implements it.
 
-I used [James][jcoglan]'s *parser-generator* library [Canopy][canopy]. Passing a grammar file to [Canopy][canopy] generates code for a parser a dependency-free parser to which you can pass strings and receive a parsed tree, or a syntax error. This is what the library uses internally to parse the query into an AST.
+I used [James][jcoglan]'s *parser-generator* library [Canopy][canopy]. Passing a grammar file to [Canopy][canopy] generates code for a dependency-free parser to which you can pass strings and receive a parsed tree, or a syntax error. This is what the library uses internally to parse the query into an AST.
 
 Canopy supports multiple output languages (JavaScript, Java, Python and Ruby) which makes the grammar of this library potentially even more useful in the future!
 
@@ -85,7 +85,9 @@ I learnt a whole load about PEGs. They're simple, but combine in complex ways to
 
 After parsing, a "reduction" step takes place. There's probably a computer-sciencey term for this but I don't know it!
 
-The parsed tree that Canopy's parser returns is verbose even for small queries. Here's snippet just for the query "a b":
+We do this because parsed tree that Canopy's parser returns is verbose even for small queries, and not representative of the actual query.
+
+Here's snippet just for the query "a b":
 
 ```text
 { text: 'a b',
@@ -132,7 +134,7 @@ If the query negated the `b` term – `a -b` – the tree would be:
   Text "a"    Text "b"
 ```
 
-Each node in the tree has a particular "type", indicated by the first item of the tuple-ish array. In the node `['And', [ ... ]]`, the type is `And`. For `['Text', "b"]` it's `Text`.
+Each node in the tree has a particular "type", indicated by the first item of the tuple-ish array. In the node `['And', [ ... ]]`, the type is `And`. For `['Text', 'b']` it's `Text`.
 
 Types specify how to reduce, stringify and simplify the parsed tree and the interchange format, and you can find them [over here][tsqptypes].
 
