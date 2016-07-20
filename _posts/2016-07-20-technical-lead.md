@@ -5,7 +5,7 @@ title: "Technical Lead"
 
 I've recently taken on a technical lead role at Twitter, looking after the frontend team of TweetDeck.
 
-As an exercise for myself I wrote down expect from a lead and, using that list and [other great resources](/2016/06/03/frontend-reading-list.html#professional-practice), the behaviours and attributes I hope to exhibit.
+As an exercise for myself I wrote down what I expect from a lead and, using that list and [other great resources](/2016/06/03/frontend-reading-list.html#professional-practice), the behaviours and attributes I hope to exhibit.
 
 To keep me honest, here there are. Team, if you're reading: hold me to this!
 
