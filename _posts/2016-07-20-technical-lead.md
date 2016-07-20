@@ -25,7 +25,7 @@ How should I behave as a lead?
 - Run focused, regular project meetings with a clear structure so people know what to expect
 - Be explicit and transparent about project management process by documenting them
 - Trust the team to deliver when responsibility and ownership are given
-- Be ready to explain *why* about anything, and able to say I don’t know
+- Be ready to explain *why* about anything, and able to say *I don’t know*
 - Sell and share the team and their work
 - Advocate for open-source and external sharing
 - Give the team space to become expert
