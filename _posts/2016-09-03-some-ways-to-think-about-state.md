@@ -7,7 +7,7 @@ In this post I'm going to try to join dots between different ways of managing st
 
 ---
 
-Often you'll see code that uses an instance of a class to store state, with data as member variables and methods for logic:
+Often you'll see code that uses an instance of a class to store state, with data in member variables and methods for logic:
 
 ```js
 class Player {
@@ -23,7 +23,7 @@ class Player {
 }
 ```
 
-In this pattern, we use direct mutation to modify an instance of a player by calling methods on it:
+In this pattern, you use direct mutation to modify an instance of a player by calling methods on it:
 
 ```js
 let p = new Player();
@@ -124,7 +124,7 @@ function levelUp(state, levels) {
 }
 ```
 
-Now we have a pure-function of the original instance method.
+Now we have a pure-function version of the original instance method.
 
 In fact we can convert almost any method to a reducer by taking the object in question and the input value as arguments, and outputting a new object.
 
