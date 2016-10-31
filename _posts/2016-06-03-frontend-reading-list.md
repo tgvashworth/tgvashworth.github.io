@@ -17,6 +17,7 @@ title: "Frontend Reading List"
 - [Let’s be mainstream!](http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design) — *Video and article* — Evan Czaplicki
 - [Impossible Programs](https://www.youtube.com/watch?v=hN63FOa_Gp4) — *Video* — Tom Stuart
 - [K Things I Know About Building Resilient Reactive Systems](https://www.youtube.com/watch?v=rQIE22e0cW8) – *Video* – Joe Armstrong
+- [Minimal API Surface Area](https://www.youtube.com/watch?v=4anAwXYqLG8) - *Video* - Sebastian Markbage
 
 ### HTML & CSS
 
