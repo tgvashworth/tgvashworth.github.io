@@ -4,9 +4,9 @@ title: A git workflow
 date: 2012-11-5 8:00
 ---
 
-This post is about how I personally work with git. There are a actually a million different possible git workflows, and I'd recommend playing with a few till you find something you like.
+This post is about how I personally work with git. There are many different git workflows to choose from, so I'd recommend playing with a few 'til you find something you (and your team!) like.
 
-My workflow is very similar to, and is based on, Scott Chacon's [Github Workflow](http://scottchacon.com/2011/08/31/github-flow.html). Obviously it works well with github, so collaboration with others is easy, but it's also designed for a tight feedback-loop using many, cheap, branches and merging often.
+My workflow is very based Scott Chacon's [Github Workflow](http://scottchacon.com/2011/08/31/github-flow.html). Obviously it works well with GitHub, but it's also designed for a tight feedback loop using many, cheap, branches and merging often.
 
 ### Workflow
 
