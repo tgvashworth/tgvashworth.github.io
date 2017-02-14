@@ -3,6 +3,8 @@ layout: post
 title: "Frontend Reading List"
 ---
 
+Here's a selection of my favourite talks and articles. It's not *exactly* a reading list becuase most are videos, but hopefully they're still useful to you!
+
 ### Ideas & architecture
 
 - [Simplicity Matters](https://www.youtube.com/watch?v=rI8tNMsozo0) — *Video* — Rich Hickey
@@ -36,6 +38,8 @@ I think dist-sys will become increasingly important for frontenders into the fut
 
 - [What We Talk About When We Talk About Distributed Systems](http://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html) — *Article and video* — Alvaro Videla
 - [There is No Now](http://queue.acm.org/detail.cfm?id=2745385) — *Article* — Justin Sheehy
+
+You could also check out my [distributed systems reading list](/2015/12/07/distributed-systems-reading-list.html).
 
 ### Professional Practice
 
