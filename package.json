@@ -1,5 +1,5 @@
 {
-  "name": "phuu.github.io",
+  "name": "tgvashworth.github.io",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phuu/phuu.github.io.git"
+    "url": "git+https://github.com/tgvashworth/tgvashworth.github.io.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/phuu/phuu.github.io/issues"
+    "url": "https://github.com/tgvashworth/tgvashworth.github.io/issues"
   },
-  "homepage": "https://github.com/phuu/phuu.github.io#readme",
+  "homepage": "https://github.com/tgvashworth/tgvashworth.github.io#readme",
   "devDependencies": {
     "jkl": "0.0.2",
     "write-good": "^0.9.1"
