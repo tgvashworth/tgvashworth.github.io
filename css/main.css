@@ -26,6 +26,8 @@ a:visited { color: #2B5884; }
 a:visited:before { background-color: #2B5884; }
 a.alt, a.alt:visited { color: #C17400; }
 a.alt:before, a.alt:visited:before { background-color: #C17400; }
+a.alt-2, a.alt-2:visited { color: #001514; }
+a.alt2:before, a.alt2:visited:before { background-color: #C17400; }
 
 /* link hovers
  * http://tobiasahlin.com/blog/css-trick-animating-link-underlines/
