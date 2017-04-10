@@ -66,7 +66,7 @@ function getErrorMessage(error) {
 
 function doMagicalThings({ hocus, pocus } = {}) {
   const spell = tryy(
-    () => invokeTheDarkOnes(hocus)
+    () => invokeTheDarkOnes(hocus),
     (portalToTheUnderworldException) =>
       abracadabraAlacazam(pocus)
   );
