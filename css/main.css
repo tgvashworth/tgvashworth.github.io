@@ -77,16 +77,23 @@ blockquote {
   border-top: 1px solid #eee;
   margin: 1.5em 0;
   overflow: hidden;
+  padding-top: 1.5rem;
 }
 
 .contact {
   float: left;
   width: 50%;
-  padding-top: 1.5rem;
 }
 
 .contact p {
   margin: 0;
+}
+
+@media (max-width: 31em) {
+  .contact {
+    width: 100%;
+    float: none;
+  }
 }
 
 /*****************************************************************************/
