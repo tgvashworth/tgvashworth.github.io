@@ -3,13 +3,11 @@ layout: post
 title: "Technical Lead"
 ---
 
-When I became tech lead of the TweetDeck team in mid-2016 I spent some time thinking about my goals as a lead.
-
-As an exercise for myself, I wrote down what I expect from a lead and, using that list and [other brilliant resources](/2016/06/03/frontend-reading-list.html#professional-practice), the behaviours and attributes I hope to exhibit.
+When I became tech lead of the TweetDeck team in mid-2016 I spent some time thinking about what I expect from a lead and, using that list and [other brilliant resources](/2016/06/03/frontend-reading-list.html#professional-practice), the behaviours and attributes I hope to exhibit.
 
 This post is a sort of check-list: I return to it periodically to make sure that I have recently paid some attention to everything on the list.
 
-These days I am a tech lead on the GraphQL team, and my name is on some other internal projects in a leadership role. The teams are bigger; so is the scope for success or failure.
+These days I am a tech lead on the GraphQL team, and my name is on some other internal projects in a leadership role. The teams are bigger; so is the scope for success or failure. This post was edited in 2018 to reflect that change.
 
 ### What do I want from a lead?
 
@@ -59,7 +57,3 @@ I think of GraphQL as product team and, as a result, this list significantly ove
 - Team process
   - Lightweight, clear, no SPOFs
 - Meeting facilitation
-
----
-
-This post was edited in 2018 to update what I now do.
