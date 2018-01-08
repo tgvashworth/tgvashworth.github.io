@@ -57,3 +57,5 @@ I think of GraphQL as product team and, as a result, this list significantly ove
 - Team process
   - Lightweight, clear, no SPOFs
 - Meeting facilitation
+
+Of course, I'm also on the hook for *some* code but where possible I shouldn't be on the critical path, or in a position where my unavailability affects others.
