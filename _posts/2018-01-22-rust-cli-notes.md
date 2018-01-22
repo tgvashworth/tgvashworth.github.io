@@ -55,3 +55,11 @@ These crates might be useful:
 * [daboross/fern: Simple, efficient logging for Rust](https://github.com/daboross/fern)
 
 I got lots of this from [@vitiral](https://twitter.com/vitiral)’s great [Rust2018 And The Great Cli Awakening](http://vitiral.github.io/2018/01/17/rust2018-and-the-great-cli-awakening.html) post.
+
+Rust has work-in-progress support for [Thrift](https://crates.io/crates/thrift) but this may not be compatible with [scrooge](https://github.com/twitter/scrooge). Perhaps Scrooge could be extended to provide Rust support. Thrift support isn’t a hard requirement yet.
+
+We won’t actually be pushing Rust too hard: mostly the existing tools wrangle paths and shell out to other executables. For the most part, the code will be very imperative and will handle errors & exit immediately.
+
+[Pants](https://www.pantsbuild.org/) currently has no support for rust although parts of its core are being rewritten in the language. There /is/ appetite at Twitter for using Rust, but only a small community who already have experience.
+
+The biggest con of the idea is requiring the GraphQL team to learn Rust when there is Python within the team already, and the risk of reverting this decision in the future as the team changes or if Rust moves to a negative standing on our tech radar.
