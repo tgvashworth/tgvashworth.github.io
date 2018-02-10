@@ -25,8 +25,7 @@ Lay the groundwork for paths that your team could take, outlining objectives, ro
 
 Help the non-engineering functions of your team understand what’s possible from the next point of inflexion. You'll help product or project management plan and communicate priorities, write roadmaps and do their best work.
 
-Point the way, and support from beneath.
-
+Point the way and empower your team.
 
 ---
 

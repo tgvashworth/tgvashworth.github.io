@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "bundle exec jekyll serve --incremental"
+    "build": "bundle exec jekyll build",
+    "start": "yarn run build && bundle exec jekyll serve --incremental"
   },
   "repository": {
     "type": "git",
