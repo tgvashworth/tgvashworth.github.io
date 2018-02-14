@@ -2,10 +2,22 @@ html {
   font: 18px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+@media print {
+  html {
+    font-size: 16px;
+  }
+}
+
 body {
   background: #FCFDFF;
   color: #001514;
   margin: 0;
+}
+
+@media print {
+  body {
+    background: transparent;
+  }
 }
 
 .container {
@@ -13,6 +25,12 @@ body {
   width: auto;
   max-width: 40rem;
   padding: 0 1rem;
+}
+
+@media print {
+  .container {
+    max-width: 100%;
+  }
 }
 
 a {
