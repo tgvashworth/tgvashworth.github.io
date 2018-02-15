@@ -42,15 +42,15 @@ If you find an area you don't want to modify, try to reduce its surface area by 
 
 Take a Hansel & Gretel approach, leaving breadcrumbs as you go, to find your way back in future.
 
-If you decide to defer improving something, remember that debt spreads when left without containment, because it tends to be the easy option, and is the learned go-to. Quarantine and come back in the future. Document that you did so, and discuss it with others.
+If you decide to defer improving something, remember that debt spreads when left without containment: doing something "the old way" tends to be the easy option, and is the learned go-to. Quarantine the legacy code and come back in the future. Document that you did so, and discuss it with others.
 
-Consider that doing nothing is an option always available, and it may be the best choice.
+Consider that doing nothing is an option that's always available, and that it may be your best choice.
 
 Your natural inclination may be to code, so come up with reasons why you shouldn't, and justify every change.
 
 ---
 
-During the TweetDeck project, Andy & I diagrammed an area of the code for several hours before deciding it was too complex to comprehend fully, and certainly to refactor competently, so we stopped and made a note to come back later. Months down the line we did, but this time we had sufficient peripheral knowledge to improve the situation.
+During the TweetDeck project, Andy & I diagrammed an area of the code for several hours before deciding it was too complex to comprehend fully, and certainly impossible to refactor competently, so we stopped and made a note to come back later. Months down the line we did, but this time we had sufficient peripheral knowledge to improve the situation.
 
 ### Rewrite vs refactor
 
