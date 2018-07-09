@@ -77,7 +77,53 @@ function levelUp(state, levels) {
 }
 ```
 
-Now, where have we seen functions kinda like that before? Oh! Reducers!
+Then we can return the state if we wanted to do further operations on the object:
+
+```js
+function leveUp(state, levels) {
+  state.level = state.level + levels;
+  return state;
+}
+```
+
+Even better, we could avoid *mutating* the object and instead produce a new object with the changes applied:
+
+```js
+function levelUp(state, levels) {
+  return {
+    ...state,
+    level: state.level + levels
+  };
+}
+
+function Player() {
+  return {
+    health: 100,
+    inventory: [],
+    level: 1
+  };
+}
+
+const p = Player();
+const q = levelUp(p);
+```
+
+Now, where have we seen functions that look like `levelUp` before? Something that:
+
+* takes two arguments
+* the first is the state of some operation
+* the second is a new input
+
+Oh! Reducers!
+
+```js
+const p = Player();
+const levels = [1,2,6,8];
+const q = levels.reduce(levelUp, p);
+// q.level === 18
+```
+
+Or, in a more "reducey" example:
 
 ```js
 const vs = [1,4,5,2,6,3];
@@ -113,7 +159,7 @@ function counter(state = 0, action) {
 
 State and a value as inputs; state as output.
 
-We can rewrite our `levelUp` function like this:
+That's exactly what we have in our rewritten `levelUp` function:
 
 ```js
 function levelUp(state, levels) {
@@ -124,9 +170,9 @@ function levelUp(state, levels) {
 }
 ```
 
-Now we have a pure-function version of the original instance method.
+It's a pure-function version of the original instance method.
 
-In fact we can convert almost any method to a reducer by taking the object in question and the input value as arguments, and outputting a new object.
+In fact, we can convert almost any method to a reducer by taking the object in question and the input value as arguments, and outputting a new object.
 
 Again, this is a *central* idea of a library like [redux][redux].
 
