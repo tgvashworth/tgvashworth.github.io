@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Technical Lead"
+summary: "Roles and responsibilities of a Tech Lead"
 ---
 
 When I became tech lead of the TweetDeck team in mid-2016 I spent some time thinking about what I expect from a lead and, using that list and [other brilliant resources](/2016/06/03/frontend-reading-list.html#professional-practice), the behaviours and attributes I hope to exhibit.

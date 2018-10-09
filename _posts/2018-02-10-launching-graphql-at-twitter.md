@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Notes on launching GraphQL at Twitter"
+summary: "What have we learned in a year of GraphQL at Twitter?"
 ---
 
 Just over a year ago we launched the first user-facing GraphQL queries at Twitter. It was the "who am I?" query that, perhaps unsurprisingly, [TweetDeck][] was making as it launched.

@@ -6,6 +6,16 @@
 <meta name="viewport" content="width=device-width">
 <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="tgvashworth atom feed" />
 
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ page.title }}" />
+{% if page.summary %}
+<meta name="twitter:description" content="{{ page.summary }}">
+{% else %}
+<meta name="twitter:description" content="{{ site.description }}">
+{% endif %}
+<meta name="twitter:image" content="https://tgvashworth.com/images/sousa.jpg" />
+<meta name="twitter:creator" content="@tgvashworth" />
+
 <link rel="stylesheet" href="/css/syntax.css">
 <link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}">
 
