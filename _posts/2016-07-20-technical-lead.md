@@ -12,7 +12,7 @@ This post is a sort of check-list: I return to it periodically to make sure that
 
 I'm now a Principal Software Engineer at [Bulb](bulb), working on our member-facing products and on security.
 
-### What do I want from a lead
+### What do I want from a lead?
 
 These are things I want or expect from someone I report to or consider a "lead" relative to me:
 
