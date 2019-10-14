@@ -6,7 +6,7 @@ summary: "Roles and responsibilities of a Tech Lead"
 
 In mid-2016 I became tech lead of the TweetDeck team at Twitter, so I spent some time thinking about what I expect from a lead and, using that list and [other brilliant resources](/2016/06/03/frontend-reading-list.html#professional-practice), the behaviours and attributes I hope to exhibit.
 
-After that came tech lead (or maybe product manager?) of the GraphQL team at Twitter, with my name is on some other internal projects in a leadership role. The teams are bigger; so is the scope for success or failure. This post was edited in 2018 to reflect that change.
+After that came tech lead (or maybe product manager?) of the GraphQL team at Twitter, with my name on some other internal projects in a leadership role. The teams are bigger; so is the scope for success or failure. This post was edited in 2018 to reflect that change.
 
 This post is a sort of check-list: I return to it periodically to make sure that I have recently paid some attention to everything on the list.
 
