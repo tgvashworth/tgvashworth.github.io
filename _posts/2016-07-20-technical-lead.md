@@ -52,7 +52,7 @@ And, at all times, optimise for happiness.
 
 ### Tech Leads and Product Managers
 
-The GraphQL team at Twitter was a product team and I did work that I percieved to be very similar to Product Management. This is what I found myself doing:
+The GraphQL team at Twitter was a product team and I did work that I perceived to be very similar to Product Management. This is what I found myself doing:
 
 - Strategy and vision for the team
 - Prioritised backlog for tactical decisions
