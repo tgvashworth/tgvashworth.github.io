@@ -10,7 +10,7 @@ After that came tech lead (or maybe product manager?) of the GraphQL team at Twi
 
 This post is a sort of check-list: I return to it periodically to make sure that I have recently paid some attention to everything on the list.
 
-I'm now a Principal Software Engineer at [Bulb](bulb), working on our member-facing products and on security.
+I'm now a Principal Software Engineer at [Bulb][bulb], working on our member-facing products and on security.
 
 ### What do I want from a lead?
 
@@ -31,7 +31,7 @@ Given that list, what behaviours should I exhibit? I can't ask more of people th
 Within the team...
 
 - Be as clear, explicit and transparent as possible, when appropriate
-- Run high-qulity, productive meetings with a clear structure — attendees should know what to expect
+- Run high-quality, productive meetings with a clear structure — attendees should know what to expect
 - Set an example for documenting project management process
 - Trust the team to deliver when responsibility and ownership are given
 - Be able to explain *why* about anything, able to say *I don’t know*, and ready to change my mind
@@ -52,7 +52,7 @@ And, at all times, optimise for happiness.
 
 ### Tech Leads and Product Managers
 
-The GraphQL team at Twitter was a product team and I did work that I percieved to be very similar to Product Management. This is what I additionally found myself doing:
+The GraphQL team at Twitter was a product team and I did work that I percieved to be very similar to Product Management. This is what I found myself doing:
 
 - Strategy and vision for the team
 - Prioritised backlog for tactical decisions
@@ -68,6 +68,6 @@ The GraphQL team at Twitter was a product team and I did work that I percieved t
   - Lightweight, clear, no SPOFs
 - Meeting facilitation
 
-Of course, I was also on the hook for *some* code but where possible I shouldn't be on the critical path, or in a position where my unavailability affects others.
+Of course, I was also on the hook for *some* code but where possible I tried not to be on the critical path, or in a position where my unavailability affects others.
 
 [bulb]: https://bulb.co.uk
