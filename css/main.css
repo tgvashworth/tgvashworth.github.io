@@ -1,5 +1,7 @@
 html {
-  font: 18px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font: 20px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
 }
 
 @media print {
@@ -9,7 +11,7 @@ html {
 }
 
 body {
-  background: #FCFDFF;
+  background: #fcfdff;
   color: #001514;
   margin: 0;
 }
@@ -38,30 +40,39 @@ a {
   text-decoration: none;
   position: relative;
 }
-a:focus, a:hover {
+a:focus,
+a:hover {
   outline: none; /* replaced by pseudo-element */
   border-bottom: 1px solid;
 }
-a:visited { color: #2B5884; }
-a.alt, a.alt:visited { color: #C17400; }
-a.alt-2, a.alt-2:visited { color: #001514; }
+a:visited {
+  color: #2b5884;
+}
+a.alt,
+a.alt:visited {
+  color: #c17400;
+}
+a.alt-2,
+a.alt-2:visited {
+  color: #001514;
+}
 a.alt-2:hover {
   border-bottom: none;
 }
 
 img {
-  max-width: 100%
+  max-width: 100%;
 }
 
 img.me {
   width: 70px;
   border-radius: 35px;
-  margin-bottom: 1em
+  margin-bottom: 1em;
 }
 
 img.me-small {
   height: 20px;
-  border-radius: 10px
+  border-radius: 10px;
 }
 
 .header {
@@ -88,7 +99,7 @@ blockquote {
 }
 
 .mini-about p {
-  margin-top: 0
+  margin-top: 0;
 }
 
 .footer {
@@ -144,13 +155,14 @@ blockquote {
 
 /* standard */
 .post pre {
-  border: 1px solid #D6D7D8;
-  background-color: #F7F8F9;
-  padding: .4em;
+  border: 1px solid #d6d7d8;
+  background-color: #f7f8f9;
+  padding: 0.4em;
   overflow-x: scroll;
 }
 
-.post ul, .post ol {
+.post ul,
+.post ol {
   margin-left: 0;
   padding-left: 2em;
 }
@@ -158,9 +170,9 @@ blockquote {
 .post code {
   font-family: monospace;
   font-size: 0.9em;
-  border: 1px solid #D6D7D8;
-  background-color: #F7F8F9;
-  padding: 0 .2em;
+  border: 1px solid #d6d7d8;
+  background-color: #f7f8f9;
+  padding: 0 0.2em;
 }
 
 .post pre code {
@@ -173,7 +185,7 @@ blockquote {
 .post pre.terminal {
   border: 1px solid #000;
   background-color: #333;
-  color: #FFF;
+  color: #fff;
 }
 
 .post pre.terminal code {
@@ -182,7 +194,7 @@ blockquote {
 
 hr {
   border: none;
-  border-top: 1px solid #D6D7D8;
+  border-top: 1px solid #d6d7d8;
   width: 100%;
   max-width: 10em;
   margin: 2em auto;
