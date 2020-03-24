@@ -89,7 +89,7 @@ He's even used one of Guesstimates other functions — `randomInt` — to model 
 
 ![Storage Service Response Time: Over-All response](/images/guesstimate-over-all-response.png)
 
-That's why you can see several peaks in the distribution: there's sampling choices being made for each entry in the output distribution.
+That's why you can see several peaks in the distribution: there are sampling choices being made for each entry in the output distribution.
 
 In another example, someone has [modelled the Drake equation][drake]: "a probabilistic argument used to estimate the number of active, communicative extraterrestrial civilizations in the Milky Way galaxy."
 
@@ -105,9 +105,9 @@ I've looked at:
 
 - Projected return on investment for my [ISA][isa]
 - Possible outcomes for a team with aggressive targets and high uncertainty of success
-- The average cost of people attempting to defraud Bulb members in a given quarter
-- The expected queries-per-second to Twitter's GraphQL Service
-- Potential range of costs in remodelling a house
+- Expected costs of people attempting to defraud Bulb members in a given quarter
+- Anticipated queries-per-second to Twitter's GraphQL Service
+- Potential ranges of costs to remodel a house
 
 In particular, modelling the potential outcomes for my team at work gave us a really strong understanding of what we could expect to achieve in the quarter and, more importantly, what we should _not_ expect.
 
