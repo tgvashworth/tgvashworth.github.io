@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Monte Carlo analysis for product development"
+summary: "Using probabilistic techniques for exploring data and modelling outcomes"
 ---
 
 I'd like to introduce you to a technique I've found really useful for product development, as well as real-life stuff.
