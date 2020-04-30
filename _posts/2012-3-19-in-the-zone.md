@@ -2,6 +2,7 @@
 layout: post
 title: In the Zone
 ---
+
 For me, being "in the zone" is very important if I want to get any significant amount programming done. It's commonly said that it may take 30 minutes to get to a state of concentrated focus, but a mere 30 seconds of distraction to lose it.
 
 I've been trying to find a ways of optimising how I get into such a zone, and, while this is totally un-scientific, here's 3 things that work for me. Why not see if they'll work for you?

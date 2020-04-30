@@ -125,6 +125,23 @@ blockquote {
   }
 }
 
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.hire-me {
+  margin: 1em 0;
+  padding: 1em;
+  background: #ebf2f9;
+  border: 1px solid #4183c4;
+}
+
+.hire-me a {
+  font-weight: bold;
+}
+
 /*****************************************************************************/
 /*
 /* Posts

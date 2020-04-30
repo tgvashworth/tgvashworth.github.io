@@ -1,43 +1,60 @@
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>{{ page.title }}</title>
-<meta name="viewport" content="width=device-width">
-<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="tgvashworth atom feed" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>{{ page.title }}</title>
+  <meta name="viewport" content="width=device-width" />
+  <link
+    href="/atom.xml"
+    type="application/atom+xml"
+    rel="alternate"
+    title="tgvashworth atom feed"
+  />
 
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="{{ page.title }}" />
-{% if page.summary %}
-<meta name="twitter:description" content="{{ page.summary }}">
-{% else %}
-<meta name="twitter:description" content="{{ site.description }}">
-{% endif %}
-<meta name="twitter:image" content="https://tgvashworth.com/images/sousa.jpg" />
-<meta name="twitter:creator" content="@tgvashworth" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{{ page.title }}" />
+  {% if page.summary %}
+  <meta name="twitter:description" content="{{ page.summary }}" />
+  {% else %}
+  <meta name="twitter:description" content="{{ site.description }}" />
+  {% endif %}
+  <meta
+    name="twitter:image"
+    content="https://tgvashworth.com/images/sousa.jpg"
+  />
+  <meta name="twitter:creator" content="@tgvashworth" />
 
-<link rel="stylesheet" href="/css/syntax.css">
-<link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}">
+  <link rel="stylesheet" href="/css/syntax.css" />
+  <link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}" />
 
-<div class="container">
-  <header class="header">
-    <h1 class="title"><a class="alt-2" href="/">{{ site.name }}</a></h1>
-  </header>
+  <div class="container">
+    <header class="header">
+      <h1 class="title"><a class="alt-2" href="/">{{ site.name }}</a></h1>
+    </header>
 
-  {{ content }}
+    {{ content }}
 
-  <footer class="footer">
-    <div class="contact">
-      <p>
-        <strong>Tom Ashworth</strong><br />
-        <a href="mailto:tgvashworth@gmail.com">tgvashworth@gmail.com</a>
-      </p>
-    </div>
-    <div class="contact">
-      <p>
-        <a href="https://github.com/tgvashworth">github.com/tgvashworth</a><br />
-        <a href="https://twitter.com/tgvashworth">twitter.com/tgvashworth</a><br />
-      </p>
-    </div>
+    <footer class="footer">
+      <div class="clearfix">
+        <div class="contact">
+          <p>
+            <strong>Tom Ashworth</strong><br />
+            <a href="mailto:tgvashworth@gmail.com">tgvashworth@gmail.com</a>
+          </p>
+        </div>
+        <div class="contact">
+          <p>
+            <a href="https://github.com/tgvashworth">github.com/tgvashworth</a
+            ><br />
+            <a href="https://twitter.com/tgvashworth">twitter.com/tgvashworth</a
+            ><br />
+          </p>
+        </div>
+      </div>
+      <div class="hire-me">
+        You can
+        <a class="alt" href="/hire-me.html">hire me</a>, by the way.
+      </div>
+    </footer>
   </div>
-</div>
+</html>

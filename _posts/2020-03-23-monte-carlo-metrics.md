@@ -6,7 +6,9 @@ summary: "Using probabilistic techniques for exploring data and modelling outcom
 
 I'd like to introduce you to a technique I've found really useful for product development, as well as real-life stuff.
 
-It's called **Monte Carlo analysis**.
+It's called **Monte Carlo analysis**, and it helps you explore and deeply understand formulas and metrics by combiniting distributions, rather than simple scalar numbers.
+
+---
 
 To set up the technique, let's look at a really simple question from my Twitter days: **how many Tweets are on screen at any time in TweetDeck?**
 
