@@ -27,6 +27,21 @@
   <link rel="stylesheet" href="/css/syntax.css" />
   <link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}" />
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-165282633-1"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "UA-165282633-1");
+  </script>
+
   <div class="container">
     <header class="header">
       <h1 class="title"><a class="alt-2" href="/">{{ site.name }}</a></h1>
