@@ -3,16 +3,11 @@ layout: default
 title: "Hire me"
 ---
 
-I'm available for short- and medium-term contracts, providing help with technical
-leadership, product management, security and privacy strategy, product
-engineering, product-security design and engineering process change.
+I'm available for short- and medium-term contracts, providing help with technical leadership, product engineering, software architecture, product-security design, product management, and engineering process change.
 
-I've been building user-focused software in various guises for nearly 10 years, ranging
-from hands-on software engieering to engineering management and product
-management too, both at large, established organisations and small, rapdily growing ones.
+I've been building user-focused software in various guises for nearly 10 years, ranging from hands-on software engieering to engineering management and product management too, both at large, established organisations and small, rapdily growing ones.
 
-I'm most comfortable working at the intersection of product, engineering, design and security,
-bringing together the best from each of those disciplines to build great products.
+I'm most comfortable working at the intersection of product, engineering, design and security, bringing together the best from each of those disciplines to build great products.
 
 You might want me to help you:
 
