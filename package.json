@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "bundle exec jekyll build",
-    "start": "yarn run build && bundle exec jekyll serve --incremental"
+    "start": "yarn run build && bundle exec jekyll serve"
   },
   "repository": {
     "type": "git",
