@@ -55,6 +55,8 @@ There are lots of problems with this:
 
 In summary, “budgeting” is bad because it’s bureaucratic, inflexible, sub-optimal and political.
 
+---
+
 Enter [Ashby’s Law of Requisite Variety](<https://en.m.wikipedia.org/wiki/Variety_(cybernetics)>), to give us a _(dubious)_ scientific basis for not doing it this way.
 
 Here’s the law, paraphrased:
