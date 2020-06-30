@@ -3,6 +3,9 @@ layout: default
 title: "Hire me"
 ---
 
+You cannot hire me, because I have a job. Sorry!
+
+<!--
 I'm available for short- and medium-term contracts, providing help with technical leadership, product engineering, software architecture, product-security design, product management, and engineering process change.
 
 I've been building user-focused software in various guises for nearly 10 years, ranging from hands-on software engineering to engineering management and product management too, both at large, established organisations and small, rapidly growing ones.
@@ -21,3 +24,5 @@ You might want me to help you:
 - Improve internal communication and collaboration
 
 Please do <a class="alt" href="mailto:tgvashworth@gmail.com?subject=Hello">get in touch</a>.
+
+-->
