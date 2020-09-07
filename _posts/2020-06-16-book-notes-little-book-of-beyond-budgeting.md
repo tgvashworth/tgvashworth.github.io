@@ -9,7 +9,7 @@ You should read this book, not just my notes: it’s tiny, dense and just makes 
 
 ---
 
-Beyond Budgeting (BB) seems to be [agile](agilemanifesto.org) for budgeting. If you’re into agility — and not the industrialised bullshit Agile SCRUMban crap — then this will be a bit of a no-brainer.
+Beyond Budgeting (BB) seems to be [agile](agilemanifesto.org) for budgeting. If you’re into agility then this will be a bit of a no-brainer.
 
 The old model — “budgeting” — is annual batch planning process:
 
@@ -63,18 +63,20 @@ Here’s the law, paraphrased:
 
 > The variety of the regulator must be equal to or greater than the variety of the environment divided by the variety of the goal.
 
-Imagine a home heating system for (simplified) weather, where it’s either warm enough that you don’t need the heating on, or it’s freezing and you do:
+As an equation: variety<sub>regulator</sub> ≥ variety<sub>environment</sub> ÷ variety<sub>goal</sub>
+
+For example, imagine a home heating system for (simplified) weather, where it’s either warm enough that you don’t need the heating on, or it’s freezing and you do:
 
 - Our goal is to be comfortable: the goal variety is 1.
 - The environment can either be hot or cold, so the variety of the environment is 2.
 - 2 over 1 is 2.
-- Therefore, the heating system needs _at least_ 2 states. _On_ and _Off_ will do, but you could get fancier. Any less, and you won’t be able to achieve the goal.
+- Therefore, the heating system needs _at least_ 2 states. _On_ and _Off_ will do, but you could get fancier. Any less and you won’t be able to achieve the goal.
 
 Stretched to vast organisations and their financial planning, the author says the equation tells us that, if the commercial environment is highly dynamic, the organisation also needs to be highly dynamic.
 
 _If you’re reading this, you probably don’t need convincing that that’s true, so I won’t try to convince you._
 
-In the book, this equation is flipped so that it is `goal x regulator > environment`.
+In the book, this equation is flipped so that it is: variety<sub>goal</sub> x variety<sub>regulator</sub> ≥ variety<sub>environment</sub>
 
 That allows the author to say: if the regulator (i.e. the budget system) is inflexible, but the environment is highly variable, then the goal variety must increase, or the environmental variety must decrease.
 
