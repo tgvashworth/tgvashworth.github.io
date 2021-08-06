@@ -18,7 +18,7 @@ The old model — “budgeting” — is annual batch planning process:
 - The budget is eventually agreed and locked-in for the year, then phased over quarters/months
 - This often includes targets or boundaries within which each department must stay, based on assumptions in the model
 
-_Apparently one company was able to spend 13 months putting together their annual budget. Not doubt the moron execs were still paid millions._
+_Apparently one company was able to spend 13 months putting together their annual budget. Not doubt the execs were still paid millions._
 
 Budget control in this context means monitoring reality vs the plan:
 
