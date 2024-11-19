@@ -1,0 +1,50 @@
+:root {
+  --bg-color: #f4f4f4;
+  --text-color: #000;
+  --primary-color: hsl(199, 100%, 60%);
+  --accent-color: hsl(199, 100%, 50%);
+  /* Additional variables */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #121212;
+    --text-color: #fff;
+    /* Additional variables */
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  text-align: center;
+}
+
+#pomodoro {
+  margin-top: 5rem;
+}
+
+#timer {
+  font-size: 5rem;
+  margin: 2rem 0;
+}
+
+#message {
+  font-size: 1.5rem;
+  min-height: 2rem;
+}
+
+@keyframes yellowfade {
+  from {
+    background: hsl(60, 100%, 50%);
+  }
+
+  to {
+    background: transparent;
+  }
+}
+
+.item-highlight {
+  animation: yellowfade 1s;
+}
