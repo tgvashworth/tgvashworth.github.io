@@ -21,6 +21,14 @@ body {
   text-align: center;
 }
 
+.pom {}
+
+@media (prefers-color-scheme: dark) {
+  .pom {
+    filter: invert(100%)
+  }
+}
+
 #pomodoro {
   margin-top: 5rem;
 }
