@@ -45,6 +45,22 @@ body {
   }
 }
 
+@keyframes darkyellowfade {
+  from {
+    background: hsl(60, 100%, 20%);
+  }
+
+  to {
+    background: transparent;
+  }
+}
+
 .item-highlight {
-  animation: yellowfade 1s;
+  animation: yellowfade 3s;
+}
+
+@media (prefers-color-scheme: dark) {
+  .item-highlight {
+    animation: darkyellowfade 3s;
+  }
 }

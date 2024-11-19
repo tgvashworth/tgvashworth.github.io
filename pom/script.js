@@ -27,8 +27,8 @@
     const init = () => {
         state.timeRemaining = state.workDuration;
         bindEvents();
-        updateUI();
-        // requestNotificationPermission();
+        requestAnimationFrame(updateUI);
+        requestNotificationPermission();
     };
 
     // Bind Event Listeners
@@ -88,7 +88,7 @@
             // Clear the message after a few seconds
             state.messageTimerId = setTimeout(() => {
                 state.messageTimerId = null;
-                updateUI();
+                requestAnimationFrame(updateUI);
             }, state.messageTime);
         } else {
             if (state.messageTimerId == null) {
@@ -97,7 +97,7 @@
             }
         }
 
-        updateUI();
+        requestAnimationFrame(updateUI);
     };
 
     // Toggle Timer
@@ -110,7 +110,7 @@
             clearInterval(state.timerId);
         }
 
-        updateUI();
+        requestAnimationFrame(updateUI);
     };
 
     // Reset Timer
@@ -120,7 +120,7 @@
         state.isWorkTime = true;
         state.timeRemaining = state.workDuration;
         state.message = '';
-        updateUI();
+        requestAnimationFrame(updateUI);
     };
 
     // Switch Mode Function
@@ -130,7 +130,7 @@
             ? state.workDuration
             : state.breakDuration;
         state.message = '';
-        updateUI();
+        requestAnimationFrame(updateUI);
     };
 
     // Send Notification
@@ -139,6 +139,12 @@
 
         if (Notification.permission === 'granted') {
             new Notification(title, { body });
+        } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    new Notification(title, { body });
+                }
+            });
         }
     };
 
