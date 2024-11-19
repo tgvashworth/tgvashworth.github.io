@@ -19,6 +19,6 @@
   "homepage": "https://github.com/tgvashworth/tgvashworth.github.io#readme",
   "devDependencies": {
     "jkl": "0.0.2",
-    "write-good": "^0.9.1"
+    "write-good": "^1.0.8"
   }
 }
