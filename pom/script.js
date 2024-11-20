@@ -12,7 +12,8 @@
         message: '',
         messageTimerId: null,
         messageTime: 5000,
-        messageHighlight: false
+        messageHighlight: false,
+        wakeLock: null,
     };
 
     // DOM Elements
@@ -36,7 +37,34 @@
         startButton.addEventListener('click', toggleTimer);
         resetButton.addEventListener('click', resetTimer);
         switchModeButton.addEventListener('click', switchMode);
+        document.addEventListener("visibilitychange", requestWakeLock);
     };
+
+    // Request Wake Lock
+    const requestWakeLock = async () => {
+        if ('wakeLock' in navigator) {
+            if (document.visibilityState === 'visible' && !state.wakeLock && state.isRunning) {
+                try {
+                    await acquireWakeLock();
+                } catch (err) {
+                    console.error(`${err.name}: ${err.message}`);
+                }
+            } else if (document.visibilityState === 'hidden' && state.wakeLock) {
+                await releaseWakeLock();
+            }
+        }
+    };
+
+    const acquireWakeLock = async () => {
+        state.wakeLock = await navigator.wakeLock.request('screen');
+        console.log('Wake Lock is active', state.wakeLock);
+    }
+
+    const releaseWakeLock = async () => {
+        await state.wakeLock.release();
+        state.wakeLock = null;
+        console.log('Wake Lock is released');
+    }
 
     // Request Notification Permission
     const requestNotificationPermission = () => {
@@ -52,7 +80,7 @@
     };
 
     // Update UI
-    const updateUI = () => {
+    const updateUI = async () => {
         const minutes = Math.floor(state.timeRemaining / 60);
         const seconds = String(state.timeRemaining % 60).padStart(2, '0');
         const timeString = `${minutes}:${seconds}`;
@@ -64,11 +92,20 @@
         messageDisplay.textContent = state.message;
         document.body.classList.toggle('highlight', state.messageHighlight);
 
+
         // Update the <h1> to indicate the current mode
         header.textContent = modeString;
 
         // Change background based on state
         document.body.dataset.mode = state.isWorkTime ? 'work' : 'break';
+
+        if (!state.isRunning && state.wakeLock) {
+            // Release the wake lock if the timer is paused
+            await releaseWakeLock();
+        } else if (state.isRunning && !state.wakeLock) {
+            // Request the wake lock if the timer is running
+            await requestWakeLock();
+        }
     };
 
     // Update State
