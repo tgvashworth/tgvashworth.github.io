@@ -1,16 +1,18 @@
 :root {
-  --bg-color: #f4f4f4;
+  --bg-color: hsl(199, 20%, 96%);
   --text-color: #000;
   --primary-color: hsl(199, 100%, 60%);
   --accent-color: hsl(199, 100%, 50%);
-  /* Additional variables */
+  --bg-break-color: hsl(199, 50%, 90%);
+  --fade-color: hsl(60, 100%, 50%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #121212;
+    --bg-color: hsl(199, 100%, 6%);
     --text-color: #fff;
-    /* Additional variables */
+    --bg-break-color: hsl(199, 100%, 15%);
+    --fade-color: hsl(60, 100%, 40%);
   }
 }
 
@@ -19,6 +21,11 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   text-align: center;
+  transition: background-color 0.5s;
+}
+
+body[data-mode="break"] {
+  background-color: var(--bg-break-color);
 }
 
 .pom {}
@@ -45,30 +52,10 @@ body {
 
 @keyframes yellowfade {
   from {
-    background: hsl(60, 100%, 50%);
-  }
-
-  to {
-    background: transparent;
+    background: var(--fade-color);
   }
 }
 
-@keyframes darkyellowfade {
-  from {
-    background: hsl(60, 100%, 20%);
-  }
-
-  to {
-    background: transparent;
-  }
-}
-
-.item-highlight {
+.highlight {
   animation: yellowfade 3s;
-}
-
-@media (prefers-color-scheme: dark) {
-  .item-highlight {
-    animation: darkyellowfade 3s;
-  }
 }

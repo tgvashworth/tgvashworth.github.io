@@ -27,7 +27,7 @@
     const init = () => {
         state.timeRemaining = state.workDuration;
         bindEvents();
-        requestAnimationFrame(updateUI);
+        updateUI();
         requestNotificationPermission();
     };
 
@@ -62,7 +62,7 @@
         document.title = `${timeString} | ${modeString} | Pomodoro Timer`;
         startButton.textContent = state.isRunning ? 'Pause' : 'Start';
         messageDisplay.textContent = state.message;
-        messageDisplay.classList.toggle('item-highlight', state.messageHighlight);
+        document.body.classList.toggle('highlight', state.messageHighlight);
 
         // Update the <h1> to indicate the current mode
         header.textContent = modeString;
@@ -88,7 +88,7 @@
             // Clear the message after a few seconds
             state.messageTimerId = setTimeout(() => {
                 state.messageTimerId = null;
-                requestAnimationFrame(updateUI);
+                updateUI();
             }, state.messageTime);
         } else {
             if (state.messageTimerId == null) {
@@ -97,7 +97,7 @@
             }
         }
 
-        requestAnimationFrame(updateUI);
+        updateUI();
     };
 
     // Toggle Timer
@@ -110,7 +110,7 @@
             clearInterval(state.timerId);
         }
 
-        requestAnimationFrame(updateUI);
+        updateUI();
     };
 
     // Reset Timer
@@ -120,7 +120,7 @@
         state.isWorkTime = true;
         state.timeRemaining = state.workDuration;
         state.message = '';
-        requestAnimationFrame(updateUI);
+        updateUI();
     };
 
     // Switch Mode Function
@@ -130,7 +130,7 @@
             ? state.workDuration
             : state.breakDuration;
         state.message = '';
-        requestAnimationFrame(updateUI);
+        updateUI();
     };
 
     // Send Notification
