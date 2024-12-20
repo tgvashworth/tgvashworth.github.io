@@ -7,19 +7,15 @@ title: "Tom Ashworth"
   <section class="mini-about">
     <img class="me" src="/images/sousa.jpg" width="70" height="70" />
     <p>
-      Hi, I'm <a href="//twitter.com/tgvashworth">Tom</a>. Around the web I'm
-      <strong>tgvashworth</strong>. <br /><br /><a
-        class="alt"
-        href="mailto:tgvashworth@gmail.com?subject=Hello"
-        >We should talk.</a
-      >
+      Hello, I'm <a href="//twitter.com/tgvashworth">Tom</a>. <br><a
+        href="mailto:tgvashworth@gmail.com?subject=Hello">Say hello.</a>
     </p>
   </section>
-  <ul class="posts">
+  <ul class="list-group list-group-flush">
     {% for post in site.posts %}
-    <li>
-      <span class="date">{{ post.date | date_to_string }}</span>
-      <a href="{{ post.url }}">{{ post.title }}</a>
+    <li class="list-group-item px-0 px-sm-3 d-flex flex-column">
+      <div class="order-2"><a href="{{ post.url }}">{{ post.title }}</a></div>
+      <span class="order-1">{{ post.date | date_to_string }}</span>
     </li>
     {% endfor %}
   </ul>

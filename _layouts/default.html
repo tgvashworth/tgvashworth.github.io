@@ -1,77 +1,64 @@
 <!DOCTYPE html>
 <html>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>{{ page.title }}</title>
-  <meta name="viewport" content="width=device-width" />
-  <link
-    href="/atom.xml"
-    type="application/atom+xml"
-    rel="alternate"
-    title="tgvashworth atom feed"
-  />
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>{{ page.title }}</title>
+<meta name="viewport" content="width=device-width" />
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="tgvashworth atom feed" />
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="{{ page.title }}" />
-  {% if page.summary %}
-  <meta name="twitter:description" content="{{ page.summary }}" />
-  {% else %}
-  <meta name="twitter:description" content="{{ site.description }}" />
-  {% endif %}
-  <meta
-    name="twitter:image"
-    content="https://tgvashworth.com/images/sousa.jpg"
-  />
-  <meta name="twitter:creator" content="@tgvashworth" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ page.title }}" />
+{% if page.summary %}
+<meta name="twitter:description" content="{{ page.summary }}" />
+{% else %}
+<meta name="twitter:description" content="{{ site.description }}" />
+{% endif %}
+<meta name="twitter:image" content="https://tgvashworth.com/images/sousa.jpg" />
+<meta name="twitter:creator" content="@tgvashworth" />
 
-  <link rel="stylesheet" href="/css/syntax.css" />
-  <link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/syntax.css" />
+<link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}" />
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=G-XGE5KBTW9C"
-  ></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XGE5KBTW9C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
 
-    gtag("config", "G-XGE5KBTW9C");
-  </script>
+  gtag("config", "G-XGE5KBTW9C");
+</script>
 
-  <div class="container">
-    <header class="header">
-      <h1 class="title"><a class="alt-2" href="/">{{ site.name }}</a></h1>
-    </header>
+<div class="container">
+  <header class="header py-3">
+    <h1 class="title h6 m-0"><a class="alt-2" href="/">{{ site.name }}</a></h1>
+  </header>
 
-    {{ content }}
+  {{ content }}
 
-    <footer class="footer">
-      <div class="clearfix">
-        <div class="contact">
-          <p>
-            <strong>Tom Ashworth</strong><br />
-            <a href="mailto:tgvashworth@gmail.com">tgvashworth@gmail.com</a>
-          </p>
-        </div>
-        <div class="contact">
-          <p>
-            <a href="https://github.com/tgvashworth">github.com/tgvashworth</a
-            ><br />
-            <a href="https://twitter.com/tgvashworth">twitter.com/tgvashworth</a
-            ><br />
-          </p>
-        </div>
+  <footer class="mt-5 py-5 border-top">
+    <div class="clearfix">
+      <div class="contact">
+        <p>
+          <strong>Tom Ashworth</strong><br />
+          <a href="mailto:tgvashworth@gmail.com">tgvashworth@gmail.com</a>
+        </p>
       </div>
-    </footer>
-  </div>
+      <div class="contact">
+        <p>
+          <a href="https://github.com/tgvashworth">github.com/tgvashworth</a><br />
+          <a href="https://twitter.com/tgvashworth">twitter.com/tgvashworth</a><br />
+        </p>
+      </div>
+    </div>
+  </footer>
+</div>
 
-  <script
-    src="//instant.page/5.0.1"
-    type="module"
-    integrity="sha384-0DvoZ9kNcB36fWcQApIMIGQoTzoBDYTQ85e8nmsfFOGz4RHAdUhADqJt4k3K2uLS"
-  ></script>
+<script src="//instant.page/5.0.1" type="module"
+  integrity="sha384-0DvoZ9kNcB36fWcQApIMIGQoTzoBDYTQ85e8nmsfFOGz4RHAdUhADqJt4k3K2uLS"></script>
+
 </html>

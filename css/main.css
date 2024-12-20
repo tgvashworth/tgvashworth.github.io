@@ -1,53 +1,7 @@
-html {
-  font: 20px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-}
-
-@media print {
-  html {
-    font-size: 16px;
-  }
-}
-
-body {
-  background: #fcfdff;
-  color: #001514;
-  margin: 0;
-}
-
-@media print {
-  body {
-    background: transparent;
-  }
-}
-
 .container {
-  margin: 1.5rem auto;
-  width: auto;
   max-width: 40rem;
-  padding: 0 1rem;
 }
 
-@media print {
-  .container {
-    max-width: 100%;
-  }
-}
-
-a {
-  color: #4183c4;
-  text-decoration: none;
-  position: relative;
-}
-a:focus,
-a:hover {
-  outline: none; /* replaced by pseudo-element */
-  border-bottom: 1px solid;
-}
-a:visited {
-  color: #2b5884;
-}
 a.alt,
 a.alt:visited {
   color: #c17400;
@@ -77,12 +31,6 @@ img.me-small {
 
 .header {
   border-bottom: 1px solid black;
-}
-
-.header h1 {
-  font-size: 1rem;
-  margin: 0.5rem 0;
-  font-weight: normal;
 }
 
 blockquote {
@@ -147,15 +95,6 @@ blockquote {
 /* Posts
 /*
 /*****************************************************************************/
-
-.posts {
-  list-style: none;
-  padding-left: 0;
-}
-
-.posts li {
-  margin-bottom: 0.444em;
-}
 
 .post-title {
   margin-bottom: 0;
