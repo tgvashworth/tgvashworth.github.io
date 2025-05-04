@@ -16,6 +16,9 @@ title: "Tom Ashworth"
     <li class="list-group-item px-0 px-sm-3 d-flex flex-column">
       <div class="order-2"><a href="{{ post.url }}">{{ post.title }}</a></div>
       <span class="order-1">{{ post.date | date_to_string }}</span>
+      {% if post.summary %}
+      <p class="summary order-3 text-muted mb-0">{{ post.summary }}</p>
+      {% endif %}
     </li>
     {% endfor %}
   </ul>
