@@ -6,56 +6,29 @@ My personal website, built with Jekyll and hosted on GitHub Pages.
 
 This repository contains the source code for my personal website at [tgvashworth.com](https://tgvashworth.com). The site is built using Jekyll, a static site generator, and is hosted on GitHub Pages.
 
-## Setup Instructions
+## Setup
 
-To run this site locally, follow these instructions:
-
-### Prerequisites
-
-You'll need to have the following installed:
-
-- [Ruby](https://www.ruby-lang.org/en/downloads/) (version 2.5.0 or higher)
-- [RubyGems](https://rubygems.org/pages/download)
-- [Git](https://git-scm.com/downloads)
-
-### Clone the Repository
+[mise](https://mise.jdx.dev/) manages Ruby and Node versions. Install it first, then:
 
 ```bash
 git clone https://github.com/tgvashworth/tgvashworth.github.io.git
 cd tgvashworth.github.io
-```
-
-### Install Dependencies
-
-Once you've cloned the repository, install the required dependencies:
-
-```bash
-gem install bundler
+mise install
 bundle install
+npm install
 ```
 
-If you run into any Ruby errors during installation, you might need to use a package manager like RVM or Homebrew to manage your Ruby installation.
-
-### Run Locally
-
-To run the site locally:
+## Run Locally
 
 ```bash
 bundle exec jekyll serve
 ```
 
-This will make the site available at http://localhost:4000. The site will automatically update when you make changes to the source files (except for changes to `_config.yml`, which require restarting the server).
+The site will be available at http://localhost:4000. Changes hot-reload, except for `_config.yml` which requires restarting the server.
 
-If you encounter a LoadError related to webrick (common in Ruby 3.0+), run:
+## Deploying
 
-```bash
-bundle add webrick
-bundle exec jekyll serve
-```
-
-### Deploying Changes
-
-To deploy changes to the live site, just push to the repo. GitHub Pages will automatically build and deploy your site
+Push to `main`. GitHub Pages builds and deploys automatically.
 
 ## Project Structure
 
