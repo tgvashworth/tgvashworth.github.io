@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "litprompt: a markdown preprocessor for LLM prompts"
-summary: "I built a tool that strips comments and resolves imports in markdown prompt files. Here's why and how."
+summary: "A little tool that strips comments and resolves imports in markdown prompt files"
 ---
 
 If you manage LLM prompts as files in a git repo, this is for you.
