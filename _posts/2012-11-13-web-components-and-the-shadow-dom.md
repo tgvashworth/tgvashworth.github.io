@@ -3,6 +3,7 @@ layout: post
 title: "Components &amp; the Shadow DOM"
 date: 2012-11-13 22:00
 mood: hsl(185, 40%, 95%)
+summary: "Exploring the Shadow DOM and the emerging web component model, with a hands-on experiment turning a story list into an encapsulated widget in Chrome Canary."
 ---
 
 Recently I heard a few people mention the Shadow DOM. It sounded cool, so I decided to explore it: turns out that it's part of a 'component' model for the web that's really rather exciting.

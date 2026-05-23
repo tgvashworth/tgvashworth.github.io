@@ -1,6 +1,7 @@
 ---
 layout: post
-title: CSS Triangles + Animations = Pie Chart Spinner
+title: CSS triangles + animations = pie chart spinner
+summary: "Building a circular countdown spinner in pure CSS using the triangle border trick, radial-gradient masks and Webkit keyframe animations, including a layered mask-on-mask hack."
 ---
 **tl;dr** With CSS Masks, Animations, Triangles and some sweat, you can make [this](/demos/spinner/final.html). Needs Webkit (sorry).
 

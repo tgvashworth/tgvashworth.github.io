@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Consumption Addiction
+title: Consumption addiction
+summary: "A personal reflection, prompted by an Extra Credits episode, on breaking an addiction to consuming online content in order to become a creator rather than a consumer."
 ---
 [Extra Credits](http://penny-arcade.com/patv/show/extra-credits) is a weekly video blog that takes a deep, analytical look at games and the games industry, but in a friendly and engaging cartoon package. I love it. In season 3, they spent two episodes discussing game addiction; the second of which was an extremely honest and very moving story told by the show's writer, James Portnow, about his struggle with an addiction to gaming. I found it fascinating — it's 20 minutes long, but I really think you [should watch it](http://penny-arcade.com/patv/episode/game-addiction-pt.2).
 
@@ -16,4 +17,4 @@ At worst, I'd spend many hours in a day watching every single video I could find
 
 I would have days where I'd become very depressed because, after all that, I hadn't created anything. Nothing had come of it and it had no tangible benefit. I realised I was consuming merely to pass the time, and using it as a way to escape from real work.
 
-This is where my [Create More Than You Consume](http://phuu.net/2012/03/26/create-more-than-you-consume.html) post takes over. Now, I'm trying my best to create something every day, blog as often as I can and generally be a source rather than a destination for the information on the internet. I still value consumption extremely highly — there's nothing I enjoy more than learning something new — but I need to be a creator, not a consumer.
+Now, I'm trying my best to create something every day, blog as often as I can and generally be a source rather than a destination for the information on the internet. I still value consumption extremely highly — there's nothing I enjoy more than learning something new — but I need to be a creator, not a consumer.

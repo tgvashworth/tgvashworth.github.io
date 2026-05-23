@@ -1,7 +1,8 @@
 ---
 layout: post
-title: YRS and Broken Education
+title: YRS and broken education
 date: 2012-8-22 16:00:00
+summary: "After mentoring kids at Young Rewired State, a critique of results-led schooling as a conveyor belt and a case for self-directed, internet-enabled learning."
 ---
 
 Recently I was a mentor at Young Rewired State, a nation-wide event for under-18s with the motto "code a better country". The kids came together in various centres around the UK, formed groups and hacked on open data to build something entirely new, in a week. It was the most exciting and inspirational thing I've done in a long while.
@@ -38,14 +39,8 @@ I know from personal experience that a lot of people go to uni because they have
 
 This is getting ranty, so I'll return to the topic. Self-directed learning.
 
-### A project; a proposal; a challenge
+### A challenge
 
 As I said earlier, I believe it's incredibly important, and I believe it's been made possible by the internet. But most schools have been slow, reluctant even, to embrace what the internet offers.
 
-I want to change this, to re-engage kids by allowing them to direct their own learning and find what it is **they** love doing. 
-
 Education is broken, but I know that a revolution isn’t going to happen overnight. It’s a slow moving machine that’s full of dinosaurs and dust. Things don’t change fast and they don’t change radically. So, in order to enact change, we must rebuild the system by working within it; by allowing the way things work now to continue while also enabling student, and teachers, to learn about what they want and get themselves engaged in a topic.
-
-I wrote, some time ago, about [tackling the hard problems](/2012/03/24/the-hard-stuff.html). This is a hard problem, but it's one I want to take on. Luckily, I have a top notch co-conspirator in this: [Walter Carvalho](//twitter.com/waltercfilho). After a period of immersing ourselves in this area to truly understand what needs to change, we'll begin working on a product that we hope will make a difference, with a sustainable business plan (yes, business plan) and achievable short-term goals.
-
-There's lots more to say, but this is a long post and it's time you took a screen break. If you're interested, or have an opinion, I'd love to hear from you. [Email me](mailto:tom@phuu.net).

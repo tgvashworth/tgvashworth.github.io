@@ -1,6 +1,7 @@
 ---
 layout: post
 title: How we use Twitter Flight in TweetDeck
+summary: "Patterns from running nearly 200 Twitter Flight components in TweetDeck, covering component types, mixins, nested teardown, and event namespacing conventions."
 ---
 
 This post is *not* an introduction [Flight](http://flightjs.github.io/) – it's about patterns I've spotted in our Flight usage on TweetDeck. Some of it probably spills over into opinion about best practice, but I tried to keep that out as much as possible. We have just under 200 Flight components – around 14k lines of code – so we've tried lots of different things. This is a snapshot of my/our thinking right now.

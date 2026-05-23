@@ -1,8 +1,8 @@
 ---
 layout: post
+title: Two little libraries
+summary: "Introducing if-expression and try-expression, two small JavaScript libraries that turn if and try-catch-finally statements into expressions that always return a value."
 ---
-
-Hey.
 
 I want to tell you about two little JavaScript libraries I built.
 

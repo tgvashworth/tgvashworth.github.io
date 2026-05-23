@@ -1,7 +1,8 @@
 ---
 layout: post
-title: "How I'd Steal Your Passwords"
+title: "How I'd steal your passwords"
 date: 2012-9-24 22:00
+summary: "A proof-of-concept walkthrough of how a browser extension could silently keylog passwords and intercept form data, as a warning about trusting what you install."
 ---
 
 This post is a bit of fun, but also a word of warning about security and being aware of what you install.

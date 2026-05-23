@@ -1,8 +1,9 @@
 ---
 layout: post
-title: A Quick Intro to TypeScript
+title: A quick intro to TypeScript
 date: 2012-10-2 1:00
 mood: hsl(190, 60%, 50%)
+summary: "A first look at TypeScript, covering installation and how object types (interfaces) and function types let you catch errors before running your JavaScript."
 ---
 
 I followed [my own advice](/2012/10/01/try-something-new.html) and tried [TypeScript](http://www.typescriptlang.org/).

@@ -2,6 +2,7 @@
 layout: post
 title: Respond
 date: 2013-2-2 00:20
+summary: "A short argument that responsive design should mean more than screen size: the web could adapt to a user's location, mood, behaviour and context, not just their device."
 ---
 
 There's an important part of painting on the web canvas often missed, and the following is a thought dump with that in mind.

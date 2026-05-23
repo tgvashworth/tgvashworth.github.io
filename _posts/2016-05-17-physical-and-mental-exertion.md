@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "Physical and Mental Exertion"
+title: "Physical and mental exertion"
+summary: "A short personal note on drawing motivation in tough coding sessions by comparing the struggle to hard physical exercise, wondering if others think the same way."
 ---
 
 If you’re the kind of person that does hard exercise, do you find yourself comparing one particular struggle to another?

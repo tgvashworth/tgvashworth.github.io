@@ -2,6 +2,7 @@
 published: true
 layout: post
 title: Avoid lots of arguments
+summary: "Why functions taking many positional arguments are a refactoring smell, and how an options object (and Promises) makes calls clearer and order-independent."
 ---
 
 If you're writing a function that takes lots of arguments, it might be a sign that you need to refactor. One way is to use an options object.

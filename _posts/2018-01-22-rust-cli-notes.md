@@ -1,6 +1,7 @@
 ---
 title: "Notes on building CLI applications in Rust"
 layout: post
+summary: "Working notes on migrating Twitter's Bash CLI tools to Rust, listing the existing Bash capabilities to replace, useful crates, and the trade-offs against using Python."
 ---
 
 My team maintains a number of increasingly complex CLI tools, mostly written in Bash, though some is Scala in order to share code with other applications.

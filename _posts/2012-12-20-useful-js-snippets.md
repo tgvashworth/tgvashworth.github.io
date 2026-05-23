@@ -1,7 +1,8 @@
 ---
 layout: post
-title: "useful js: snippets"
+title: "Useful JS: snippets"
 date: 2012-12-20 17:00
+summary: "A handful of everyday JavaScript snippets for logging arguments, binding this in setTimeout, filtering and mapping arrays, and setting default function arguments."
 ---
 
 Here's some Javascript snippets I find myself using every day. You should be good to drop them into your page, but if you've not familiar with a particular technique then it's always good idea to read up on it before using it. I've provided links where I can.

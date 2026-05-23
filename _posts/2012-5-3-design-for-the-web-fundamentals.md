@@ -1,12 +1,10 @@
 ---
 layout: post
-title: "Design for the Web: Fundamentals"
+title: "Design for the web"
+summary: "A reflection on what makes designing for the web distinct: conveying structured information and, uniquely, designing the hyperlinked pathways between pieces of it."
 ---
-In a series of short essay-style articles looking at designing for the web, I want to go back to fundamental concepts and evaluate, as a learning experience for myself, what it is to design for the web. This is the first.
 
-### What is fundamentally different?
-
-The first question I'd like to ask is this: what is fundamentally different about the web? What about it is distinct from creating things that are held or felt or operated?
+What is fundamentally different about the web? What about it is distinct from creating things that are held or felt or operated?
 
 Definitions of design abound, and I'm willing cliché when I quote Steve Jobs, on Apple's products:
 
@@ -27,7 +25,3 @@ The other half is almost unique to the web; we are designing pathways, from one 
 There are two obvious places where the pathways are important: site navigation and page links. For a site with a breadth and depth of information, navigation is a constant challenge; one that is not always successfully overcome.
 
 When we design for the web, we are designing to convey structured information and the pathways to and from other datums. These pathways are, to return to our quotation, how the web works.
-
-In the next article, I want to look at the significance of pathways and figure out what makes great navigation and information-linking design.
-
-Thanks for reading.

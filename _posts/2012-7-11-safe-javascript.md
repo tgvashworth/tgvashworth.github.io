@@ -1,7 +1,8 @@
 ---
 layout: post
-title: How to write safer Javascript
+title: How to write safer JavaScript
 date: 2012-7-11 11:00:00
+summary: "Quick techniques for safer JavaScript: avoiding global variables, wrapping code in self-executing functions, the leading-semicolon guard, and protecting against a redefined undefined."
 ---
 
 I just thought I'd share a few quick ways of making your Javascript a little bit safer. I'd recommend reading deeper into a few of these techniques too. The [MDN Javascript](https://developer.mozilla.org/en/JavaScript) articles are great for this, and reading [the source code](https://github.com/jquery/jquery) of major Javascript projects & libaraies is a great way of seeing this stuff in action.

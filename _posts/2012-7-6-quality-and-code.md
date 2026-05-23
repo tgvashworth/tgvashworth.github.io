@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Quality & Code
+title: Quality & code
 date: 2012-07-06 7:00:00
+summary: "An argument that developers should take pride in well-documented, tested, readable code rather than valuing code that merely works, especially in open source."
 ---
 
 I always want to avoid anything that might be called self-righteous or hypocritical, but please excuse me if I venture into that territory. This post is as much a manifesto for myself as it is a criticism of anyone else.

@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Javascript App Hosting on S3
+title: JavaScript app hosting on S3
 date: 2012-7-22 7:00:00
+summary: "A trick for hosting client-side JavaScript apps on Amazon S3 by pointing the index and 404 pages at the same file, faking a directory structure from the request URI."
 ---
 
 I came up with a technique for hosting Javascript apps on Amazon's S3 that can use the request URI (path) as any app with a server side could. This enables a 'fake' directory structure that is actually just one page on S3. I built [schemist](http://schemist.phuu.net) using this technique.

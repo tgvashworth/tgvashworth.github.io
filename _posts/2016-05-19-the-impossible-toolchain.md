@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "The Impossible Toolchain?"
+title: "The impossible toolchain?"
+summary: "A short wishlist for a frontend toolchain with reliable type inference, clean interop, distributable types and debuggable sourcemaps, lamenting that no current option delivers it."
 ---
 
 My goal is to write good quality, well tested frontend code that makes building great products easier, faster and more enjoyable.

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Phantom notifications from mise in iTerm"
+summary: "Why mise triggers empty macOS notifications on every cd in iTerm2, traced to its terminal_progress OSC escape sequences, with a one-line config fix to disable them."
 ---
 
 If you use [mise](https://mise.jdx.dev/) and iTerm2, you might find yourself getting mysterious macOS notifications every time you `cd`. No message, no useful content — just a phantom alert. Here's what's going on and how to fix it.

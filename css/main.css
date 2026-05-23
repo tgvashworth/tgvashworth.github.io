@@ -6,6 +6,7 @@
   --accent-deep: #d36e5b;
   --apricot-cream: #efc495;
   --hairline: rgba(31, 42, 40, 0.12);
+  --code-bg: #f2eee4;
 
   --font-display: "halyard-display", "Helvetica Neue", Arial, sans-serif;
   --font-ui: "halyard-micro", "Helvetica Neue", Arial, sans-serif;
@@ -36,6 +37,7 @@ body {
   color: var(--ink);
   position: relative;
   isolation: isolate;
+  overflow-x: hidden;
 }
 
 body::before {
@@ -205,9 +207,9 @@ mark {
 
 .post-list .summary {
   margin: 0;
-  font-size: 1rem;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
   color: var(--ink-soft);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* ---------- Post page ---------- */
@@ -215,6 +217,22 @@ mark {
 .post-header {
   padding: 2.5rem 0 1.5rem;
 }
+
+.post-home {
+  display: block;
+  width: fit-content;
+  margin: 0 0 1.25rem;
+  line-height: 0;
+}
+
+.post-home-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  transition: transform 0.18s ease;
+}
+
+.post-home:hover .post-home-img { transform: translateY(-2px); }
 
 .post-eyebrow {
   font-family: var(--font-ui);
@@ -226,34 +244,41 @@ mark {
   margin: 0 0 0.9rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.35rem;
+  position: relative;
 }
 
 .post-eyebrow .back {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.6rem;
-  height: 1.6rem;
-  margin-left: -2.1rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: -0.5rem 0;
   border-radius: 50%;
   color: var(--ink-soft);
   text-decoration: none;
   transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease;
 }
 
-.post-eyebrow .back svg {
-  width: 0.9rem;
-  height: 0.9rem;
-}
+.post-eyebrow .back svg { width: 1.35rem; height: 1.35rem; }
 
 .post-eyebrow .back:hover {
   color: var(--accent-deep);
+  background: rgba(31, 42, 40, 0.06);
   transform: translateX(-2px);
 }
 
-@media (max-width: 640px) {
-  .post-eyebrow .back { margin-left: 0; }
+/* On wider screens, hang the back button out in the left gutter. */
+@media (min-width: 48rem) {
+  .post-eyebrow .back {
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    margin: 0 0.4rem 0 0;
+    transform: translateY(-50%);
+  }
+  .post-eyebrow .back:hover { transform: translateY(-50%) translateX(-3px); }
 }
 
 .post-title {
@@ -324,21 +349,32 @@ mark {
   padding: 0.05em 0.3em;
 }
 
+/* Code blocks fill the column; Rouge wrapper carries no chrome of its own.
+   Scope to the block-level div so inline code.highlighter-rouge is untouched. */
+.post div.highlighter-rouge { margin: 1.5em 0; width: 100%; }
+.post div.highlighter-rouge,
+.post .highlight { background: transparent; }
+
 .post pre {
+  width: 100%;
   border: 1px solid var(--hairline);
-  background: rgba(31, 42, 40, 0.04);
-  border-radius: 6px;
-  padding: 0.85em 1em;
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 1em 1.15em;
   overflow-x: auto;
-  line-height: 1.45;
+  line-height: 1.5;
+  font-size: 0.92rem;
+  -webkit-overflow-scrolling: touch;
 }
 
 .post pre code {
+  display: block;
+  min-width: 0;
   border: none;
   background: none;
   padding: 0;
   border-radius: 0;
-  font-size: 0.9em;
+  font-size: inherit;
 }
 
 .post pre.terminal {
@@ -355,6 +391,97 @@ mark {
   width: 100%;
   max-width: 10em;
   margin: 2.5em auto;
+}
+
+/* ---------- Post navigation (prev / next) ---------- */
+
+.post-nav {
+  margin: 3.5rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.post-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background: rgba(248, 247, 241, 0.5);
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.post-nav-link:hover {
+  border-color: var(--accent-deep);
+  background: var(--porcelain);
+  transform: translateY(-2px);
+}
+
+.post-nav-arrow {
+  flex: 0 0 auto;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--ink-soft);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.post-nav-link:hover .post-nav-arrow { color: var(--accent-deep); }
+.post-nav-link.prev:hover .post-nav-arrow { transform: translateX(-3px); }
+.post-nav-link.next:hover .post-nav-arrow { transform: translateX(3px); }
+
+.post-nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.post-nav-label {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.post-nav-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 1rem + 0.7vw, 1.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  transition: color 0.18s ease;
+}
+
+.post-nav-link:hover .post-nav-title { color: var(--accent-deep); }
+
+.post-nav-summary {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (min-width: 56rem) {
+  .post-nav {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    width: min(62rem, calc(100vw - 4rem));
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+  .post-nav-link.prev { grid-column: 1; }
+  .post-nav-link.next { grid-column: 2; }
 }
 
 .tweet-embed {

@@ -1,10 +1,11 @@
 ---
 layout: post
-title: Radio Silence
+title: Radio silence
 date: 2012-07-02 20:50:00
+summary: "A short personal note on how turning off Growl desktop notifications removed constant interruptions and restored focus."
 ---
 
-I had a very productive day yesterday. I could attribute this to a number of things; for example, I’ve noticed that lines of code written is inversely proportional to number of biscuits consumed. It could also be that I’m feeling extremely motivated by what I’m [working on](https://github.com/phuu/extensio).
+I had a very productive day yesterday. I could attribute this to a number of things; for example, I’ve noticed that lines of code written is inversely proportional to number of biscuits consumed. It could also be that I’m feeling extremely motivated by what I’m [working on](https://github.com/tgvashworth/extensio).
 
 However, I made a change yesterday that I think was much more likely to have had an effect.
 

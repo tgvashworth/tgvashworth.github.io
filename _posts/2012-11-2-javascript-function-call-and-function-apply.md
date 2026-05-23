@@ -1,7 +1,8 @@
 ---
 layout: post
-title: "useful js: call &amp; apply"
+title: "Useful JS: call &amp; apply"
 date: 2012-11-2 8:00
+summary: "How JavaScript's call and apply work and differ, with practical uses like converting arguments to an array and a worked pub/sub example."
 ---
 
 Javascript's **call** and **apply** are two mysterious functions that can be difficult to understand, but it's worth taking the time to learn about them becuase they're ver useful. They're also very similar, but with one subtle but important difference.

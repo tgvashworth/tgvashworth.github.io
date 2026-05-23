@@ -1,10 +1,9 @@
 ---
 layout: post
-title: Responsive Workflow
+title: Responsive workflow
+summary: "A walk through a responsive design workflow, from six-up sketching and typography with Modular Scale and Typecast to fluid layouts and breakpoints where the design actually breaks."
 ---
 Responsive workflow is a hot topic so, naturally, I thought I'd weigh in with my thoughts. But I'd like to clear somethings up:
-
-Firstly, I'm not entirely happy calling it 'responsive' work flow, because it's just workflow. Everything I make is responsive (or, at least, adaptive), so being explicit about responsiveness is tautology. Secondly, workflow is the never the same from project to project, so this is just a general idea of how I work.
 
 ### Sketch
 

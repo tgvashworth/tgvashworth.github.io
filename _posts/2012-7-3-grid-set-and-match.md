@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Grid, Set and Match
+title: Grid, set and match
 date: 2012-07-03 9:42:00
+summary: "A walkthrough of a personal site redesign, using Gridset for a compound grid alongside Jekyll, LESS and in-browser design with JS Bin."
 ---
 
 This new redesign of my site is here, and I'm happy with it. You might be interested to know a bit about what's underneath...
@@ -32,6 +33,6 @@ The grid builder is very easy to use and intuitive, although it would be nice to
 
 Honestly, my first attempt at using a compound grid was not an enormous sucess as the grid I came up with is slighly awkward to work with. And with a vertical grid layout you have to think, and markup, somewhat vertically, meaning it's difficult to break out of the grid horizontally, especialy in a CMS-like environment. Perhaps this is limitation of Gridset, or perhaps it's something I'm doing.
 
-All that said, Gridset was a pleasure to work with and theres's so much I haven't mentioned about the site and my experience with Gridset. The ease with which an adaptive layout can be thrown together is brilliant, as is the documentation that's generated for your grid. Great work Mark Boulton & co; I'd highly reccommend trying out Gridset for yourself. 
+All that said, Gridset was a pleasure to work with and theres's so much I haven't mentioned about the site and my experience with Gridset. The ease with which an adaptive layout can be thrown together is brilliant, as is the documentation that's generated for your grid. Great work Mark Boulton & co; I'd highly reccommend trying out Gridset for yourself.
 
 I hope you enjoyed a little insight into how this site was designed & built, and if you learned anything then that's a bonus. It's nothing special, but I find that reflective posts like this are good for me to figure out my process and what I could be doing better.

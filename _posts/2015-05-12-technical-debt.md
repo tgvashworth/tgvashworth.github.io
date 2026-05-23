@@ -1,7 +1,8 @@
 ---
-title: Technical Debt
+title: Technical debt
 date: 2015-05-12
 layout: post
+summary: "Lessons from a six-month TweetDeck technical-debt project on identifying debt, deciding what to pay off, weighing refactor versus rewrite, and the people side of touching legacy code."
 ---
 
 We recently completed and launched a slew of changes to TweetDeck at the end of a technical debt project that lasted more than 6 months. The changes are largely hidden in the JavaScript guts, bringing legacy code up to date and unlocking a range of future features.

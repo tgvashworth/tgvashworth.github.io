@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "Product Management Reading List"
+title: "Product management reading list"
+summary: "A short annotated list of books, articles and tweets that shaped my thinking on product management, including Shape Up, Good Strategy/Bad Strategy and Humble Inquiry."
 ---
 
 Over the last couple of years, my work has veered towards product management: either as a close collaborator with one or more product managers, as at Bulb, or in a technical-product-manager-ish role, as at Twitter.

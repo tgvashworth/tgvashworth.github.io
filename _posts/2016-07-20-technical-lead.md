@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Technical Lead"
+title: "Technical lead"
 summary: "Roles and responsibilities of a Tech Lead"
 ---
 

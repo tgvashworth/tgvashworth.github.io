@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "Elm: building Native modules"
+title: "Elm: building native modules"
+summary: "How to write Elm native modules in plain JavaScript by hooking into the compiler's Elm.Native namespace, with a clear warning that it's an unsupported hack."
 ---
 
 I couldn't find any documentation on how to write modules written in pure JavaScript for [Elm][elm] so I took a stab at it myself, using [elm-d3][elm-d3] and the [Elm compiler][elm-compiler] as a reference. Here's a quick write-up.

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Concerning separation
+summary: "A defence of keeping presentation logic alongside templates, as React does, arguing that view logic and markup are one concern and that splitting them lowers cohesion."
 ---
 This a quick response to Ben’s tweet from this week:
 

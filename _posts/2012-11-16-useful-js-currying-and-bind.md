@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "useful js: curry and bind"
+title: "Useful JS: curry and bind"
 date: 2012-11-16 22:00
 comments: false
+summary: "What currying (partial application) is and why it's useful, building a curry function from scratch and showing how ES5's bind handles both this-binding and argument fixing."
 ---
 
 You might have heard of currying: it's a strange name for a really, really useful technique (it comes from [this dude](http://en.wikipedia.org/wiki/Haskell_Curry)). Here I'm going to cover what it is, why you need it, and then take a look at a useful function for currying built right into Javascript (ES5+): `bind`.

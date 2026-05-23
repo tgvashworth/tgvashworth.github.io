@@ -1,6 +1,7 @@
 ---
 layout: "post"
-title: "Book Notes: The Little Book of Beyond Budgeting"
+title: "Book notes: The Little Book of Beyond Budgeting"
+summary: "Notes on Steve Morlidge's Little Book of Beyond Budgeting, covering why annual budgeting fails, Ashby's Law of Requisite Variety, and how to replace it with continuous targets, forecasts and devolved teams."
 ---
 
 These are my notes on _The Little Book of Beyond Budgeting_ by Dr Steve Morlidge, subtitled “A new operating system for organisations: what it is and why it works”. My specific thoughts are _in italics_.

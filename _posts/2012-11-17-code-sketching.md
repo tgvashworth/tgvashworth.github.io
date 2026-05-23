@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Code Sketching
+title: Code sketching
 date: 2012-11-17 19:00
+summary: "A technique of sketching throwaway code snippets to design intuitive, consistent module interfaces, treating developer experience much like a designer treats user experience."
 ---
 
 Here's a technique I like to think of as sketching in code, the end goal of which is a well designed, **usable interface** for your code.

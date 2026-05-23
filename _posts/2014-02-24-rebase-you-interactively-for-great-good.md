@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Rebase you interactively for great good
+summary: "A worked walkthrough of git's interactive rebase, using edit, squash and commit splitting to tidy a messy commit history before pushing."
 ---
 
 I [tweeted today](https://twitter.com/tgvashworth/status/437997631315656704) about using interactive rebase to clean up a set of commits, so here's a wee bit on how to do it. The repo for this is [on GitHub](https://github.com/phuu/example-interactive-rebase).

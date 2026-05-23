@@ -2,6 +2,7 @@
 layout: post
 title: Collaboration
 date: 2012-11-8 9:00
+summary: "Drawing on human evolution and ant colonies to argue that contributing to open source has outsized impact, backed by data showing roughly 1.3% of users contribute to major projects."
 ---
 
 > This is perhaps a slighly unusual post that I was going to give as the first part of a talk (perhaps I will at some point), but the subject matter wasn't right for the event, so I fleshed it out and put it here. I hope you enjoy it.

@@ -1,5 +1,7 @@
 ---
 layout: post
+title: Point the way
+summary: "Why a tech lead creates more value by pairing, reviewing and mapping out the team's possible next steps than by diving in to write the code themselves."
 ---
 
 

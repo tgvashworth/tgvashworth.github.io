@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Project Lead"
+title: "Project lead"
 summary: "I wrote a guide to help my team's Project Leads. It might be useful for you too."
 ---
 

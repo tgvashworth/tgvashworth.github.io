@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Keeping Open-Source Secrets
+title: Keeping open-source secrets
 date: 2013-04-11 19:00:00
+summary: "Practical ways to keep API keys and config out of an open-source repo, comparing gitignored files, private forks, environment variables and a fallback chain that supports all of them."
 ---
 
 Often with an open-source project you need to keep private configuration secret - it can't be shared alongside the code. This can be anything that dictates the running of the app – like client secrets for a 3rd party API – that's important to keep safe from potentially malicious uses.

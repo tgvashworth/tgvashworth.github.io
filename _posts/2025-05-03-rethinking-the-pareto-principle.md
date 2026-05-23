@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "Rethinking the Pareto Principle"
+title: "Rethinking the Pareto principle"
 summary: The traditional usage of the 80/20 rule needs a rethink, from oversimplification to powerful learning tool.
 ---
 

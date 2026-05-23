@@ -2,6 +2,7 @@
 title: "Promise & fetch cancellation"
 date: 2015-11-25
 layout: post
+summary: "Argues that request cancellation does not belong in the Promise spec, drawing on the fetch and es-discuss debates to show why fetch needs its own primitives instead."
 ---
 
 Working on [fetch-engine][fetch-engine] has had me wondering about how we interact with the network from JavaScript.

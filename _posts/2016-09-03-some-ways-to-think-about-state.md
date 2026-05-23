@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Some ways to think about state"
+summary: "Tracing a path from class-based mutable state through Python's self to pure functions, showing how an ordinary instance method becomes a Redux-style reducer that is reusable and testable."
 ---
 
 In this post I'm going to try to join dots between different ways of managing state in code, to show that common patterns can be more functional, more testable and probably more maintainable.

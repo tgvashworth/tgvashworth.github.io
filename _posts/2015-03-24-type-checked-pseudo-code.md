@@ -1,6 +1,7 @@
 ---
-title: "Type-Checked Pseudo-Code"
+title: "Type-checked pseudo-code"
 layout: post
+summary: "Why prototyping problems in Haskell first works as type-checked pseudo-code, using its type system as a forcing function to clarify thinking before writing real code."
 ---
 
 ![Brain hurt.][brain-hurt]

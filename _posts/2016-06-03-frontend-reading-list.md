@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "Frontend Reading List"
+title: "Frontend reading list"
+summary: "A curated list of favourite talks and articles on architecture, HTML/CSS, tools, distributed systems and professional practice, featuring Rich Hickey, David Nolen and others."
 ---
 
 Here's a selection of my favourite talks and articles. It's not *exactly* a reading list becuase most are videos, but hopefully they're still useful to you!

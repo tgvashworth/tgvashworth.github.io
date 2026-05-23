@@ -2,6 +2,7 @@
 layout: post
 title: A git workflow
 date: 2012-11-5 8:00
+summary: "A personal git workflow based on GitHub Flow: a deployable master, frequent cheap branches, pull-request reviews, and a feature/fix/task/try naming convention."
 ---
 
 This post is about how I personally work with git. There are many different git workflows to choose from, so I'd recommend playing with a few 'til you find something you (and your team!) like.

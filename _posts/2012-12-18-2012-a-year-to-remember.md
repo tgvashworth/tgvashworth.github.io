@@ -1,6 +1,7 @@
 ---
 layout: post
 title: A year to remember
+summary: "A personal recap of 2012: starting and leaving a CS degree, building frittr, working at Buffer and on App.net apps, and landing a dream job at Left Logic."
 ---
 
 For me, 2012 was an incredible year. This here's a sprint straight through it all, as much to remind me as anything else!

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Default to technology
+summary: "A reminder that build it and they will come is false: find customers and understand their problem first, and reach for technology only once you can deliver value."
 ---
 
 I'm not the first to point it out that "if you build it, they will come" is simply false, but it seems this is forgotten even by [very competent, experienced teams](http://stet.editorially.com/articles/goodbye/).

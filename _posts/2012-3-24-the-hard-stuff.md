@@ -1,6 +1,7 @@
 ---
 layout: post
-title: The Hard Stuff
+title: The hard stuff
+summary: "A short opinion piece asking why startups chase social and sharing instead of harder problems, floating ideas in publishing, education and printers."
 ---
 
 Why are so many startups focusing on social and sharing? These aren't hugely difficult problems when you think about it, so who's taking on the hard stuff?

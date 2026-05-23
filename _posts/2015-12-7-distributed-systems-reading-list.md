@@ -1,7 +1,8 @@
 ---
-title: "Distributed Systems Reading List"
+title: "Distributed systems reading list"
 date: 2015-12-7
 layout: post
+summary: "An annotated reading list of books, papers, talks and blogs on distributed systems, from Kleppmann and Aphyr to Lamport's clocks paper."
 ---
 
 The workings of large distributed systems fascinate me. At the same time, working at Twitter has taught me hard lessons about the variety of exciting failure scenarios of a scaled system. "holy shit, everything's on fire" moments are my personal favourites.
