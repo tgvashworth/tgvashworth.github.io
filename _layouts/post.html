@@ -2,11 +2,16 @@
 layout: default
 ---
 
-<div class="mt-5 mb-3">
-  <h2 class="post-title">{{ page.title }}</h2>
-  <p class="meta">{{ page.date | date_to_string }}</p>
-</div>
+<header class="post-header">
+  <p class="post-eyebrow">
+    <a class="back" href="/" aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+    </a>
+    <span>{{ page.date | date: "%-d %B %Y" }}</span>
+  </p>
+  <h1 class="post-title">{{ page.title }}</h1>
+</header>
 
-<div class="post">
+<article class="post">
   {{ content }}
-</div>
+</article>
