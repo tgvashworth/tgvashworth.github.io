@@ -3,23 +3,24 @@ layout: default
 title: "Tom Ashworth"
 ---
 
-<div id="home">
-  <section class="mini-about">
-    <img class="me" src="/images/sousa.jpg" width="70" height="70" />
-    <p>
-      Hello, I'm <a href="//twitter.com/tgvashworth">Tom</a>. <br><a
-        href="mailto:tgvashworth@gmail.com?subject=Hello">Say hello.</a>
-    </p>
-  </section>
-  <ul class="list-group list-group-flush">
-    {% for post in site.posts %}
-    <li class="list-group-item px-0 px-sm-3 d-flex flex-column">
-      <div class="order-2"><a href="{{ post.url }}">{{ post.title }}</a></div>
-      <span class="order-1">{{ post.date | date_to_string }}</span>
-      {% if post.summary %}
-      <p class="summary order-3 text-muted mb-0">{{ post.summary }}</p>
-      {% endif %}
-    </li>
-    {% endfor %}
-  </ul>
-</div>
+<section class="home-hero">
+  <img class="me" src="/images/tom-icon.png" width="64" height="64" alt="Tom Ashworth" />
+  <p class="eyebrow">Tom Ashworth</p>
+  <h1>Notes, mostly.</h1>
+  <p class="intro">
+    Hi, I'm <a href="https://github.com/tgvashworth">Tom</a>. I write here about engineering,
+    AI, and the work of building software. <a href="mailto:tgvashworth@gmail.com?subject=Hello">Say hello</a>.
+  </p>
+</section>
+
+<ul class="post-list">
+{% for post in site.posts %}
+  <li>
+    <span class="date">{{ post.date | date_to_string }}</span>
+    <a class="post-link" href="{{ post.url }}">{{ post.title }}</a>
+    {% if post.summary %}
+    <p class="summary">{{ post.summary }}</p>
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>
