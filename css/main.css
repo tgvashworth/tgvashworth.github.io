@@ -18,6 +18,18 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 html, body { margin: 0; padding: 0; }
 
 html {
@@ -378,9 +390,9 @@ mark {
 }
 
 .post pre.terminal {
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  color: var(--porcelain);
+  border: 1px solid var(--hairline);
+  background: #1a2220;
+  color: #ece9df;
 }
 
 .post pre.terminal code { background: none; color: inherit; }
@@ -524,13 +536,15 @@ mark {
   margin-top: 4rem;
   padding: 2rem 0 3rem;
   border-top: 1px solid var(--hairline);
-  font-size: 0.92rem;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
   color: var(--ink-soft);
 }
 
 .site-footer .footer-grid {
+  max-width: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 1.5rem 3rem;
 }
 
@@ -551,6 +565,24 @@ mark {
 }
 
 .site-footer strong { color: var(--ink); }
+.site-footer strong a { color: var(--ink); border-bottom: none; }
+.site-footer strong a:hover { color: var(--accent-deep); }
+
+.theme-toggle {
+  font: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--ink-soft);
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.theme-toggle:hover { color: var(--ink); }
+.theme-toggle #theme-icon { display: inline-block; width: 1em; text-align: center; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -558,3 +590,49 @@ mark {
     animation: none !important;
   }
 }
+
+/* ---------- Dark theme ---------- */
+
+html.dark {
+  --porcelain: #15201e;
+  --ink: #e9e6dd;
+  --ink-soft: #9ba7a1;
+  --hairline: rgba(233, 230, 221, 0.14);
+  --code-bg: #1b2624;
+}
+
+/* Keep the apricot highlight legible (dark text on a light mark). */
+html.dark mark { color: #1f2a28; }
+
+/* The avatar is transparent line-art; give it a light disc in dark mode. */
+html.dark .home-hero .me,
+html.dark .post-home-img { background: #f4f1e8; }
+
+/* Hero photo: gentler, and fade into the dark page rather than porcelain. */
+html.dark body::before { opacity: 0.4; }
+html.dark body::after {
+  background: linear-gradient(180deg, rgba(21, 32, 30, 0.35) 0%, rgba(21, 32, 30, 0.6) 50%, #15201e 100%);
+}
+
+/* Ink-tinted surfaces become light-tinted on dark. */
+html.dark .post code { background: rgba(233, 230, 221, 0.08); }
+html.dark .post pre code { background: none; }
+html.dark .post-eyebrow .back:hover { background: rgba(233, 230, 221, 0.08); }
+html.dark .post-nav-link { background: rgba(233, 230, 221, 0.03); }
+html.dark .post-nav-link:hover { background: rgba(233, 230, 221, 0.06); }
+
+/* Syntax highlighting: brighter, warmer tokens for the dark code panel. */
+html.dark .highlight {
+  --c-fg: #e3e0d6;
+  --c-comment: #7c8881;
+  --c-punct: #9aa69f;
+  --c-red: #e98a78;
+  --c-orange: #d39a5a;
+  --c-amber: #cdb05f;
+  --c-green: #8fc1a9;
+  --c-cyan: #6fc0b5;
+  --c-blue: #5fb3c2;
+  --c-purple: #c98fae;
+}
+html.dark .highlight .gd { color: #e98a78; }
+html.dark .highlight .gi { color: #8fc1a9; }
