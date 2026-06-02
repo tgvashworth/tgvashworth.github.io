@@ -142,3 +142,24 @@ You can combine both: a guidance interlock token per file that _must_ be supplie
 | Both               | The model definitely read a specific set of files | Per-file    | Varies       |
 
 If you only have time for one, the skill interlock is the stronger guarantee — it tells you the model loaded the instructions before it called the tool. If you already have that, guidance interlocks are the next useful thing to add: they answer the questions you actually have about whether the guidance is working.
+
+## Implementing this in litprompt
+
+[litprompt](https://github.com/tgvashworth/litprompt), my build system for prompts and skills, now does the producer side of this pattern. Point it at a skill and it stamps the interlock line into the built file and emits a JSON manifest keyed by output path.
+
+You pick the mode per build: `analytics` (logged-only) or `enforce` (the line tells the model the call will be rejected without the token). Identity comes from the skill's frontmatter — an explicit `interlock:` slug, falling back to `name:`. The version is the content hash of the built body, computed before the line is inserted so it never hashes itself.
+
+A minimal `litprompt.yaml`:
+
+```yaml
+interlock:
+  manifest: interlocks.json
+builds:
+  - source: plugins/*/skills/*/SKILL.src.md
+    output: SKILL.md
+    interlock: enforce
+```
+
+The top-level block holds shared config (the manifest path, the tool parameter name, the wording of the stamped line). Each build opts in by setting `interlock:` to `analytics` or `enforce`.
+
+litprompt only handles the producer side. The consuming tool — reading the token, checking it against the manifest, logging or rejecting — is yours; there's a [worked example](https://github.com/tgvashworth/litprompt/blob/main/docs/interlock-consumer.md) for that half in the repo.
