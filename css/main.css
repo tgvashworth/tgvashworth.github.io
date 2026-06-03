@@ -7,6 +7,11 @@
   --apricot-cream: #efc495;
   --hairline: rgba(31, 42, 40, 0.12);
   --code-bg: #f2eee4;
+  /* iOS status-bar tint: the colour the page composites to at its very top,
+     where the fixed hero photo overlays the background. Kept in sync with the
+     hardcoded value in _layouts/default.html (theme-color meta can't read vars
+     before first paint). */
+  --theme-tint: #f6ebdc;
 
   --font-display: "halyard-display", "Helvetica Neue", Arial, sans-serif;
   --font-ui: "halyard-micro", "Helvetica Neue", Arial, sans-serif;
@@ -599,6 +604,7 @@ html.dark {
   --ink-soft: #9ba7a1;
   --hairline: rgba(233, 230, 221, 0.14);
   --code-bg: #1b2624;
+  --theme-tint: #4f524b;
 }
 
 /* Keep the apricot highlight legible (dark text on a light mark). */

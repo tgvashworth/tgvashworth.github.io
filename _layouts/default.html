@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<!-- iOS status-bar / browser-chrome tint. Uses the --code-bg palette token
-     (#f2eee4 light / #1b2624 dark). Driven by JS below so it tracks the manual
-     theme toggle, not just the OS prefers-color-scheme. -->
-<meta name="theme-color" content="#f2eee4" />
+<!-- iOS status-bar / browser-chrome tint. Mirrors the --theme-tint palette
+     token in css/main.css (#f6ebdc light / #4f524b dark) so the bar blends into
+     the hero rather than showing a band. Hardcoded here because the theme-color
+     meta can't read CSS vars before first paint; keep the two in sync. Driven by
+     JS below so it tracks the manual theme toggle, not just the OS. -->
+<meta name="theme-color" content="#f6ebdc" />
 <script>
   // Set the theme before first paint to avoid a flash of the wrong theme,
   // and tint the status bar to match the chosen theme straight away.
@@ -20,7 +22,7 @@
     } catch (e) {}
     if (dark) {
       var m = document.querySelector('meta[name="theme-color"]');
-      if (m) m.content = "#1b2624";
+      if (m) m.content = "#4f524b";
     }
   })();
 </script>
@@ -95,7 +97,7 @@
       if (label) label.textContent = dark ? "Light" : "Dark";
       // Keep the status-bar tint matched to the active theme.
       var meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.content = dark ? "#1b2624" : "#f2eee4";
+      if (meta) meta.content = dark ? "#4f524b" : "#f6ebdc";
     }
     update();
 
