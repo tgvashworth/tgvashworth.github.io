@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<!-- iOS status-bar / browser-chrome tint. These match the *composited* top of
-     the page (porcelain + hero photo overlay), not flat porcelain, so the bar
-     blends into the hero instead of showing a pale band above the content.
-     Driven by JS below so it tracks the manual theme toggle, not just the OS. -->
-<meta name="theme-color" content="#f6ebdc" />
+<!-- iOS status-bar / browser-chrome tint. Uses the --code-bg palette token
+     (#f2eee4 light / #1b2624 dark). Driven by JS below so it tracks the manual
+     theme toggle, not just the OS prefers-color-scheme. -->
+<meta name="theme-color" content="#f2eee4" />
 <script>
   // Set the theme before first paint to avoid a flash of the wrong theme,
   // and tint the status bar to match the chosen theme straight away.
@@ -21,7 +20,7 @@
     } catch (e) {}
     if (dark) {
       var m = document.querySelector('meta[name="theme-color"]');
-      if (m) m.content = "#4f524b";
+      if (m) m.content = "#1b2624";
     }
   })();
 </script>
@@ -96,7 +95,7 @@
       if (label) label.textContent = dark ? "Light" : "Dark";
       // Keep the status-bar tint matched to the active theme.
       var meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.content = dark ? "#4f524b" : "#f6ebdc";
+      if (meta) meta.content = dark ? "#1b2624" : "#f2eee4";
     }
     update();
 
