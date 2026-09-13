@@ -2,27 +2,25 @@
 layout: default
 ---
 
-<aside class="post-contents" hidden>
-  <button class="post-toc-toggle" type="button" aria-expanded="false" aria-controls="post-toc">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-    Contents
-  </button>
-  <nav id="post-toc" class="post-toc" aria-label="Contents">
-    <h2 class="post-toc-title">Contents</h2>
-    <ul class="post-toc-list"></ul>
-  </nav>
-</aside>
-
 <header class="post-header">
   <a class="post-home" href="/" aria-label="Back to home">
     <img class="post-home-img" src="/images/tom-icon.png" width="64" height="64" alt="Tom Ashworth" />
   </a>
-  <p class="post-eyebrow">
+  <div class="post-eyebrow">
     <a class="back" href="/" aria-label="Back to home">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
     </a>
     <span>{{ page.date | date: "%-d %B %Y" }}</span>
-  </p>
+    <aside class="post-contents" hidden>
+      <button class="post-toc-toggle" type="button" aria-label="Contents" aria-expanded="false" aria-controls="post-toc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+      <nav id="post-toc" class="post-toc" aria-label="Contents">
+        <h2 class="post-toc-title">Contents</h2>
+        <ul class="post-toc-list"></ul>
+      </nav>
+    </aside>
+  </div>
   <h1 class="post-title">{{ page.title }}</h1>
 </header>
 
