@@ -320,7 +320,7 @@ mark {
 .post h1, .post h2, .post h3, .post h4 {
   font-family: var(--font-display);
   font-weight: 700;
-  font-style: italic;
+  font-style: normal;
   letter-spacing: -0.015em;
   line-height: 1.15;
   margin-top: 2.25rem;
@@ -408,6 +408,113 @@ mark {
   width: 100%;
   max-width: 10em;
   margin: 2.5em auto;
+}
+
+/* ---------- Post contents ---------- */
+
+.post-toc-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  background: var(--porcelain);
+  color: var(--ink);
+  font: 0.875rem var(--font-ui);
+  cursor: pointer;
+}
+
+.post-toc-toggle svg { width: 1.25rem; height: 1.25rem; }
+
+.post-toc {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  inset: 4.5rem 1rem auto;
+  max-height: calc(100dvh - 5.5rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  background: var(--porcelain);
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.post-toc-toggle[aria-expanded="true"] + .post-toc { display: block; }
+
+.post-toc-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.post-toc-list { list-style: none; margin: 0; padding: 0; }
+.post-toc-list li + li { margin-top: 0.25rem; }
+.post-toc-list .post-toc-subheading { padding-left: 1rem; }
+
+.post-toc a {
+  display: block;
+  padding-block: 0.4rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease;
+}
+
+.post-toc a:hover,
+.post-toc a[aria-current="location"] { color: var(--ink); }
+
+.post-toc-text {
+  padding-bottom: 0.12em;
+  background: linear-gradient(var(--sweet-salmon), var(--sweet-salmon)) left bottom / 0% 1.5px no-repeat;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 0.25s ease;
+}
+
+.post-toc a[aria-current="location"] .post-toc-text { background-size: 100% 1.5px; }
+
+.post-toc a:focus-visible,
+.post-toc-toggle:focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 3px; }
+
+.post h2[id], .post h3[id] { scroll-margin-top: 6rem; }
+
+@media (min-width: 76rem) {
+  .post-toc-toggle { display: none; }
+  .post-toc {
+    display: block;
+    inset: 8.125rem auto 2rem 1.5rem;
+    width: calc((100vw - var(--max-w)) / 2 - 3rem);
+    max-width: 23rem;
+    max-height: none;
+    padding: 0.25rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    scrollbar-width: thin;
+  }
+  .post-toc a { padding-block: 0.2rem; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.has-post-contents { scroll-behavior: smooth; }
+}
+
+@media print {
+  .post-contents { display: none; }
 }
 
 /* ---------- Post navigation (prev / next) ---------- */
