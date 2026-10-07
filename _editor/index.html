@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="editor-token" content="EDITOR_TOKEN">
+  <title>Writing room · Tom Ashworth</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/editor/editor.css">
+  <script src="/editor/editor.bundle.js" defer></script>
+</head>
+<body>
+  <aside class="library">
+    <a class="brand" href="/"><span class="brand-dot"></span> Tom Ashworth <span class="local">Local</span></a>
+    <div class="library-heading"><h1>Writing room</h1></div>
+    <button id="new-post" class="new-button" type="button"><span aria-hidden="true">＋</span> New post</button>
+    <label class="search-label" for="search">Your posts</label>
+    <input id="search" class="search" type="search" placeholder="Find a post…">
+    <div class="filters" aria-label="Filter posts">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="drafts" aria-pressed="false">Drafts</button>
+      <button type="button" data-filter="posts" aria-pressed="false">Posts</button>
+    </div>
+    <nav id="post-list" class="post-list" aria-label="Posts"></nav>
+    <div class="library-footer"><a href="/">← Back to your site</a><span id="branch"></span></div>
+  </aside>
+
+  <main class="room">
+    <header class="topbar">
+      <div class="save-state"><span id="state-dot" class="state-dot"></span><span id="save-state" role="status">New draft</span></div>
+      <div class="actions">
+        <button id="focus" type="button" class="quiet" data-view="focus" aria-pressed="false">Focus</button>
+        <button id="split-view" type="button" class="quiet" data-view="split" aria-pressed="true">Split</button>
+        <button id="toggle-preview" type="button" class="quiet" data-view="preview" aria-pressed="false">Preview</button>
+        <button id="save" type="button">Save file</button>
+        <button id="ship" type="button" class="primary">Ship <span aria-hidden="true">↗</span></button>
+      </div>
+    </header>
+    <div id="message" class="message" role="status" hidden></div>
+    <div id="recovery" class="recovery" hidden>
+      <span>There’s an unsaved browser copy of this post.</span>
+      <button id="restore" type="button">Restore it</button><button id="dismiss-recovery" type="button">Dismiss</button>
+    </div>
+    <div class="workspace">
+      <section class="writing" aria-label="Post editor">
+        <div class="paper">
+          <div class="eyebrow"><span id="post-kind">Draft</span><span class="separator">/</span><span id="post-date"></span></div>
+          <label class="sr-only" for="title">Post title</label>
+          <textarea id="title" class="title" rows="1" placeholder="Post title" spellcheck="true"></textarea>
+          <label class="sr-only" for="summary">One-line summary</label>
+          <textarea id="summary" class="summary" rows="1" placeholder="Summary (optional)" spellcheck="true"></textarea>
+          <div class="formatting" aria-label="Markdown formatting">
+            <button type="button" data-format="bold" title="Bold"><strong>B</strong><span class="sr-only">Bold</span></button>
+            <button type="button" data-format="italic" title="Italic"><em>I</em><span class="sr-only">Italic</span></button>
+            <button type="button" data-format="heading">H2<span class="sr-only">Heading</span></button>
+            <button type="button" data-format="link">Link</button>
+            <button type="button" data-format="quote">Quote</button>
+            <button type="button" data-format="list">List</button>
+            <span class="markdown-label">Markdown</span>
+          </div>
+          <div id="body" class="body"></div>
+          <details class="metadata"><summary>File &amp; front matter</summary>
+            <p id="file-path">A Markdown file will be created when you save.</p>
+            <label for="frontmatter">YAML metadata</label>
+            <textarea id="frontmatter" spellcheck="false" rows="6"></textarea>
+            <p>Title and summary above take precedence. Other fields stay as you write them.</p>
+          </details>
+        </div>
+        <footer class="writing-footer"><span id="word-count">0 words</span><span>Spell check uses your browser</span><span class="shortcut">⌘ / Ctrl S to save</span></footer>
+      </section>
+
+      <aside class="preview-panel" aria-label="Post preview">
+        <div class="preview-heading"><span>Preview</span><span id="preview-state" role="status">Jekyll preview</span></div>
+        <iframe id="preview" title="Post rendered with your Jekyll layout" sandbox=""></iframe>
+        <section class="checks">
+          <div class="checks-heading"><div><h2>Writing checks</h2></div><button id="check" type="button">Check writing</button></div>
+          <ul id="suggestions"><li class="empty">Check for repeated words and wordy phrases.</li></ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <dialog id="ship-dialog">
+    <form method="dialog">
+      <h2>Publish this post?</h2>
+      <p id="ship-description"></p>
+      <p>This commits this post and pushes to main. GitHub Pages then builds your public site.</p>
+      <p id="ship-reason"></p>
+      <div class="dialog-actions"><button value="cancel">Keep writing</button><button id="confirm-ship" value="ship" class="primary">Commit &amp; push</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

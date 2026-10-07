@@ -4,6 +4,9 @@
 
 ### Jekyll ###
 _site/
+.jekyll-editor/
+_editor/editor.bundle.js
+.worktrees/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
