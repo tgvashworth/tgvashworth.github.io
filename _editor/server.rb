@@ -11,6 +11,13 @@ require "timeout"
 require "cgi"
 
 module LocalEditor
+  # Jekyll assigns undated drafts their file time lazily. Set it before sorting
+  # and rendering so the local post page and homepage use the same date.
+  Jekyll::Hooks.register :site, :post_read do |site|
+    site.posts.docs.each(&:date)
+    site.posts.docs.sort!
+  end
+
   class Error < StandardError
     attr_reader :status
     def initialize(message, status = 400)
@@ -83,7 +90,8 @@ module LocalEditor
       {
         id: id, title: metadata["title"].to_s, summary: metadata["summary"].to_s,
         date: Date.parse(date.to_s).iso8601, body: body, frontmatter: header,
-        revision: Digest::SHA256.hexdigest(source), draft: id.start_with?("_drafts/") || metadata["published"] == false
+        revision: Digest::SHA256.hexdigest(source), draft: id.start_with?("_drafts/") || metadata["published"] == false,
+        note: metadata["note"] == true
       }
     end
 
@@ -125,6 +133,10 @@ module LocalEditor
       _, _, old = split("---\n#{header}\n---\n")
       header = scalar(header, "title", input["title"]) unless old["title"] == input["title"]
       header = scalar(header, "summary", input["summary"].to_s) unless old["summary"].to_s == input["summary"].to_s
+      if input.key?("note")
+        raise Error, "Small note must be true or false." unless [true, false].include?(input["note"])
+        header = scalar(header, "note", input["note"]) unless (old["note"] == true) == input["note"]
+      end
       header = scalar(header, "layout", "post") unless old["layout"]
       source = "---\n#{header}\n---\n#{input['body']}"
       split(source)

@@ -51,6 +51,8 @@ write. To choose another port, run `EDITOR_PORT=4011 npm run editor`.
 - Save file creates `_drafts/slug.md` for new posts and updates the original file for
   existing posts. Title and summary are regular fields; other YAML metadata is
   available under File & front matter and is preserved unless you edit it.
+- Select Small note to show the full post on the homepage, with a compact title
+  and a date/permalink footer. Notes keep their own post page and appear in RSS.
 - Every edit is saved automatically in this browser's local storage. Refreshing
   restores the current draft, including its title and metadata. Multiple browser
   drafts stay in the post list, labelled Browser draft. This works before a file
@@ -84,6 +86,23 @@ Verify the editor with `npm run test:editor`. Tests use disposable sites and
 local bare Git repositories, including successful publishing, build/commit/push
 failures, conflict detection and path restrictions. Browser tests also check
 draft persistence and CodeMirror's Markdown list commands.
+
+## Small notes
+
+Posts marked `note: true` appear in full among the other homepage entries, in
+date order. Use the editor's Small note checkbox, or add the field directly:
+
+```yaml
+---
+layout: post
+title: "A small observation"
+note: true
+---
+```
+
+Write the note's Markdown body below the front matter. A title is still required;
+it appears smaller on both the homepage and the note's own page. Other posts
+keep their title and optional summary on the homepage.
 
 ## Deploying
 

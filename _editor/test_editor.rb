@@ -86,6 +86,51 @@ class EditorTest < Minitest::Test
     assert_includes File.read(target), "Outside edit"
   end
 
+  def test_small_note_survives_save_reopen_and_can_be_disabled
+    post = @workspace.save(input(note: true, frontmatter: "layout: post\n# Keep this\ntags: [writing]"))
+    assert @workspace.read(post[:id])[:note]
+    assert_includes post[:frontmatter], "note: true"
+    updated = @workspace.save(post.transform_keys(&:to_s).merge("title" => "An updated note"))
+    assert updated[:note]
+    ordinary = @workspace.save(updated.transform_keys(&:to_s).merge("note" => false))
+    refute ordinary[:note]
+    assert_includes ordinary[:frontmatter], "# Keep this\ntags: [writing]"
+    assert_raises(LocalEditor::Error) { @workspace.save(input(note: "true")) }
+  end
+
+  def test_homepage_renders_notes_in_full_with_footer_and_keeps_post_summaries
+    project = File.expand_path("..", __dir__)
+    FileUtils.cp(File.join(project, "index.html"), @root)
+    FileUtils.cp(Dir.glob(File.join(project, "_layouts", "*.html")), File.join(@root, "_layouts"))
+    File.write(File.join(@root, "_config.yml"), "baseurl: /blog\nmarkdown: kramdown\n")
+    File.write(@workspace.path("_posts/2020-01-03-note.md"), "---\nlayout: post\ntitle: Small & useful\nnote: true\n---\nA **complete** note.\n\n- One\n- Two\n")
+    File.write(@workspace.path("_posts/2020-01-02-essay.md"), "---\nlayout: post\ntitle: An essay\nsummary: Essay summary\n---\nEssay body stays on its own page.\n")
+    File.write(@workspace.path("_posts/2020-01-01-ordinary.md"), "---\nlayout: post\ntitle: Ordinary\nnote: false\n---\nOrdinary body stays on its own page.\n")
+    @workspace.rebuild
+    require "nokogiri"
+    home = Nokogiri::HTML(File.read(File.join(@workspace.destination, "index.html")))
+    entries = home.css(".post-list > .post-list-item")
+    assert_equal 3, entries.length
+    note = entries.first
+    assert_equal "Small & useful", note.at_css("h2.note-title").text
+    assert_equal "complete", note.at_css(".note-body strong").text
+    assert_equal ["One", "Two"], note.css(".note-body li").map(&:text)
+    assert_equal "/blog/2020/01/03/note.html", note.at_css("footer a")['href']
+    assert note.at_css("footer time")['datetime'].start_with?("2020-01-03")
+    assert_equal "Essay summary", entries[1].at_css(".summary").text
+    refute_includes home.text, "Essay body stays"
+    refute_includes home.text, "Ordinary body stays"
+    page = Nokogiri::HTML(File.read(File.join(@workspace.destination, "2020/01/03/note.html")))
+    assert_equal "Small & useful", page.at_css(".post-header-note .post-title").text
+    assert_equal "complete", page.at_css(".post strong").text
+    draft = @workspace.save(input(note: true))
+    @workspace.rebuild
+    document = @workspace.site.posts.docs.find { |post| post.relative_path == draft[:id] }
+    draft_page = Nokogiri::HTML(File.read(document.destination(@workspace.destination)))
+    assert_includes draft_page.at_css(".post-eyebrow").text, "#{Date.today.day} #{Date.today.strftime('%B %Y')}"
+    refute_includes draft_page.text, "years old"
+  end
+
   def test_removed_file_is_not_recreated_by_stale_editor
     post = @workspace.save(input)
     File.delete(@workspace.path(post[:id]))

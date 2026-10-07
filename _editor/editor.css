@@ -55,6 +55,9 @@ textarea { display: block; border: 0; border-radius: 0; background: transparent;
 .title::placeholder { color: #a0a99a; }
 .summary { margin: 18px 0 28px; color: var(--muted); font-size: 15px; line-height: 1.65; min-height: 26px; resize: none; overflow: hidden; }
 .summary::placeholder { color: #a0a799; }
+.note-option { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -10px 0 24px; font-size: 12px; }
+.note-option input { accent-color: var(--ink); }
+.note-option span { color: var(--muted); }
 .formatting { display: flex; align-items: center; gap: 2px; padding: 9px 0; border-block: 1px solid var(--line); margin-bottom: 25px; }
 .formatting button { border-color: transparent; font-size: 12px; padding: 3px 8px; }
 .markdown-label { margin-left: auto; font-size: 10px; color: #788474; }

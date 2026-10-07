@@ -14,7 +14,7 @@ class MemoryStorage {
   removeItem(key) { this.entries.delete(key); }
 }
 
-const draft = browserId => ({ id: null, browserId, title: 'Unfinished post', body: '- One\n- Two\n', summary: 'A summary', frontmatter: 'layout: post\ntags: [writing]', date: '2026-10-03', revision: null });
+const draft = browserId => ({ id: null, browserId, title: 'Unfinished post', body: '- One\n- Two\n', summary: 'A summary', frontmatter: 'layout: post\ntags: [writing]', date: '2026-10-03', note: true, revision: null });
 
 test('multiple drafts survive a new store instance with all their fields', () => {
   const storage = new MemoryStorage();

@@ -4,7 +4,9 @@ import { DraftStore } from './draft-store.js';
 
 (() => {
   const $ = id => document.getElementById(id);
-  const fields = ['title', 'summary', 'frontmatter'];
+  const fields = ['title', 'summary', 'frontmatter', 'note'];
+  const fieldValue = id => id === 'note' ? $(id).checked : $(id).value;
+  const setField = (id, value) => { if (id === 'note') $(id).checked = value === true; else $(id).value = value || ''; };
   const token = document.querySelector('meta[name="editor-token"]').content;
   let storage;
   try { storage = window.localStorage; } catch (_) {}
@@ -41,7 +43,7 @@ import { DraftStore } from './draft-store.js';
   }
 
   function payload() {
-    return { ...current, ...Object.fromEntries(fields.map(id => [id, $(id).value])), body: markdownEditor.getText() };
+    return { ...current, ...Object.fromEntries(fields.map(id => [id, fieldValue(id)])), body: markdownEditor.getText() };
   }
 
   function storeRecovery() {
@@ -55,11 +57,11 @@ import { DraftStore } from './draft-store.js';
   function loadRecovery() {
     recovery = null;
     recovery = draftStore.read(current);
-    if (recovery && fields.every(id => recovery[id] === $(id).value) && recovery.body === markdownEditor.getText()) recovery = null;
+    if (recovery && fields.every(id => (id === 'note' ? recovery[id] === true : recovery[id]) === fieldValue(id)) && recovery.body === markdownEditor.getText()) recovery = null;
     // Matching revisions can be restored automatically. Keep stale copies
     // available for explicit recovery without replacing a newer disk version.
     if (recovery && (!current.id || recovery.revision === current.revision)) {
-      fields.forEach(id => { $(id).value = recovery[id] || ''; });
+      fields.forEach(id => setField(id, recovery[id]));
       markdownEditor.setText(recovery.body || '', true);
       dirty = true;
       browserSaved = true;
@@ -85,6 +87,7 @@ import { DraftStore } from './draft-store.js';
     $('save').textContent = 'Save file';
     ['save', 'ship', 'new-post', 'check'].forEach(id => { $(id).disabled = busy; });
     fields.forEach(id => { $(id).readOnly = busy; });
+    $('note').disabled = busy;
     markdownEditor.setReadOnly(busy);
     document.querySelectorAll('[data-format]').forEach(button => { button.disabled = busy; });
     $('ship').title = shipping.available ? 'Review, commit and push this post' : shipping.reason || '';
@@ -113,7 +116,7 @@ import { DraftStore } from './draft-store.js';
   function showPost(post) {
     const differentPost = (current?.id || current?.browserId) !== (post.id || post.browserId);
     current = post;
-    fields.forEach(id => { $(id).value = post[id] || ''; });
+    fields.forEach(id => setField(id, post[id]));
     markdownEditor.setText(post.body || '', differentPost);
     dirty = false;
     browserSaved = false;
@@ -346,7 +349,7 @@ import { DraftStore } from './draft-store.js';
     // Keep the recovery's original revision so a stale browser copy cannot
     // silently overwrite a newer disk version.
     current.revision = recovery.revision;
-    fields.forEach(id => { $(id).value = recovery[id] || ''; });
+    fields.forEach(id => setField(id, recovery[id]));
     markdownEditor.setText(recovery.body || '', true);
     $('recovery').hidden = true;
     changed();

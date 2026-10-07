@@ -190,7 +190,7 @@ mark {
   border-top: 1px solid var(--hairline);
 }
 
-.post-list li {
+.post-list > .post-list-item {
   padding: 2.5rem 0;
   border-bottom: 1px solid var(--hairline);
   display: flex;
@@ -198,7 +198,7 @@ mark {
   gap: 0.4rem;
 }
 
-.post-list li:last-child { border-bottom: none; }
+.post-list > .post-list-item:last-child { border-bottom: none; }
 
 .post-list .date {
   font-family: var(--font-ui);
@@ -230,6 +230,42 @@ mark {
 }
 
 /* ---------- Post page ---------- */
+
+.note-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.post.note-body { padding: 0; overflow-wrap: anywhere; }
+.note-body > :first-child { margin-top: 0; }
+.note-body > :last-child { margin-bottom: 0; }
+
+.note-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  margin-top: 1rem;
+}
+
+.note-permalink {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  text-underline-offset: 0.2em;
+}
+
+.note-permalink:hover { color: var(--accent-deep); }
+
+.post-header-note .post-title {
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  letter-spacing: normal;
+}
 
 .post-header {
   padding: 2.5rem 0 1.5rem;

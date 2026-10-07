@@ -49,6 +49,7 @@
           <textarea id="title" class="title" rows="1" placeholder="Post title" spellcheck="true"></textarea>
           <label class="sr-only" for="summary">One-line summary</label>
           <textarea id="summary" class="summary" rows="1" placeholder="Summary (optional)" spellcheck="true"></textarea>
+          <label class="note-option"><input id="note" type="checkbox"> Small note <span>Show the full text on the homepage</span></label>
           <div class="formatting" aria-label="Markdown formatting">
             <button type="button" data-format="bold" title="Bold"><strong>B</strong><span class="sr-only">Bold</span></button>
             <button type="button" data-format="italic" title="Italic"><em>I</em><span class="sr-only">Italic</span></button>
@@ -63,7 +64,7 @@
             <p id="file-path">A Markdown file will be created when you save.</p>
             <label for="frontmatter">YAML metadata</label>
             <textarea id="frontmatter" spellcheck="false" rows="6"></textarea>
-            <p>Title and summary above take precedence. Other fields stay as you write them.</p>
+            <p>Title, summary and Small note above take precedence. Other fields stay as you write them.</p>
           </details>
         </div>
         <footer class="writing-footer"><span id="word-count">0 words</span><span>Spell check uses your browser</span><span class="shortcut">⌘ / Ctrl S to save</span></footer>

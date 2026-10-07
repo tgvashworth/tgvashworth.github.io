@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<header class="post-header">
+<header class="post-header{% if page.note == true %} post-header-note{% endif %}">
   <a class="post-home" href="/" aria-label="Back to home">
     <img class="post-home-img" src="/images/tom-icon.png" width="64" height="64" alt="Tom Ashworth" />
   </a>
