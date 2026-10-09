@@ -251,10 +251,8 @@ mark {
   margin-top: 1rem;
 }
 
-.note-permalink {
-  font-family: var(--font-ui);
-  font-size: 0.8rem;
-  color: var(--ink-soft);
+.post-list .note-permalink {
+  font-weight: 400;
   text-underline-offset: 0.2em;
 }
 

@@ -116,6 +116,7 @@ class EditorTest < Minitest::Test
     assert_equal "complete", note.at_css(".note-body strong").text
     assert_equal ["One", "Two"], note.css(".note-body li").map(&:text)
     assert_equal "/blog/2020/01/03/note.html", note.at_css("footer a")['href']
+    assert_equal "03 Jan 2020", note.at_css("footer a time").text
     assert note.at_css("footer time")['datetime'].start_with?("2020-01-03")
     assert_equal "Essay summary", entries[1].at_css(".summary").text
     refute_includes home.text, "Essay body stays"

@@ -21,8 +21,7 @@ title: "Tom Ashworth"
       <h2 class="note-title">{{ post.title | escape }}</h2>
       <div class="post note-body">{{ post.content }}</div>
       <footer class="note-footer">
-        <time class="date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time>
-        <a class="note-permalink" href="{{ post.url | relative_url }}" aria-label="Permalink to {{ post.title | escape }}">Permalink</a>
+        <a class="date note-permalink" href="{{ post.url | relative_url }}" aria-label="Permalink to {{ post.title | escape }}"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time></a>
       </footer>
     </article>
     {% else %}
