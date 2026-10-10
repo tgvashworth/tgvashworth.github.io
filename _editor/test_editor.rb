@@ -112,13 +112,14 @@ class EditorTest < Minitest::Test
     entries = home.css(".post-list > .post-list-item")
     assert_equal 3, entries.length
     note = entries.first
-    assert_equal "Small & useful", note.at_css("h2.note-title").text
+    assert_equal "Small & useful", note.at_css("a.post-link.note-title").text
     assert_equal "complete", note.at_css(".note-body strong").text
     assert_equal ["One", "Two"], note.css(".note-body li").map(&:text)
-    assert_equal "/blog/2020/01/03/note.html", note.at_css("h2.note-title a")['href']
-    assert_equal "03 Jan 2020", note.at_css("time.note-date").text
-    assert note.at_css("time.note-date")['datetime'].start_with?("2020-01-03")
-    assert_equal ["time", "h2"], note.at_css("article").element_children.first(2).map(&:name)
+    assert_equal "/blog/2020/01/03/note.html", note.at_css("a.note-title")['href']
+    assert_equal "03 Jan 2020", note.at_css(".date").text
+    assert_equal entries[1].at_css(".date")['class'], note.at_css(".date")['class']
+    assert_equal ["span", "a"], note.element_children.first(2).map(&:name)
+    assert_equal ["span", "a"], entries[1].element_children.first(2).map(&:name)
     assert_equal "Essay summary", entries[1].at_css(".summary").text
     refute_includes home.text, "Essay body stays"
     refute_includes home.text, "Ordinary body stays"

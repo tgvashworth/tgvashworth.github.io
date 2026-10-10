@@ -231,29 +231,13 @@ mark {
 
 /* ---------- Post page ---------- */
 
-.note-title {
-  margin: 0.4rem 0 0.75rem;
-  font-family: var(--font-ui);
-  font-weight: 700;
+.post-list .post-link.note-title {
   font-size: 1rem;
-  line-height: 1.4;
 }
 
 .post.note-body { padding: 0; overflow-wrap: anywhere; }
 .note-body > :first-child { margin-top: 0; }
 .note-body > :last-child { margin-bottom: 0; }
-
-.note-title a {
-  text-decoration: none;
-  transition: color 0.18s ease;
-}
-
-.post-list .note-date {
-  display: block;
-  font-weight: 400;
-}
-
-.note-title a:hover { color: var(--accent-deep); }
 
 .post-header-note .post-title {
   font-family: var(--font-ui);

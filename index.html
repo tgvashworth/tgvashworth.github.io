@@ -16,18 +16,12 @@ title: "Tom Ashworth"
 <ul class="post-list">
 {% for post in site.posts %}
   <li class="post-list-item{% if post.note == true %} post-list-note{% endif %}">
-    {% if post.note == true %}
-    <article>
-      <time class="date note-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time>
-      <h2 class="note-title"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
-      <div class="post note-body">{{ post.content }}</div>
-    </article>
-    {% else %}
     <span class="date">{{ post.date | date_to_string }}</span>
-    <a class="post-link" href="{{ post.url }}">{{ post.title }}</a>
-    {% if post.summary %}
+    <a class="post-link{% if post.note == true %} note-title{% endif %}" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+    {% if post.note == true %}
+    <div class="post note-body">{{ post.content }}</div>
+    {% elsif post.summary %}
     <p class="summary">{{ post.summary }}</p>
-    {% endif %}
     {% endif %}
   </li>
 {% endfor %}
