@@ -18,11 +18,9 @@ title: "Tom Ashworth"
   <li class="post-list-item{% if post.note == true %} post-list-note{% endif %}">
     {% if post.note == true %}
     <article>
-      <h2 class="note-title">{{ post.title | escape }}</h2>
+      <time class="date note-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time>
+      <h2 class="note-title"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
       <div class="post note-body">{{ post.content }}</div>
-      <footer class="note-footer">
-        <a class="date note-permalink" href="{{ post.url | relative_url }}" aria-label="Permalink to {{ post.title | escape }}"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time></a>
-      </footer>
     </article>
     {% else %}
     <span class="date">{{ post.date | date_to_string }}</span>

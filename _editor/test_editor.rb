@@ -98,7 +98,7 @@ class EditorTest < Minitest::Test
     assert_raises(LocalEditor::Error) { @workspace.save(input(note: "true")) }
   end
 
-  def test_homepage_renders_notes_in_full_with_footer_and_keeps_post_summaries
+  def test_homepage_renders_notes_in_full_with_linked_title_and_keeps_post_summaries
     project = File.expand_path("..", __dir__)
     FileUtils.cp(File.join(project, "index.html"), @root)
     FileUtils.cp(Dir.glob(File.join(project, "_layouts", "*.html")), File.join(@root, "_layouts"))
@@ -115,9 +115,10 @@ class EditorTest < Minitest::Test
     assert_equal "Small & useful", note.at_css("h2.note-title").text
     assert_equal "complete", note.at_css(".note-body strong").text
     assert_equal ["One", "Two"], note.css(".note-body li").map(&:text)
-    assert_equal "/blog/2020/01/03/note.html", note.at_css("footer a")['href']
-    assert_equal "03 Jan 2020", note.at_css("footer a time").text
-    assert note.at_css("footer time")['datetime'].start_with?("2020-01-03")
+    assert_equal "/blog/2020/01/03/note.html", note.at_css("h2.note-title a")['href']
+    assert_equal "03 Jan 2020", note.at_css("time.note-date").text
+    assert note.at_css("time.note-date")['datetime'].start_with?("2020-01-03")
+    assert_equal ["time", "h2"], note.at_css("article").element_children.first(2).map(&:name)
     assert_equal "Essay summary", entries[1].at_css(".summary").text
     refute_includes home.text, "Essay body stays"
     refute_includes home.text, "Ordinary body stays"

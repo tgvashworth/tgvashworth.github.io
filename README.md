@@ -51,8 +51,8 @@ write. To choose another port, run `EDITOR_PORT=4011 npm run editor`.
 - Save file creates `_drafts/slug.md` for new posts and updates the original file for
   existing posts. Title and summary are regular fields; other YAML metadata is
   available under File & front matter and is preserved unless you edit it.
-- Select Small note to show the full post on the homepage, with a compact title
-  and a date/permalink footer. Notes keep their own post page and appear in RSS.
+- Select Small note to show the full post on the homepage, with the date above
+  a compact linked title. Notes keep their own post page and appear in RSS.
 - Every edit is saved automatically in this browser's local storage. Refreshing
   restores the current draft, including its title and metadata. Multiple browser
   drafts stay in the post list, labelled Browser draft. This works before a file

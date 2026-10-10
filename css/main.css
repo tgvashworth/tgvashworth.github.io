@@ -232,7 +232,7 @@ mark {
 /* ---------- Post page ---------- */
 
 .note-title {
-  margin: 0 0 0.75rem;
+  margin: 0.4rem 0 0.75rem;
   font-family: var(--font-ui);
   font-weight: 700;
   font-size: 1rem;
@@ -243,20 +243,17 @@ mark {
 .note-body > :first-child { margin-top: 0; }
 .note-body > :last-child { margin-bottom: 0; }
 
-.note-footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.5rem 1rem;
-  margin-top: 1rem;
+.note-title a {
+  text-decoration: none;
+  transition: color 0.18s ease;
 }
 
-.post-list .note-permalink {
+.post-list .note-date {
+  display: block;
   font-weight: 400;
-  text-underline-offset: 0.2em;
 }
 
-.note-permalink:hover { color: var(--accent-deep); }
+.note-title a:hover { color: var(--accent-deep); }
 
 .post-header-note .post-title {
   font-family: var(--font-ui);
