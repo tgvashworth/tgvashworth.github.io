@@ -26,31 +26,31 @@
   </aside>
 
   <main class="room">
-    <header class="topbar">
-      <div class="save-state"><span id="state-dot" class="state-dot"></span><span id="save-state" role="status">New draft</span></div>
-      <div class="actions">
-        <details id="post-settings" class="post-settings">
-          <summary>Post settings</summary>
-          <div class="settings-panel">
-            <label class="setting-option"><input id="draft" type="checkbox" aria-label="Draft" aria-describedby="draft-help"><span>Draft<small id="draft-help">Keep this post off the public site</small></span></label>
-            <label class="setting-option"><input id="note" type="checkbox" aria-label="Small note" aria-describedby="note-help"><span>Small note<small id="note-help">Show the full text on the homepage</small></span></label>
-            <p>Save file to keep these settings. Ship to update the public site.</p>
-          </div>
-        </details>
-        <button id="focus" type="button" class="quiet" data-view="focus" aria-pressed="false">Focus</button>
-        <button id="split-view" type="button" class="quiet" data-view="split" aria-pressed="true">Split</button>
-        <button id="toggle-preview" type="button" class="quiet" data-view="preview" aria-pressed="false">Preview</button>
-        <button id="save" type="button">Save file</button>
-        <button id="ship" type="button" class="primary">Ship <span aria-hidden="true">↗</span></button>
-      </div>
-    </header>
-    <div id="message" class="message" role="status" hidden></div>
-    <div id="recovery" class="recovery" hidden>
-      <span>There’s an unsaved browser copy of this post.</span>
-      <button id="restore" type="button">Restore it</button><button id="dismiss-recovery" type="button">Dismiss</button>
-    </div>
     <div class="workspace">
       <section class="writing" aria-label="Post editor">
+        <header class="topbar">
+          <div class="save-state"><span id="state-dot" class="state-dot"></span><span id="save-state" role="status">New draft</span></div>
+          <div class="actions">
+            <details id="post-settings" class="post-settings">
+              <summary>Post settings</summary>
+              <div class="settings-panel">
+                <label class="setting-option"><input id="draft" type="checkbox" aria-label="Draft" aria-describedby="draft-help"><span>Draft<small id="draft-help">Keep this post off the public site</small></span></label>
+                <label class="setting-option"><input id="note" type="checkbox" aria-label="Small note" aria-describedby="note-help"><span>Small note<small id="note-help">Show the full text on the homepage</small></span></label>
+                <p>Save file to keep these settings. Ship to update the public site.</p>
+              </div>
+            </details>
+            <button id="focus" type="button" class="quiet" data-view="focus" aria-pressed="false">Focus</button>
+            <button id="split-view" type="button" class="quiet" data-view="split" aria-pressed="true">Split</button>
+            <button id="toggle-preview" type="button" class="quiet" data-view="preview" aria-pressed="false">Preview</button>
+            <button id="save" type="button">Save file</button>
+            <button id="ship" type="button" class="primary">Ship <span aria-hidden="true">↗</span></button>
+          </div>
+        </header>
+        <div id="message" class="message" role="status" hidden></div>
+        <div id="recovery" class="recovery" hidden>
+          <span>There’s an unsaved browser copy of this post.</span>
+          <button id="restore" type="button">Restore it</button><button id="dismiss-recovery" type="button">Dismiss</button>
+        </div>
         <div class="paper">
           <div class="eyebrow"><span id="post-kind">Draft</span><span class="separator">/</span><span id="post-date"></span></div>
           <label class="sr-only" for="title">Post title</label>
@@ -78,7 +78,7 @@
       </section>
 
       <aside class="preview-panel" aria-label="Post preview">
-        <div class="preview-heading"><span>Preview</span><span id="preview-state" role="status">Jekyll preview</span></div>
+        <div class="preview-heading"><span>Preview</span><button type="button" class="quiet preview-back" data-view="split">Back to editor</button><span id="preview-state" role="status">Jekyll preview</span></div>
         <iframe id="preview" title="Post rendered with your Jekyll layout" sandbox=""></iframe>
         <section class="checks">
           <div class="checks-heading"><div><h2>Writing checks</h2></div><button id="check" type="button">Check writing</button></div>

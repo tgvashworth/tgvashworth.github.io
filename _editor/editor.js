@@ -353,7 +353,7 @@ import { DraftStore } from './draft-store.js';
     document.body.classList.toggle('focus-mode', view === 'focus');
     document.body.classList.toggle('no-preview', view === 'focus');
     document.body.classList.toggle('preview-only', view === 'preview');
-    document.querySelectorAll('[data-view]').forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+    document.querySelectorAll('[data-view]').forEach(other => other.setAttribute('aria-pressed', String(other.dataset.view === view)));
     resize();
   }));
   $('restore').addEventListener('click', () => {
