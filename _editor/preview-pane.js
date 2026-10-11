@@ -39,7 +39,10 @@ export class PreviewPane {
     next.removeAttribute('id');
     next.className = 'preview-incoming';
     next.setAttribute('aria-hidden', 'true');
-    next.inert = true;
+    // Hide the loading frame with CSS rather than making its document inert.
+    // It must become scrollable as soon as the fade begins.
+    next.removeAttribute('inert');
+    next.setAttribute('tabindex', '-1');
     let cancel;
     const cancelled = new Promise(resolve => { cancel = resolve; });
     const pending = { cancel };
@@ -72,7 +75,7 @@ export class PreviewPane {
       previous.inert = true;
       next.id = 'preview';
       next.removeAttribute('aria-hidden');
-      next.inert = false;
+      next.removeAttribute('tabindex');
       this.frame = next;
       // Start the fade only after the invisible frame has been laid out at the
       // restored scroll position. Keep the old frame underneath until it ends.

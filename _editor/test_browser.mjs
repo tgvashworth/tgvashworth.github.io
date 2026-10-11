@@ -163,10 +163,12 @@ function previewFixture() {
     const classes = new Set();
     const frame = {
       visible: true, id: 'preview', removed: false,
+      attributes: new Map(),
       contentDocument: { scrollingElement: { scrollLeft: 0, scrollTop: 0 }, fonts: { ready: Promise.resolve() }, images: [] },
       contentWindow: { scrollTo({ left, top }) { frame.contentDocument.scrollingElement.scrollLeft = left; frame.contentDocument.scrollingElement.scrollTop = top; } },
       classList: { add(...values) { values.forEach(value => classes.add(value)); }, remove(...values) { values.forEach(value => classes.delete(value)); } },
-      setAttribute() {}, removeAttribute(key) { if (key === 'id') this.id = ''; },
+      setAttribute(key, value) { this.attributes.set(key, value); },
+      removeAttribute(key) { this.attributes.delete(key); if (key === 'id') this.id = ''; },
       addEventListener(key, callback) { events[key] = callback; },
       load() { events.load(); },
       remove() { this.removed = true; },
@@ -210,6 +212,9 @@ test('preview waits for fonts, preserves the latest scroll, and discards superse
     const first = children.at(-1);
     const latest = pane.show('latest');
     const second = children.at(-1);
+    assert.equal(second.inert, undefined);
+    assert.equal(second.attributes.get('aria-hidden'), 'true');
+    assert.equal(second.attributes.get('tabindex'), '-1');
     let fontsReady;
     second.contentDocument.fonts.ready = new Promise(resolve => { fontsReady = resolve; });
     second.load();
@@ -222,6 +227,9 @@ test('preview waits for fonts, preserves the latest scroll, and discards superse
     assert.equal(first.removed, true);
     assert.equal(await latest, true);
     assert.equal(pane.frame, second);
+    assert.equal(second.inert, undefined);
+    assert.equal(second.attributes.has('aria-hidden'), false);
+    assert.equal(second.attributes.has('tabindex'), false);
     assert.equal(second.contentDocument.scrollingElement.scrollTop, 980);
     const stale = pane.show('stale', { isCurrent: () => false });
     const third = children.at(-1);
