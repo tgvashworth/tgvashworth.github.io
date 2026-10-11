@@ -67,11 +67,14 @@ write. To choose another port, run `EDITOR_PORT=4011 mise run editor`.
   your browser if you do not see spelling suggestions. Check writing adds
   `write-good` suggestions for repeated words, wordy phrases and other prose
   slips. These are suggestions, not a grammar guarantee.
-- Save file creates `_drafts/slug.md` for new posts and updates the original file for
-  existing posts. Title and summary are regular fields; other YAML metadata is
-  available under File & front matter and is preserved unless you edit it.
-- Select Small note to show the full post on the homepage, with the date above
-  a compact linked title. Notes keep their own post page and appear in RSS.
+- Open Post settings at the top to change Draft and Small note. New posts start
+  as drafts. Save file keeps drafts in `_drafts/`; clearing Draft moves them to a
+  dated `_posts/` file. Existing posts keep their filename when marked as drafts,
+  using `published: false` to hide them from the public build.
+- Small note shows the full post on the homepage, with the date above a compact
+  linked title. Notes keep their own post page and appear in RSS.
+- Title and summary are regular fields; other YAML metadata is available under
+  File & front matter and is preserved unless you edit it.
 - Every edit is saved automatically in this browser's local storage. Refreshing
   restores the current draft, including its title and metadata. Multiple browser
   drafts stay in the post list, labelled Browser draft. This works before a file
@@ -89,8 +92,10 @@ Ship opens a review dialog, builds with Jekyll, commits only the selected post,
 and pushes to `origin/main`. It requires a checkout on `main`, an empty staging
 area, and a HEAD matching the remote main branch. It does not merge, force push,
 or include other unpushed commits. Unrelated unstaged file changes stay local.
-Drafts move to a dated `_posts` filename when shipped. If a push fails after the
-commit, reopen the new post and retry Ship without changing it; the server can
+Ship respects the Draft setting: drafts stay off the public site, while their
+source is committed and pushed. Clear Draft and save to prepare a post for
+publication. If a push fails after the commit, reopen the post and retry Ship
+without changing it; the server can
 retry that commit's push. No GitHub token is needed: Git uses your existing
 authentication.
 

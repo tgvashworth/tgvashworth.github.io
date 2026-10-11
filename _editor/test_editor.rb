@@ -179,7 +179,8 @@ class EditorTest < Minitest::Test
     repository
     File.write(File.join(@root, "unrelated.txt"), "Leave me alone")
     draft = @workspace.save(input)
-    result = @workspace.ship(draft.transform_keys(&:to_s))
+    ready = @workspace.save(draft.transform_keys(&:to_s).merge("draft" => false))
+    result = @workspace.ship(ready.transform_keys(&:to_s))
     assert result[:shipped]
     assert_match %r{\A_posts/\d{4}-\d{2}-\d{2}-a-thought.md\z}, result[:post][:id]
     refute File.exist?(@workspace.path(draft[:id]))
@@ -191,11 +192,96 @@ class EditorTest < Minitest::Test
   def test_ship_tracked_draft_records_rename
     draft = @workspace.save(input)
     repository
-    result = @workspace.ship(draft.transform_keys(&:to_s))
+    ready = @workspace.save(draft.transform_keys(&:to_s).merge("draft" => false))
+    @workspace = LocalEditor::Workspace.new(@root)
+    result = @workspace.ship(@workspace.read(ready[:id]).transform_keys(&:to_s))
     names = @workspace.git("show", "--pretty=", "--name-only", "--no-renames", "HEAD")
     assert_includes names, draft[:id]
     assert_includes names, result[:post][:id]
     assert result[:shipped]
+  end
+
+  def test_ship_keeps_a_draft_off_the_public_site
+    repository
+    draft = @workspace.save(input(draft: true, note: true))
+    result = @workspace.ship(draft.transform_keys(&:to_s))
+    assert result[:shipped]
+    assert result[:post][:draft]
+    assert_equal draft[:id], result[:post][:id]
+    config = Jekyll.configuration("source" => @root, "destination" => File.join(@temporary, "public"), "quiet" => true)
+    public_site = Jekyll::Site.new(config)
+    public_site.process
+    assert_empty public_site.posts.docs
+  end
+
+  def test_existing_post_can_be_hidden_and_restored_without_changing_url
+    post = @workspace.save(input(draft: false, note: true))
+    repository
+    hidden = @workspace.save(post.transform_keys(&:to_s).merge("draft" => true))
+    assert_equal post[:id], hidden[:id]
+    assert hidden[:draft]
+    assert hidden[:note]
+    assert_includes hidden[:frontmatter], "published: false"
+    @workspace.ship(hidden.transform_keys(&:to_s))
+    config = Jekyll.configuration("source" => @root, "destination" => File.join(@temporary, "public"), "quiet" => true)
+    public_site = Jekyll::Site.new(config)
+    public_site.process
+    assert_empty public_site.posts.docs
+    restored = @workspace.save(hidden.transform_keys(&:to_s).merge("draft" => false))
+    assert_equal post[:id], restored[:id]
+    refute restored[:draft]
+    @workspace.ship(restored.transform_keys(&:to_s))
+    public_site.process
+    assert_equal 1, public_site.posts.docs.length
+  end
+
+  def test_promotion_handles_collisions_and_rejects_stale_revisions
+    existing = @workspace.save(input(draft: false))
+    draft = @workspace.save(input(frontmatter: "layout: post\npublished: false\n# Keep me", note: true))
+    ready = @workspace.save(draft.transform_keys(&:to_s).merge("draft" => false))
+    refute ready[:draft]
+    assert ready[:note]
+    assert_includes ready[:frontmatter], "# Keep me"
+    assert_equal existing[:id].sub(".md", "-2.md"), ready[:id]
+    refute File.exist?(@workspace.path(draft[:id]))
+    assert_raises(LocalEditor::Error) { @workspace.save(draft.transform_keys(&:to_s).merge("draft" => false)) }
+    assert_raises(LocalEditor::Error) { @workspace.save(input(draft: "false")) }
+  end
+
+  def test_failed_promotion_keeps_saved_draft_intact
+    draft = @workspace.save(input)
+    original = File.read(@workspace.path(draft[:id]))
+    @workspace.define_singleton_method(:write_moves) { |_| raise IOError, "disk full" }
+    assert_raises(IOError) { @workspace.save(draft.transform_keys(&:to_s).merge("draft" => false)) }
+    assert_equal original, File.read(@workspace.path(draft[:id]))
+    assert_empty Dir.glob(File.join(@root, "_posts", "*.md"))
+  end
+
+  def test_failed_commit_of_promoted_draft_can_be_retried
+    draft = @workspace.save(input)
+    repository
+    ready = @workspace.save(draft.transform_keys(&:to_s).merge("draft" => false))
+    hook = File.join(@root, ".git", "hooks", "pre-commit")
+    File.write(hook, "#!/bin/sh\nexit 1\n")
+    File.chmod(0o755, hook)
+    assert_raises(LocalEditor::Error) { @workspace.ship(ready.transform_keys(&:to_s)) }
+    assert_equal ready[:revision], @workspace.read(ready[:id])[:revision]
+    refute File.exist?(@workspace.path(draft[:id]))
+    assert_empty @workspace.git("diff", "--cached", "--name-only")
+    File.delete(hook)
+    result = @workspace.ship(ready.transform_keys(&:to_s))
+    assert result[:shipped]
+    assert_includes @workspace.git("show", "--pretty=", "--name-only", "--no-renames", "HEAD"), draft[:id]
+  end
+
+  def test_ship_does_not_delete_a_recreated_draft
+    draft = @workspace.save(input)
+    repository
+    ready = @workspace.save(draft.transform_keys(&:to_s).merge("draft" => false))
+    File.write(@workspace.path(draft[:id]), "New work")
+    assert_raises(LocalEditor::Error) { @workspace.ship(ready.transform_keys(&:to_s)) }
+    assert_equal "New work", File.read(@workspace.path(draft[:id]))
+    assert_empty @workspace.git("diff", "--cached", "--name-only")
   end
 
   def test_ship_blocks_other_branches_staged_changes_and_ahead_commits
@@ -228,7 +314,7 @@ class EditorTest < Minitest::Test
     hook = File.join(@remote, "hooks", "pre-receive")
     File.write(hook, "#!/bin/sh\nexit 1\n")
     File.chmod(0o755, hook)
-    draft = @workspace.save(input)
+    draft = @workspace.save(input(draft: false))
     error = assert_raises(LocalEditor::Error) { @workspace.ship(draft.transform_keys(&:to_s)) }
     assert_includes error.message, "Committed locally"
     head = @workspace.git("rev-parse", "HEAD")

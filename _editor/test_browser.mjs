@@ -33,6 +33,20 @@ test('multiple drafts survive a new store instance with all their fields', () =>
   assert.ok(reloaded.list().every(post => post.browserOnly && post.draft));
 });
 
+test('draft status and small note settings survive browser recovery', () => {
+  const storage = new MemoryStorage();
+  const store = new DraftStore(storage);
+  const post = { ...draft('settings'), draft: false, note: true };
+  store.save(post);
+  const restored = new DraftStore(storage).read(post);
+  assert.equal(restored.draft, false);
+  assert.equal(restored.note, true);
+  const file = { ...post, id: '_posts/2026-10-03-settings.md', draft: true, note: false };
+  store.save(file);
+  assert.equal(new DraftStore(storage).read(file).draft, true);
+  assert.equal(new DraftStore(storage).read(file).note, false);
+});
+
 test('saving a file removes only its browser copy and retains other drafts', () => {
   const store = new DraftStore(new MemoryStorage());
   const first = draft('first');

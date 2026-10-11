@@ -4,9 +4,11 @@ import { DraftStore } from './draft-store.js';
 
 (() => {
   const $ = id => document.getElementById(id);
-  const fields = ['title', 'summary', 'frontmatter', 'note'];
-  const fieldValue = id => id === 'note' ? $(id).checked : $(id).value;
-  const setField = (id, value) => { if (id === 'note') $(id).checked = value === true; else $(id).value = value || ''; };
+  const fields = ['title', 'summary', 'frontmatter', 'note', 'draft'];
+  const booleanFields = ['note', 'draft'];
+  const recoveredValue = (post, id) => id === 'draft' ? post.draft ?? current.draft ?? true : post[id];
+  const fieldValue = id => booleanFields.includes(id) ? $(id).checked : $(id).value;
+  const setField = (id, value) => { if (booleanFields.includes(id)) $(id).checked = value === true; else $(id).value = value || ''; };
   const token = document.querySelector('meta[name="editor-token"]').content;
   let storage;
   try { storage = window.localStorage; } catch (_) {}
@@ -57,11 +59,11 @@ import { DraftStore } from './draft-store.js';
   function loadRecovery() {
     recovery = null;
     recovery = draftStore.read(current);
-    if (recovery && fields.every(id => (id === 'note' ? recovery[id] === true : recovery[id]) === fieldValue(id)) && recovery.body === markdownEditor.getText()) recovery = null;
+    if (recovery && fields.every(id => (booleanFields.includes(id) ? recoveredValue(recovery, id) === true : recovery[id]) === fieldValue(id)) && recovery.body === markdownEditor.getText()) recovery = null;
     // Matching revisions can be restored automatically. Keep stale copies
     // available for explicit recovery without replacing a newer disk version.
     if (recovery && (!current.id || recovery.revision === current.revision)) {
-      fields.forEach(id => setField(id, recovery[id]));
+      fields.forEach(id => setField(id, recoveredValue(recovery, id)));
       markdownEditor.setText(recovery.body || '', true);
       dirty = true;
       browserSaved = true;
@@ -87,7 +89,8 @@ import { DraftStore } from './draft-store.js';
     $('save').textContent = 'Save file';
     ['save', 'ship', 'new-post', 'check'].forEach(id => { $(id).disabled = busy; });
     fields.forEach(id => { $(id).readOnly = busy; });
-    $('note').disabled = busy;
+    booleanFields.forEach(id => { $(id).disabled = busy; });
+    $('post-kind').textContent = $('draft').checked ? 'Draft' : 'Post';
     markdownEditor.setReadOnly(busy);
     document.querySelectorAll('[data-format]').forEach(button => { button.disabled = busy; });
     $('ship').title = shipping.available ? 'Review, commit and push this post' : shipping.reason || '';
@@ -116,7 +119,7 @@ import { DraftStore } from './draft-store.js';
   function showPost(post) {
     const differentPost = (current?.id || current?.browserId) !== (post.id || post.browserId);
     current = post;
-    fields.forEach(id => setField(id, post[id]));
+    fields.forEach(id => setField(id, id === 'draft' ? post.draft ?? true : post[id]));
     markdownEditor.setText(post.body || '', differentPost);
     dirty = false;
     browserSaved = false;
@@ -305,7 +308,9 @@ import { DraftStore } from './draft-store.js';
   $('ship').addEventListener('click', async () => {
     if (busy) return;
     try { await refreshList(); } catch (error) { message(error.message, true); return; }
-    $('ship-description').textContent = current.draft ? 'The saved draft will become a dated Markdown post.' : 'The saved changes to this post will go live.';
+    $('post-settings').open = false;
+    $('ship-heading').textContent = $('draft').checked ? 'Ship this draft?' : 'Publish this post?';
+    $('ship-description').textContent = $('draft').checked ? 'This post will stay off the public site. Its source will be committed and pushed to the repository.' : 'The saved changes to this post will go live.';
     $('ship-reason').textContent = shipping.available ? '' : shipping.reason;
     $('confirm-ship').disabled = !shipping.available || !$('title').value.trim();
     $('ship-dialog').showModal();
@@ -321,12 +326,18 @@ import { DraftStore } from './draft-store.js';
       const result = await api('ship', payload());
       showPost(result.post);
       await refreshList();
-      message(result.shipped ? `Pushed ${result.commit.slice(0, 8)}. GitHub Pages is building your post.` : result.message);
+      message(result.shipped ? `Pushed ${result.commit.slice(0, 8)}. GitHub Pages is rebuilding your site.` : result.message);
     } catch (error) { message(error.message, true); await refreshList().catch(() => {}); }
     finally { busy = false; updateState(); }
   });
 
   fields.forEach(id => $(id).addEventListener('input', changed));
+  document.addEventListener('click', event => {
+    if (!$('post-settings').contains(event.target)) $('post-settings').open = false;
+  });
+  $('post-settings').addEventListener('keydown', event => {
+    if (event.key === 'Escape') { $('post-settings').open = false; $('post-settings').querySelector('summary').focus(); }
+  });
   $('save').addEventListener('click', save);
   $('check').addEventListener('click', check);
   $('new-post').addEventListener('click', () => newPost());
@@ -349,7 +360,7 @@ import { DraftStore } from './draft-store.js';
     // Keep the recovery's original revision so a stale browser copy cannot
     // silently overwrite a newer disk version.
     current.revision = recovery.revision;
-    fields.forEach(id => setField(id, recovery[id]));
+    fields.forEach(id => setField(id, recoveredValue(recovery, id)));
     markdownEditor.setText(recovery.body || '', true);
     $('recovery').hidden = true;
     changed();

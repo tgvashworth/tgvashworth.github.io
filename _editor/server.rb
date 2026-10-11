@@ -137,6 +137,15 @@ module LocalEditor
         raise Error, "Small note must be true or false." unless [true, false].include?(input["note"])
         header = scalar(header, "note", input["note"]) unless (old["note"] == true) == input["note"]
       end
+      if input.key?("draft")
+        raise Error, "Draft must be true or false." unless [true, false].include?(input["draft"])
+        if input["draft"] && input["id"].to_s.start_with?("_posts/")
+          header = scalar(header, "published", false) unless old["published"] == false
+        elsif !input["draft"]
+          header = scalar(header, "published", true) if old["published"] == false
+          header = scalar(header, "draft", false) if old["draft"] == true
+        end
+      end
       header = scalar(header, "layout", "post") unless old["layout"]
       source = "---\n#{header}\n---\n#{input['body']}"
       split(source)
@@ -158,7 +167,7 @@ module LocalEditor
 
     def save(input)
       source = source_for(input)
-      id = input["id"] || new_id(input["title"])
+      id = input["id"] || new_id(input["title"], draft: input.fetch("draft", true))
       target = path(id)
       if File.exist?(target)
         current = Digest::SHA256.hexdigest(File.binread(target))
@@ -166,8 +175,34 @@ module LocalEditor
       elsif input["id"]
         raise Error.new("This file was moved or removed. Copy your text before reopening it.", 409)
       end
-      atomic_write(target, source)
+      if id.start_with?("_drafts/") && input["draft"] == false
+        new_id = new_id(input["title"], draft: false)
+        moves = pending_moves
+        begin
+          atomic_write(path(new_id), source)
+          write_moves(moves.merge(new_id => id))
+          File.delete(target)
+        rescue StandardError
+          File.delete(path(new_id)) if File.exist?(path(new_id))
+          write_moves(moves)
+          raise
+        end
+        id = new_id
+      else
+        atomic_write(target, source)
+      end
       read(id)
+    end
+
+    # Keep saved draft moves across editor restarts so Ship can commit a tracked
+    # draft's deletion alongside its new post, without staging unrelated files.
+    def pending_moves
+      target = File.join(root, ".jekyll-editor", "pending-moves.json")
+      File.exist?(target) ? JSON.parse(File.read(target)) : {}
+    end
+
+    def write_moves(moves)
+      atomic_write(File.join(root, ".jekyll-editor", "pending-moves.json"), JSON.generate(moves))
     end
 
     def atomic_write(target, source)
@@ -240,47 +275,34 @@ module LocalEditor
       end
       raise Error.new("This checkout differs from origin/main. Sync it in Git before shipping; the editor won't merge or push other commits.", 409) unless local_head == remote_head
 
-      old_id = post[:id]
-      new_id = old_id
-      original = File.binread(path(old_id))
-      paths = []
+      id = post[:id]
+      paths = [id]
+      moves = pending_moves
+      if (old_id = moves[id])
+        raise Error.new("The original draft was recreated. Resolve its move in Git before shipping.", 409) if File.exist?(path(old_id))
+        paths << old_id unless git("ls-files", "--", old_id).empty?
+      end
       begin
-        if old_id.start_with?("_drafts/")
-          new_id = new_id(post[:title], draft: false, date: Date.today.iso8601)
-          header, body, metadata = split(original)
-          header = scalar(header, "published", true) if metadata["published"] == false
-          header = scalar(header, "draft", false) if metadata["draft"] == true
-          # Keep the draft until the post has been written successfully.
-          atomic_write(path(new_id), "---\n#{header}\n---\n#{body}")
-          File.delete(path(old_id))
-        elsif post[:draft]
-          header, body, = split(original)
-          atomic_write(path(old_id), "---\n#{scalar(header, 'published', true)}\n---\n#{body}")
-        end
-        paths = [new_id]
-        paths << old_id if old_id != new_id && !git("ls-files", "--", old_id).empty?
         # Validate the entire Jekyll site before committing or pushing.
         rebuild
         git("add", "--", *paths)
         if git("diff", "--cached", "--name-only").empty?
-          return { post: read(new_id), shipped: false, message: "This post has no unpublished changes." }
+          return { post: post, shipped: false, message: "This post has no unpublished changes." }
         end
         git("commit", "--only", "-m", "post: #{post[:title]}", "--", *paths)
       rescue StandardError
-        # A failed build or commit must leave the saved draft intact. Only our
-        # own paths can be staged because shipping required an empty index.
-        git("reset", "--", *paths) unless paths.empty?
-        atomic_write(path(old_id), original)
-        File.delete(path(new_id)) if new_id != old_id && File.exist?(path(new_id))
+        # Only our paths can be staged because shipping required an empty index.
+        git("reset", "--", *paths)
         raise
       end
       commit = git("rev-parse", "HEAD")
-      saved = read(new_id)
-      File.write(retry_file, JSON.generate({ commit: commit, id: new_id, revision: saved[:revision] }))
+      saved = read(id)
+      File.write(retry_file, JSON.generate({ commit: commit, id: id, revision: saved[:revision] }))
+      write_moves(moves.reject { |key, _| key == id }) if moves.key?(id)
       begin
         git("push", "origin", "HEAD:refs/heads/main")
       rescue Error => e
-        raise Error.new("Committed locally as #{commit[0, 8]}, but push failed. Reopen #{new_id} and retry Ship. #{e.message}", 422)
+        raise Error.new("Committed locally as #{commit[0, 8]}, but push failed. Reopen #{id} and retry Ship. #{e.message}", 422)
       end
       File.delete(retry_file)
       { post: saved, commit: commit, shipped: true }
