@@ -4,6 +4,7 @@ import { EditorState } from '@codemirror/state';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { DraftStore } from './draft-store.js';
 import { WritingChecksStore } from './writing-checks-store.js';
+import { PreviewPane } from './preview-pane.js';
 import { markdownBindings } from './markdown-editor.js';
 
 class MemoryStorage {
@@ -152,4 +153,81 @@ for (const [before, after] of [
 test('ordinary prose falls through to the normal Enter binding', () => {
   const state = EditorState.create({ doc: 'A paragraph', extensions: [markdown({ base: markdownLanguage, addKeymap: false })] });
   assert.equal(markdownBindings[0].run({ state, dispatch() { assert.fail('Unexpected edit'); } }), false);
+});
+
+function previewFixture() {
+  const children = [];
+  const stage = { append(frame) { children.push(frame); } };
+  const makeFrame = () => {
+    const events = {};
+    const classes = new Set();
+    const frame = {
+      visible: true, id: 'preview', removed: false,
+      contentDocument: { scrollingElement: { scrollLeft: 0, scrollTop: 0 }, fonts: { ready: Promise.resolve() }, images: [] },
+      contentWindow: { scrollTo({ left, top }) { frame.contentDocument.scrollingElement.scrollLeft = left; frame.contentDocument.scrollingElement.scrollTop = top; } },
+      classList: { add(...values) { values.forEach(value => classes.add(value)); }, remove(...values) { values.forEach(value => classes.delete(value)); } },
+      setAttribute() {}, removeAttribute(key) { if (key === 'id') this.id = ''; },
+      addEventListener(key, callback) { events[key] = callback; },
+      load() { events.load(); },
+      remove() { this.removed = true; },
+      cloneNode: makeFrame,
+      getClientRects() { return this.visible ? [{}] : []; },
+    };
+    return frame;
+  };
+  const frame = makeFrame();
+  children.push(frame);
+  return { pane: new PreviewPane(stage, frame), frame, children };
+}
+
+test('preview scroll survives hidden panes and keeps separate Split and Preview positions', () => {
+  const { pane, frame } = previewFixture();
+  frame.contentDocument.scrollingElement.scrollTop = 750;
+  pane.rememberScroll();
+  pane.changeView('preview');
+  assert.equal(frame.contentDocument.scrollingElement.scrollTop, 750);
+  frame.contentDocument.scrollingElement.scrollTop = 1200;
+  pane.rememberScroll();
+  frame.visible = false;
+  frame.contentDocument.scrollingElement.scrollTop = 0;
+  pane.rememberScroll();
+  frame.visible = true;
+  pane.changeView('split');
+  assert.equal(frame.contentDocument.scrollingElement.scrollTop, 750);
+  pane.changeView('preview');
+  assert.equal(frame.contentDocument.scrollingElement.scrollTop, 1200);
+  pane.resetScroll();
+  pane.changeView('split');
+  assert.equal(frame.contentDocument.scrollingElement.scrollTop, 0);
+});
+
+test('preview waits for fonts, preserves the latest scroll, and discards superseded renders', async () => {
+  const originalRAF = globalThis.requestAnimationFrame;
+  globalThis.requestAnimationFrame = callback => queueMicrotask(callback);
+  try {
+    const { pane, frame, children } = previewFixture();
+    const obsolete = pane.show('obsolete');
+    const first = children.at(-1);
+    const latest = pane.show('latest');
+    const second = children.at(-1);
+    let fontsReady;
+    second.contentDocument.fonts.ready = new Promise(resolve => { fontsReady = resolve; });
+    second.load();
+    await Promise.resolve();
+    assert.equal(pane.frame, frame);
+    assert.equal(frame.removed, false);
+    frame.contentDocument.scrollingElement.scrollTop = 980;
+    fontsReady();
+    assert.equal(await obsolete, false);
+    assert.equal(first.removed, true);
+    assert.equal(await latest, true);
+    assert.equal(pane.frame, second);
+    assert.equal(second.contentDocument.scrollingElement.scrollTop, 980);
+    const stale = pane.show('stale', { isCurrent: () => false });
+    const third = children.at(-1);
+    third.load();
+    assert.equal(await stale, false);
+    assert.equal(third.removed, true);
+    assert.equal(pane.frame, second);
+  } finally { globalThis.requestAnimationFrame = originalRAF; }
 });

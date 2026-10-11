@@ -2,6 +2,7 @@
 import { createMarkdownEditor } from './markdown-editor.js';
 import { DraftStore } from './draft-store.js';
 import { WritingChecksStore } from './writing-checks-store.js';
+import { PreviewPane } from './preview-pane.js';
 
 (() => {
   const $ = id => document.getElementById(id);
@@ -24,6 +25,9 @@ import { WritingChecksStore } from './writing-checks-store.js';
   let recovery = null;
   let previewVersion = 0;
   let previewTimer;
+  let resetPreview = false;
+  let writingScroll = 0;
+  const previewPane = new PreviewPane($('preview-stage'), $('preview'));
   let editVersion = 0;
   let checksVersion = -1;
   let browserSaved = false;
@@ -118,8 +122,14 @@ import { WritingChecksStore } from './writing-checks-store.js';
     schedulePreview();
   }
 
-  function showPost(post) {
+  function showPost(post, preserveScroll = false) {
     const differentPost = (current?.id || current?.browserId) !== (post.id || post.browserId);
+    if (differentPost && !preserveScroll) {
+      resetPreview = true;
+      previewPane.resetScroll();
+      writingScroll = 0;
+      document.querySelector('.paper').scrollTop = 0;
+    }
     current = post;
     fields.forEach(id => setField(id, id === 'draft' ? post.draft ?? true : post[id]));
     markdownEditor.setText(post.body || '', differentPost);
@@ -221,18 +231,22 @@ import { WritingChecksStore } from './writing-checks-store.js';
     const version = ++previewVersion;
     $('preview-state').textContent = 'Preview updating…';
     previewTimer = setTimeout(async () => {
-      if (!$('title').value.trim()) {
-        if (version !== previewVersion) return;
-        $('preview').srcdoc = '<!doctype html><html><body style="margin:0;padding:70px 35px;color:#65716b;background:#f8f7f1;font:18px/1.7 Georgia,serif"><p>Add a title to preview your post.</p></body></html>';
-        $('preview-state').textContent = 'Jekyll preview';
-        return;
-      }
       try {
+        if (!$('title').value.trim()) {
+          if (version !== previewVersion) return;
+          await previewPane.show('<!doctype html><html><body style="margin:0;padding:70px 35px;color:#65716b;background:#f8f7f1;font:18px/1.7 Georgia,serif"><p>Add a title to preview your post.</p></body></html>', { reset: resetPreview, isCurrent: () => version === previewVersion });
+          if (version !== previewVersion) return;
+          resetPreview = false;
+          $('preview-state').textContent = 'Jekyll preview';
+          return;
+        }
         const result = await api('preview', payload());
         if (version !== previewVersion) return;
-        // The sandbox deliberately prevents post HTML from running scripts or
-        // reaching the editor's filesystem API. Styles and images still load.
-        $('preview').srcdoc = result.html;
+        // Post scripts remain sandboxed. Same-origin access lets the parent
+        // wait for fonts and restore scrolling before revealing the new frame.
+        await previewPane.show(result.html, { reset: resetPreview, isCurrent: () => version === previewVersion });
+        if (version !== previewVersion) return;
+        resetPreview = false;
         $('preview-state').textContent = 'Up to date';
       } catch (error) {
         if (version !== previewVersion) return;
@@ -250,7 +264,7 @@ import { WritingChecksStore } from './writing-checks-store.js';
     try {
       const post = await api('save', payload());
       removeRecovery(previous);
-      showPost(post);
+      showPost(post, true);
       await refreshList();
       return true;
     } catch (error) {
@@ -334,7 +348,7 @@ import { WritingChecksStore } from './writing-checks-store.js';
     message('Building with Jekyll, then committing and pushing…');
     try {
       const result = await api('ship', payload());
-      showPost(result.post);
+      showPost(result.post, true);
       await refreshList();
       message(result.shipped ? `Pushed ${result.commit.slice(0, 8)}. GitHub Pages is rebuilding your site.` : result.message);
     } catch (error) { message(error.message, true); await refreshList().catch(() => {}); }
@@ -360,11 +374,18 @@ import { WritingChecksStore } from './writing-checks-store.js';
   document.querySelectorAll('[data-format]').forEach(button => button.addEventListener('click', () => format(button.dataset.format)));
   document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => {
     const view = button.dataset.view;
+    const paper = document.querySelector('.paper');
+    if (paper.getClientRects().length) writingScroll = paper.scrollTop;
+    previewPane.rememberScroll();
     document.body.classList.toggle('focus-mode', view === 'focus');
     document.body.classList.toggle('no-preview', view === 'focus');
     document.body.classList.toggle('preview-only', view === 'preview');
     document.querySelectorAll('[data-view]').forEach(other => other.setAttribute('aria-pressed', String(other.dataset.view === view)));
     resize();
+    requestAnimationFrame(() => {
+      paper.scrollTop = writingScroll;
+      previewPane.changeView(view);
+    });
   }));
   $('restore').addEventListener('click', () => {
     // Keep the recovery's original revision so a stale browser copy cannot

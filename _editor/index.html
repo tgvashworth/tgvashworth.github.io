@@ -79,7 +79,9 @@
 
       <aside class="preview-panel" aria-label="Post preview">
         <div class="preview-heading"><span>Preview</span><button type="button" class="quiet preview-back" data-view="split">Back to editor</button><span id="preview-state" role="status">Jekyll preview</span></div>
-        <iframe id="preview" title="Post rendered with your Jekyll layout" sandbox=""></iframe>
+        <div id="preview-stage" class="preview-stage">
+          <iframe id="preview" title="Post rendered with your Jekyll layout" sandbox="allow-same-origin"></iframe>
+        </div>
         <section class="checks">
           <div class="checks-heading"><div><h2>Writing checks</h2></div><button id="check" type="button">Check writing</button></div>
           <ul id="suggestions"><li class="empty">Check for repeated words and wordy phrases.</li></ul>

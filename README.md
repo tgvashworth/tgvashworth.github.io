@@ -60,6 +60,8 @@ write. To choose another port, run `EDITOR_PORT=4011 mise run editor`.
 
 - Browse and search posts, or start a new draft.
 - Write Markdown beside a live preview using the site's Jekyll renderer and layouts.
+  Preview updates load invisibly and fade over the previous render after styles,
+  fonts and images are ready. Scroll position is kept through updates and view switches.
 - The Markdown pane uses CodeMirror, with syntax highlighting, undo/redo, search,
   indentation, and automatic continuation of bullet, numbered and task lists.
   Enter on an empty list item ends the list. Cmd/Ctrl B, I and K insert bold,
