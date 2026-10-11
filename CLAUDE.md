@@ -8,17 +8,24 @@ Personal blog for tgvashworth.com. Jekyll static site hosted on GitHub Pages. Pu
 
 ## Setup
 
-Tooling is managed by [mise](https://mise.jdx.dev/). Ruby and Node versions are pinned in `.mise.toml`.
+Tooling is managed by [mise](https://mise.jdx.dev/). Ruby and Node versions and tasks are defined in `mise.toml`.
 
 ```
 mise install          # install Ruby + Node
-bundle install        # install gems (Jekyll via github-pages)
-npm install           # install Node devDependencies (write-good, jkl)
+mise run setup        # install gems and Node dependencies
 ```
 
 ## Commands
 
-- **Serve locally:** `bundle exec jekyll serve` (available at http://localhost:4000)
+- **List tasks:** `mise tasks`
+- **Build:** `mise run build`
+- **Serve locally:** `mise run serve` (available at http://localhost:4000)
+- **Serve drafts:** `mise run serve:drafts`
+- **Writing editor:** `mise run editor` (http://127.0.0.1:4001/editor; set `EDITOR_PORT` to change the port)
+- **Tests:** `mise run test` (or `test:editor:browser` / `test:editor:ruby` separately)
+- **Build and test:** `mise run check`
+- **Clean generated site:** `mise run clean`
+- Tasks install missing dependencies; existing npm scripts delegate to mise.
 - **Note:** Changes to `_config.yml` require restarting the server. All other changes hot-reload.
 
 ## Blog post format

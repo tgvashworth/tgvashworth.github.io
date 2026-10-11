@@ -1,3 +1,77 @@
 [tools]
 ruby = "3.3.4"
 node = "22"
+
+[tasks.setup]
+description = "Install Ruby gems and Node dependencies"
+depends = ["deps:ruby", "deps:node"]
+
+[tasks."deps:ruby"]
+description = "Install missing Ruby gems"
+run = "bundle check || bundle install"
+
+[tasks."deps:node"]
+description = "Install Node dependencies from the lockfile"
+run = """
+if [ ! -x node_modules/.bin/esbuild ] \
+  || ! cmp -s package.json node_modules/.mise-package.json \
+  || ! cmp -s package-lock.json node_modules/.mise-package-lock.json \
+  || ! npm ls --depth=0 >/dev/null 2>&1; then
+  npm ci --no-audit --no-fund
+  cp package.json node_modules/.mise-package.json
+  cp package-lock.json node_modules/.mise-package-lock.json
+fi
+"""
+
+[tasks.build]
+description = "Build the public Jekyll site"
+depends = ["deps:ruby"]
+run = "bundle exec jekyll build"
+
+[tasks.serve]
+description = "Serve the site at http://localhost:4000"
+alias = ["dev", "start"]
+depends = ["deps:ruby"]
+run = "bundle exec jekyll serve"
+
+[tasks."serve:drafts"]
+description = "Serve the site including draft posts"
+depends = ["deps:ruby"]
+run = "bundle exec jekyll serve --drafts"
+
+[tasks.editor]
+description = "Start the local writing editor (EDITOR_PORT defaults to 4001)"
+depends = ["deps:ruby", "editor:build"]
+run = "bundle exec ruby _editor/server.rb"
+
+[tasks."editor:build"]
+description = "Bundle the editor's JavaScript"
+depends = ["deps:node"]
+run = "node_modules/.bin/esbuild _editor/editor.js --bundle --format=iife --outfile=_editor/editor.bundle.js"
+
+[tasks.test]
+description = "Run all editor tests"
+depends = ["test:editor"]
+
+[tasks."test:editor"]
+description = "Run the editor's browser and Ruby tests"
+depends = ["test:editor:browser", "test:editor:ruby"]
+
+[tasks."test:editor:browser"]
+description = "Test browser draft storage and Markdown editing"
+depends = ["deps:node"]
+run = "node --experimental-default-type=module --test _editor/test_browser.mjs"
+
+[tasks."test:editor:ruby"]
+description = "Test the editor server, previews, saves and publishing"
+depends = ["deps:ruby", "deps:node"]
+run = "bundle exec ruby _editor/test_editor.rb"
+
+[tasks.check]
+description = "Build the site and run all tests"
+depends = ["build", "test"]
+
+[tasks.clean]
+description = "Remove the generated public site and Jekyll caches"
+depends = ["deps:ruby"]
+run = "bundle exec jekyll clean"

@@ -14,27 +14,46 @@ This repository contains the source code for my personal website at [tgvashworth
 git clone https://github.com/tgvashworth/tgvashworth.github.io.git
 cd tgvashworth.github.io
 mise install
-bundle install
-npm install
+mise run setup
 ```
 
 ## Run Locally
 
 ```bash
-bundle exec jekyll serve
+mise run serve
 ```
 
 The site will be available at http://localhost:4000. Changes hot-reload, except for `_config.yml` which requires restarting the server.
 
+Run `mise tasks` to list the available commands. Tasks prepare the dependencies
+they need; Node packages are reinstalled when the package files change or the
+editor build tool is missing.
+
+| Task | Operation |
+| --- | --- |
+| `mise run setup` | Install Ruby gems and Node packages |
+| `mise run build` | Build the public site |
+| `mise run serve` | Serve the site (`dev` and `start` are aliases) |
+| `mise run serve:drafts` | Serve the site including drafts |
+| `mise run editor` | Start the local writing editor |
+| `mise run editor:build` | Bundle the editor JavaScript |
+| `mise run test` | Run all editor tests |
+| `mise run test:editor:browser` | Run the browser storage and Markdown tests |
+| `mise run test:editor:ruby` | Run the editor server tests |
+| `mise run check` | Build the site and run all tests |
+| `mise run clean` | Remove the generated public site and Jekyll caches |
+
+The existing `npm run` commands delegate to these mise tasks.
+
 ## Write in the browser
 
 ```bash
-npm run editor
+mise run editor
 ```
 
 Open http://127.0.0.1:4001/editor. This local server includes the site preview, so
 you do not need a separate `jekyll serve` process. Leave it running while you
-write. To choose another port, run `EDITOR_PORT=4011 npm run editor`.
+write. To choose another port, run `EDITOR_PORT=4011 mise run editor`.
 
 - Browse and search posts, or start a new draft.
 - Write Markdown beside a live preview using the site's Jekyll renderer and layouts.
@@ -82,7 +101,7 @@ sandboxed; scripts in a post do not run in the editing pane. Local site pages
 block third-party scripts, including analytics. AI feedback, image uploading,
 and installation as a login service are not included in this first version.
 
-Verify the editor with `npm run test:editor`. Tests use disposable sites and
+Verify the editor with `mise run test`. Tests use disposable sites and
 local bare Git repositories, including successful publishing, build/commit/push
 failures, conflict detection and path restrictions. Browser tests also check
 draft persistence and CodeMirror's Markdown list commands.

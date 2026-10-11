@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "bundle exec jekyll build",
-    "editor": "npm run editor:build && bundle exec ruby _editor/server.rb",
-    "editor:build": "esbuild _editor/editor.js --bundle --format=iife --outfile=_editor/editor.bundle.js",
-    "test:editor": "npm run test:editor:browser && bundle exec ruby _editor/test_editor.rb",
-    "test:editor:browser": "node --experimental-default-type=module --test _editor/test_browser.mjs",
-    "start": "npm run build && bundle exec jekyll serve"
+    "build": "mise run build",
+    "editor": "mise run editor",
+    "editor:build": "mise run editor:build",
+    "test:editor": "mise run test:editor",
+    "test:editor:browser": "mise run test:editor:browser",
+    "start": "mise run serve"
   },
   "repository": {
     "type": "git",
