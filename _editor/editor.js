@@ -1,6 +1,7 @@
 /* The editor runs only in the local Ruby server; this directory is not built by Jekyll. */
 import { createMarkdownEditor } from './markdown-editor.js';
 import { DraftStore } from './draft-store.js';
+import { WritingChecksStore } from './writing-checks-store.js';
 
 (() => {
   const $ = id => document.getElementById(id);
@@ -13,6 +14,7 @@ import { DraftStore } from './draft-store.js';
   let storage;
   try { storage = window.localStorage; } catch (_) {}
   const draftStore = new DraftStore(storage);
+  const writingChecksStore = new WritingChecksStore(storage);
   let current = null;
   let posts = [];
   let shipping = {};
@@ -143,6 +145,8 @@ import { DraftStore } from './draft-store.js';
     updateState();
     resize();
     clearChecks();
+    const savedChecks = writingChecksStore.read(payload());
+    if (savedChecks) renderChecks(savedChecks);
     schedulePreview();
   }
 
@@ -266,32 +270,38 @@ import { DraftStore } from './draft-store.js';
     try {
       const result = await api('check', payload());
       if (version !== editVersion) return;
-      checksVersion = version;
-      $('suggestions').replaceChildren();
-      if (!result.suggestions.length) {
-        const item = document.createElement('li');
-        item.className = 'empty';
-        item.textContent = 'No prose suggestions. Your browser checks spelling.';
-        $('suggestions').append(item);
-      }
-      result.suggestions.forEach(suggestion => {
-        const item = document.createElement('li');
-        const button = document.createElement('button');
-        button.type = 'button';
-        const excerpt = document.createElement('strong');
-        excerpt.textContent = `“${suggestion.excerpt}” · line ${suggestion.line}`;
-        const reason = document.createElement('span');
-        reason.textContent = suggestion.reason;
-        button.append(excerpt, reason);
-        button.addEventListener('click', () => {
-          if (version !== editVersion) return;
-          markdownEditor.select(suggestion.index, suggestion.index + suggestion.offset);
-        });
-        item.append(button);
-        $('suggestions').append(item);
-      });
+      writingChecksStore.save(payload(), result.suggestions);
+      renderChecks(result.suggestions);
     } catch (error) { message(error.message, true); }
     finally { busy = false; updateState(); }
+  }
+
+  function renderChecks(suggestions) {
+    checksVersion = editVersion;
+    const version = editVersion;
+    $('suggestions').replaceChildren();
+    if (!suggestions.length) {
+      const item = document.createElement('li');
+      item.className = 'empty';
+      item.textContent = 'No prose suggestions. Your browser checks spelling.';
+      $('suggestions').append(item);
+    }
+    suggestions.forEach(suggestion => {
+      const item = document.createElement('li');
+      const button = document.createElement('button');
+      button.type = 'button';
+      const excerpt = document.createElement('strong');
+      excerpt.textContent = `“${suggestion.excerpt}” · line ${suggestion.line}`;
+      const reason = document.createElement('span');
+      reason.textContent = suggestion.reason;
+      button.append(excerpt, reason);
+      button.addEventListener('click', () => {
+        if (version !== editVersion) return;
+        markdownEditor.select(suggestion.index, suggestion.index + suggestion.offset);
+      });
+      item.append(button);
+      $('suggestions').append(item);
+    });
   }
 
   function format(kind) {

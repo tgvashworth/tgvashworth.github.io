@@ -81,8 +81,8 @@ textarea { display: block; border: 0; border-radius: 0; background: transparent;
 .preview-only .preview-back { display: block; font-size: 11px; padding: 0 8px; }
 .preview-heading { align-items: center; font-size: 11px; display: flex; justify-content: space-between; padding: 20px 24px; gap: 10px; color: var(--muted); }
 #preview-state { font-size: 10px; }
-iframe { width: 100%; flex: 1; min-height: 230px; border: 0; background: var(--paper); }
-.checks { border-top: 1px solid var(--line); padding: 20px 24px; max-height: 32%; overflow-y: auto; }
+iframe { width: 100%; flex: 1; min-height: 0; border: 0; background: var(--paper); }
+.checks { border-top: 1px solid var(--line); padding: 20px 24px; flex: 0 0 clamp(140px, 32%, 320px); min-height: 0; overflow-y: auto; }
 .checks-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .checks h2 { margin: 0; font: 18px Georgia, serif; }
 .checks p { font-size: 11px; color: var(--muted); margin: 4px 0 0; }
@@ -103,7 +103,7 @@ iframe { width: 100%; flex: 1; min-height: 230px; border: 0; background: var(--p
 .no-preview .paper { width: min(100%, 913px); margin: 0 auto; }
 .focus-mode .library { display: none; }
 .focus-mode .room { margin-left: 0; }
-.preview-only .library, .preview-only .writing, .preview-only .checks { display: none; }
+.preview-only .library, .preview-only .writing { display: none; }
 .preview-only .room { margin-left: 0; height: 100dvh; min-height: 0; }
 .preview-only .workspace { display: block; overflow: hidden; }
 .preview-only .preview-panel { height: 100%; min-height: 0; border: 0; }
@@ -116,6 +116,6 @@ dialog .eyebrow { font-size: 10px; }
 #ship-reason { color: #934d39; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 26px; }
 @media (max-width: 1150px) { .library { width: 230px; } .room { margin-left: 230px; }  .actions { gap: 2px; } .actions button { padding-inline: 10px; } .workspace { grid-template-columns: minmax(300px, 1.1fr) minmax(300px, .9fr); } .shortcut { display: none; } }
-@media (max-width: 930px) { .library { width: 210px; padding-inline: 15px; } .room { margin-left: 210px; } .workspace { display: flex; flex-direction: column; overflow-y: auto; } .writing { min-height: 600px; flex-shrink: 0; } .topbar { padding-inline: 30px; } .paper { overflow: visible; padding-inline: 30px; } .preview-panel { min-height: 720px; border-left: 0; border-top: 1px solid var(--line); flex-shrink: 0; } .preview-panel iframe { min-height: 500px; } .checks { max-height: 220px; }  }
+@media (max-width: 930px) { .library { width: 210px; padding-inline: 15px; } .room { margin-left: 210px; } .workspace { display: flex; flex-direction: column; overflow-y: auto; } .writing { min-height: 600px; flex-shrink: 0; } .topbar { padding-inline: 30px; } .paper { overflow: visible; padding-inline: 30px; } .preview-panel { min-height: 720px; border-left: 0; border-top: 1px solid var(--line); flex-shrink: 0; } .preview-panel iframe { min-height: 500px; } .checks { flex-basis: 220px; }  }
 @media (max-width: 620px) { .library { position: static; width: 100%; height: 260px; padding: 18px; } .library-heading, .library-footer, .search-label { display: none; } .brand { margin-bottom: 14px; } .new-button { position: absolute; top: 55px; right: 18px; padding: 7px 12px; } .search { width: calc(100% - 130px); } .filters { padding: 8px 0; } .post-list { display: flex; flex-shrink: 0; gap: 5px; } .post-item { min-width: 170px; max-width: 170px; } .post-item strong { font-size: 12px; } .room { margin: 0; height: auto; min-height: 100dvh; } .topbar { position: sticky; top: 0; z-index: 2; background: var(--paper); padding: 14px 24px; } .save-state { font-size: 10px; } .actions button, .post-settings summary { font-size: 11px; padding: 7px; } .post-settings { position: static; } .settings-panel { left: 24px; right: auto; top: calc(100% + 5px); width: min(290px, calc(100vw - 28px)); } .workspace { overflow: visible; } .paper { padding: 30px 24px; } .title { font-size: 34px; } .message, .recovery { padding-inline: 16px; } .recovery { flex-wrap: wrap; } .writing-footer { font-size: 10px; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

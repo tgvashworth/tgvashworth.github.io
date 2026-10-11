@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { EditorState } from '@codemirror/state';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { DraftStore } from './draft-store.js';
+import { WritingChecksStore } from './writing-checks-store.js';
 import { markdownBindings } from './markdown-editor.js';
 
 class MemoryStorage {
@@ -45,6 +46,32 @@ test('draft status and small note settings survive browser recovery', () => {
   store.save(file);
   assert.equal(new DraftStore(storage).read(file).draft, true);
   assert.equal(new DraftStore(storage).read(file).note, false);
+});
+
+test('writing checks survive reload only for the same post and exact body', () => {
+  const storage = new MemoryStorage();
+  const post = { ...draft('checked'), body: 'very very easy' };
+  const suggestions = [{ excerpt: 'very very', reason: 'repeated word', line: 1, index: 0, offset: 9 }];
+  new WritingChecksStore(storage).save(post, suggestions);
+  const restored = new WritingChecksStore(storage);
+  assert.deepEqual(restored.read(post), suggestions);
+  assert.equal(restored.read({ ...post, body: 'Updated text' }), null);
+  assert.equal(restored.read({ ...post, browserId: 'another' }), null);
+  restored.save(post, []);
+  assert.deepEqual(new WritingChecksStore(storage).read(post), []);
+});
+
+test('writing check recovery tolerates unavailable and corrupt storage', () => {
+  const post = draft('checked');
+  const storage = new MemoryStorage();
+  const store = new WritingChecksStore(storage);
+  storage.setItem(store.key(post), '{');
+  assert.equal(store.read(post), null);
+  store.save(post, [{ index: -1 }]);
+  assert.equal(store.read(post), null);
+  const unavailable = new WritingChecksStore(undefined);
+  assert.doesNotThrow(() => unavailable.save(post, []));
+  assert.equal(unavailable.read(post), null);
 });
 
 test('saving a file removes only its browser copy and retains other drafts', () => {

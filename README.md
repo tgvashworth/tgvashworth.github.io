@@ -66,7 +66,8 @@ write. To choose another port, run `EDITOR_PORT=4011 mise run editor`.
 - Browser spell check is enabled on the writing fields. Enable spell check in
   your browser if you do not see spelling suggestions. Check writing adds
   `write-good` suggestions for repeated words, wordy phrases and other prose
-  slips. These are suggestions, not a grammar guarantee.
+  slips. The checks panel stays open, and results survive refreshing while the
+  post's text is unchanged. These are suggestions, not a grammar guarantee.
 - Open Post settings at the top to change Draft and Small note. New posts start
   as drafts. Save file keeps drafts in `_drafts/`; clearing Draft moves them to a
   dated `_posts/` file. Existing posts keep their filename when marked as drafts,
