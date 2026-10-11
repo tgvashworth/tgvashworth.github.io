@@ -128,10 +128,48 @@ class EditorTest < Minitest::Test
     assert_equal "complete", page.at_css(".post strong").text
     draft = @workspace.save(input(note: true))
     @workspace.rebuild
-    document = @workspace.site.posts.docs.find { |post| post.relative_path == draft[:id] }
-    draft_page = Nokogiri::HTML(File.read(document.destination(@workspace.destination)))
+    refute @workspace.site.posts.docs.any? { |post| post.relative_path == draft[:id] }
+    draft_page = Nokogiri::HTML(@workspace.preview(draft.transform_keys(&:to_s)))
     assert_includes draft_page.at_css(".post-eyebrow").text, "#{Date.today.day} #{Date.today.strftime('%B %Y')}"
     refute_includes draft_page.text, "years old"
+  end
+
+  def homepage
+    server = LocalEditor::Server.allocate
+    server.instance_variable_set(:@workspace, @workspace)
+    response = WEBrick::HTTPResponse.new(WEBrick::Config::HTTP)
+    request = Struct.new(:path).new("/")
+    server.serve(request, response)
+    response.body
+  end
+
+  def test_local_homepage_and_feed_exclude_drafts_and_update_after_saving
+    File.write(File.join(@root, "index.html"), "---\n---\n{% for post in site.posts %}{{ post.title }}\n{% endfor %}")
+    FileUtils.cp(File.expand_path("../atom.xml", __dir__), @root)
+    draft = @workspace.save(input(title: "Hidden folder draft", draft: true))
+    hidden = @workspace.save(input(title: "Hidden post draft", draft: false))
+    hidden = @workspace.save(hidden.transform_keys(&:to_s).merge("draft" => true))
+    visible = @workspace.save(input(title: "Visible post", draft: false))
+    assert_includes homepage, "Visible post"
+    refute_includes homepage, "Hidden folder draft"
+    refute_includes homepage, "Hidden post draft"
+    feed = File.read(File.join(@workspace.destination, "atom.xml"))
+    assert_includes feed, "Visible post"
+    refute_includes feed, "Hidden folder draft"
+    refute_includes feed, "Hidden post draft"
+    assert @workspace.list.find { |post| post[:id] == draft[:id] }[:draft]
+    assert_includes @workspace.preview(draft.transform_keys(&:to_s)), "A <strong>small</strong> thought."
+    hidden = @workspace.save(hidden.transform_keys(&:to_s).merge("draft" => false))
+    assert_includes homepage, "Hidden post draft"
+    assert File.file?(@workspace.site.posts.docs.find { |post| post.relative_path == hidden[:id] }.destination(@workspace.destination))
+    @workspace.save(hidden.transform_keys(&:to_s).merge("draft" => true))
+    refute_includes homepage, "Hidden post draft"
+    refute File.exist?(File.join(@workspace.destination, hidden[:date].tr("-", "/"), "hidden-post-draft.html"))
+    @workspace.save(visible.transform_keys(&:to_s).merge("draft" => true))
+    refute_includes homepage, "Visible post"
+    ready = @workspace.save(draft.transform_keys(&:to_s).merge("draft" => false))
+    assert_includes homepage, "Hidden folder draft"
+    refute ready[:draft]
   end
 
   def test_removed_file_is_not_recreated_by_stale_editor

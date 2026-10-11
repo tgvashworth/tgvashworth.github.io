@@ -52,7 +52,10 @@ mise run editor
 ```
 
 Open http://127.0.0.1:4001/editor. This local server includes the site preview, so
-you do not need a separate `jekyll serve` process. Leave it running while you
+you do not need a separate `jekyll serve` process. The local homepage and feed
+follow the public build rules: drafts and unpublished posts stay hidden. Drafts
+remain available in the editor and its live post preview. Save file applies
+changes to the local homepage; Ship applies them to the public site. Leave it running while you
 write. To choose another port, run `EDITOR_PORT=4011 mise run editor`.
 
 - Browse and search posts, or start a new draft.

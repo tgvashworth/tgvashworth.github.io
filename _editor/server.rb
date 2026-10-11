@@ -43,7 +43,7 @@ module LocalEditor
     def rebuild
       config = Jekyll.configuration(
         "source" => root, "destination" => destination,
-        "show_drafts" => true, "unpublished" => true, "future" => true,
+        "show_drafts" => false, "unpublished" => false, "future" => false,
         "strict_front_matter" => true, "quiet" => true
       )
       config["exclude"] += [".worktrees", ".jekyll-editor", "_editor"]
@@ -53,6 +53,11 @@ module LocalEditor
         @site = Jekyll::Site.new(config)
       end
       @site.process
+      @needs_rebuild = false
+    end
+
+    def rebuild_if_needed
+      rebuild if @needs_rebuild
     end
 
     # Only top-level Markdown posts/drafts are writable. Check directory and
@@ -191,6 +196,7 @@ module LocalEditor
       else
         atomic_write(target, source)
       end
+      @needs_rebuild = true
       read(id)
     end
 
@@ -283,7 +289,9 @@ module LocalEditor
         paths << old_id unless git("ls-files", "--", old_id).empty?
       end
       begin
-        # Validate the entire Jekyll site before committing or pushing.
+        # Drafts stay out of the site build, but their own preview must still
+        # render successfully before committing or pushing them.
+        preview(post.transform_keys(&:to_s))
         rebuild
         git("add", "--", *paths)
         if git("diff", "--cached", "--name-only").empty?
@@ -297,7 +305,7 @@ module LocalEditor
       end
       commit = git("rev-parse", "HEAD")
       saved = read(id)
-      File.write(retry_file, JSON.generate({ commit: commit, id: id, revision: saved[:revision] }))
+      atomic_write(retry_file, JSON.generate({ commit: commit, id: id, revision: saved[:revision] }))
       write_moves(moves.reject { |key, _| key == id }) if moves.key?(id)
       begin
         git("push", "origin", "HEAD:refs/heads/main")
@@ -411,6 +419,7 @@ module LocalEditor
       if %w[/editor/editor.bundle.js /editor/editor.css].include?(request.path)
         target = File.join(__dir__, File.basename(request.path))
       else
+        @workspace.rebuild_if_needed
         relative = request.path.delete_prefix("/")
         target = File.expand_path(relative, @workspace.destination)
         target = File.join(target, "index.html") if File.directory?(target)
