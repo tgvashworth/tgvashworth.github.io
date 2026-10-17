@@ -138,6 +138,16 @@ module LocalEditor
       _, _, old = split("---\n#{header}\n---\n")
       header = scalar(header, "title", input["title"]) unless old["title"] == input["title"]
       header = scalar(header, "summary", input["summary"].to_s) unless old["summary"].to_s == input["summary"].to_s
+      if input.key?("date")
+        date = selected_date(input)
+        previous = old["date"] || input["id"].to_s[/\d{4}-\d{1,2}-\d{1,2}/]
+        unless previous && Date.parse(previous.to_s).iso8601 == date
+          # Changing the calendar day keeps an existing timestamp's time and zone.
+          previous_value = old["date"].to_s
+          value = previous_value.match?(/\A\d{4}-\d{2}-\d{2}/) ? previous_value.sub(/\A\d{4}-\d{2}-\d{2}/, date) : date
+          header = scalar(header, "date", value)
+        end
+      end
       if input.key?("note")
         raise Error, "Small note must be true or false." unless [true, false].include?(input["note"])
         header = scalar(header, "note", input["note"]) unless (old["note"] == true) == input["note"]
@@ -170,9 +180,18 @@ module LocalEditor
       id
     end
 
+    def selected_date(input)
+      date = input["date"]
+      raise Error, "Choose a valid post date." unless date.is_a?(String) && date.match?(/\A\d{4}-\d{2}-\d{2}\z/) && date[0, 4].to_i.positive?
+      Date.iso8601(date).iso8601
+    rescue ArgumentError
+      raise Error, "Choose a valid post date."
+    end
+
     def save(input)
       source = source_for(input)
-      id = input["id"] || new_id(input["title"], draft: input.fetch("draft", true))
+      date = input.key?("date") ? selected_date(input) : Date.today.iso8601
+      id = input["id"] || new_id(input["title"], draft: input.fetch("draft", true), date: date)
       target = path(id)
       if File.exist?(target)
         current = Digest::SHA256.hexdigest(File.binread(target))
@@ -181,7 +200,7 @@ module LocalEditor
         raise Error.new("This file was moved or removed. Copy your text before reopening it.", 409)
       end
       if id.start_with?("_drafts/") && input["draft"] == false
-        new_id = new_id(input["title"], draft: false)
+        new_id = new_id(input["title"], draft: false, date: date)
         moves = pending_moves
         begin
           atomic_write(path(new_id), source)

@@ -6,10 +6,14 @@ import { PreviewPane } from './preview-pane.js';
 
 (() => {
   const $ = id => document.getElementById(id);
-  const fields = ['title', 'summary', 'frontmatter', 'note', 'draft'];
+  const fields = ['title', 'summary', 'frontmatter', 'note', 'draft', 'date'];
   const booleanFields = ['note', 'draft'];
   const recoveredValue = (post, id) => id === 'draft' ? post.draft ?? current.draft ?? true : post[id];
-  const fieldValue = id => booleanFields.includes(id) ? $(id).checked : $(id).value;
+  const fieldValue = id => {
+    if (booleanFields.includes(id)) return $(id).checked;
+    if (id === 'date') return $(id).value || current?.date || '';
+    return $(id).value;
+  };
   const setField = (id, value) => { if (booleanFields.includes(id)) $(id).checked = value === true; else $(id).value = value || ''; };
   const token = document.querySelector('meta[name="editor-token"]').content;
   let storage;
@@ -96,6 +100,10 @@ import { PreviewPane } from './preview-pane.js';
     ['save', 'ship', 'new-post', 'check'].forEach(id => { $(id).disabled = busy; });
     fields.forEach(id => { $(id).readOnly = busy; });
     booleanFields.forEach(id => { $(id).disabled = busy; });
+    $('date').disabled = busy;
+    $('post-date').disabled = busy;
+    const date = fieldValue('date');
+    $('post-date').textContent = date ? new Date(`${date}T12:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Choose date';
     $('post-kind').textContent = $('draft').checked ? 'Draft' : 'Post';
     markdownEditor.setReadOnly(busy);
     document.querySelectorAll('[data-format]').forEach(button => { button.disabled = busy; });
@@ -138,7 +146,6 @@ import { PreviewPane } from './preview-pane.js';
     editVersion += 1;
     checksVersion = -1;
     $('post-kind').textContent = post.draft ? 'Draft' : 'Post';
-    $('post-date').textContent = new Date(`${post.date}T12:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
     $('file-path').textContent = post.id || 'A Markdown file will be created when you save.';
     const url = new URL(location.href);
     if (post.id) {
@@ -356,6 +363,13 @@ import { PreviewPane } from './preview-pane.js';
   });
 
   fields.forEach(id => $(id).addEventListener('input', changed));
+  $('post-date').addEventListener('click', () => {
+    if (busy) return;
+    $('date').focus({ preventScroll: true });
+    if ($('date').showPicker) $('date').showPicker();
+    else $('date').click();
+  });
+  $('date').addEventListener('blur', () => { if (!$('date').value) $('date').value = fieldValue('date'); });
   document.addEventListener('click', event => {
     if (!$('post-settings').contains(event.target)) $('post-settings').open = false;
   });

@@ -77,6 +77,58 @@ class EditorTest < Minitest::Test
     assert_equal source, File.read(@workspace.path(post[:id]))
   end
 
+  def test_chosen_date_survives_draft_saves_and_becomes_the_new_post_filename
+    draft = @workspace.save(input(date: "2020-02-29"))
+    assert_equal "2020-02-29", @workspace.read(draft[:id])[:date]
+    edited = @workspace.save(draft.transform_keys(&:to_s).merge("date" => "2020-03-04"))
+    assert_equal "2020-03-04", edited[:date]
+    post = @workspace.save(edited.transform_keys(&:to_s).merge("draft" => false))
+    assert_equal "_posts/2020-03-04-a-thought.md", post[:id]
+    assert_equal "2020-03-04", post[:date]
+    direct = @workspace.save(input(date: "2020-05-06", draft: false))
+    assert_equal "_posts/2020-05-06-a-thought.md", direct[:id]
+  end
+
+  def test_changing_an_existing_post_date_updates_preview_and_site_without_moving_its_file
+    id = "_posts/2020-02-03-original.md"
+    File.write(@workspace.path(id), "---\nlayout: post\ntitle: Original\ndate: 2020-02-03 10:20:00 +0100\n# Keep this\ntags: [writing]\n---\nBody\n")
+    File.write(File.join(@root, "_layouts/post.html"), '<p>{{ page.date | date: "%Y-%m-%d %H:%M %z" }}</p>')
+    @workspace.rebuild
+    post = @workspace.read(id).transform_keys(&:to_s)
+    post["date"] = "2020-04-08"
+    assert_includes @workspace.preview(post), "2020-04-08 10:20 +0100"
+    assert_equal "2020-02-03", @workspace.read(id)[:date]
+    saved = @workspace.save(post)
+    assert_equal id, saved[:id]
+    assert_equal "2020-04-08", @workspace.read(id)[:date]
+    assert_includes saved[:frontmatter], "# Keep this\ntags: [writing]"
+    @workspace.rebuild
+    output = File.join(@workspace.destination, "2020/04/08/original.html")
+    assert File.file?(output), "Jekyll should use the selected date in the permalink"
+    assert_includes File.read(output), "2020-04-08 10:20 +0100"
+  end
+
+  def test_invalid_calendar_dates_are_rejected_without_writing_files
+    ["2026-02-29", "2026-13-01", "2026-2-1", "0000-01-01", "", nil, 123].each do |date|
+      error = assert_raises(LocalEditor::Error) { @workspace.save(input(date: date)) }
+      assert_equal "Choose a valid post date.", error.message
+    end
+    assert_empty @workspace.list
+  end
+
+  def test_filename_dates_stay_implicit_until_the_day_changes
+    id = "_posts/2020-02-03-original.md"
+    source = "---\nlayout: post\ntitle: Original\n---\nBody\n"
+    File.write(@workspace.path(id), source)
+    post = @workspace.read(id).transform_keys(&:to_s)
+    @workspace.save(post)
+    assert_equal source, File.read(@workspace.path(id))
+    saved = @workspace.save(post.merge("date" => "2020-04-08"))
+    assert_equal id, saved[:id]
+    assert_equal "2020-04-08", @workspace.read(id)[:date]
+    assert_includes saved[:frontmatter], 'date: "2020-04-08"'
+  end
+
   def test_conflict_does_not_overwrite_external_changes
     post = @workspace.save(input)
     target = @workspace.path(post[:id])

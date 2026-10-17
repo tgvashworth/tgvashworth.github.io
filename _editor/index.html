@@ -53,7 +53,7 @@
         </div>
         <div class="paper">
           <div class="paper-content">
-            <div class="eyebrow"><span id="post-kind">Draft</span><span class="separator">/</span><span id="post-date"></span></div>
+            <div class="eyebrow"><span id="post-kind">Draft</span><span class="separator">/</span><span class="post-date-control"><button id="post-date" type="button" title="Change post date" aria-haspopup="dialog">Choose date</button><input id="date" type="date" aria-label="Post date" tabindex="-1" required min="0001-01-01" max="9999-12-31"></span></div>
             <label class="sr-only" for="title">Post title</label>
             <textarea id="title" class="title" rows="1" placeholder="Post title" spellcheck="true"></textarea>
             <label class="sr-only" for="summary">One-line summary</label>
@@ -72,7 +72,7 @@
               <p id="file-path">A Markdown file will be created when you save.</p>
               <label for="frontmatter">YAML metadata</label>
               <textarea id="frontmatter" spellcheck="false" rows="6"></textarea>
-              <p>Title, summary and Post settings take precedence. Other fields stay as you write them.</p>
+              <p>Title, summary, date and Post settings take precedence. Other fields stay as you write them.</p>
             </details>
           </div>
         </div>
